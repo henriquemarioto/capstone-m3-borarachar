@@ -6,9 +6,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Button colour={"red"} hover size={"full"}>
-        KEK
-      </Button>
+     
     </div>
   );
 }
