@@ -1,12 +1,11 @@
-import { useState } from "react";
-import Button from "./components/Button";
+import Input from "./components/Input";
 import GlobalStyle from "./styles/global";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
-     
+      <Input inputName={"Name"} isErrored={true} />
     </div>
   );
 }
