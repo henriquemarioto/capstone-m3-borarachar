@@ -23,8 +23,8 @@ export default createGlobalStyle`
     --darker-blue: #050B2F;
     --dark-blue: #07387B;
     --blue-gradient: #07387B - #050B2F ;
-    --grayish-blue: #2E7DB4;
-    --blue: #439AD8;
+    --blue: #2E7DB4;
+    --light-blue: #439AD8;
     --dark-purple-blue: #171D6D;
     --purple-blue: #4D47E9;
     --light-purple-blue: #635EFF;
@@ -38,6 +38,8 @@ export default createGlobalStyle`
     --purple: #7B61FF;
 
 }
+
+
 *{
         box-sizing: border-box;
     }
@@ -75,14 +77,17 @@ export default createGlobalStyle`
     ol, ul {
         list-style: none;
     }
+
     blockquote, q {
         quotes: none;
     }
+
     blockquote:before, blockquote:after,
     q:before, q:after {
         content: '';
         content: none;
     }
+
     table {
         border-collapse: collapse;
         border-spacing: 0;
