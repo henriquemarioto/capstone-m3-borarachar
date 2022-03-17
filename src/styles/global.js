@@ -39,7 +39,6 @@ export default createGlobalStyle`
         --yellow-15: rgba(241, 196, 15, 0.15);
         --yellow: #F1C40F;
         --purple: #7B61FF;
-
     }
 
     *{
@@ -94,7 +93,14 @@ export default createGlobalStyle`
         border-spacing: 0;
     }
     
-    button, a{
+    button{
         cursor: pointer;
+    }
+    a{
+        cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+
+      }
     }
 `;
