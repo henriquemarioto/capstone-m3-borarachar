@@ -35,7 +35,7 @@ export const Container = styled.div`
       margin-right: 5px;
       width: 100%;
       height: 30px;
-      margin-top: 5px;
+      /* margin-top: 5px; */
     }
   }
   .bttIcons {
