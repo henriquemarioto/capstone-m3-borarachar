@@ -11,8 +11,35 @@ import {
   ContainerAccount,
 } from "./styles";
 import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 export const Register = () => {
+  const passwordRecoverySchema = yup.object().shape({
+    name: yup.string().required("Nome completo obrigatório"),
+    email: yup.string().email("Email inválido").required("Email obrigatório"),
+    cpf: yup.string().required("CPF obrigatório"),
+    phoneNumber: yup.string().required("Celular obrigatório"),
+    password: yup.string().required("Senha obrigatória"),
+    password_confirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "As senhas não são idênticas")
+      .required("Confirmação de senha obrigatória"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(passwordRecoverySchema),
+  });
+
+  const submitRegister = (data) => {
+    console.log("REGISTER TEST:", data);
+    history.push("/login");
+  };
+
   const history = useHistory();
   return (
     <Container>
@@ -22,14 +49,62 @@ export const Register = () => {
             <Logo />
             <h2>Registre-se</h2>
           </ContainerHeaderLogin>
-          <form>
-            <Input inputName={"Nome completo"} />
-            <Input inputName={"Email"} />
-            <Input inputName={"CPF"} />
-            <Input inputName={"Celular"} />
-            <Input inputName={"Senha"} />
-            <Input inputName={"Confirmar senha"} />
-            <Button colour={"blue"} hover>
+          <form onSubmit={handleSubmit(submitRegister)}>
+            <Input
+              isErrored={errors.name === undefined ? false : true}
+              inputName={
+                errors.name === undefined
+                  ? "Nome completo"
+                  : errors.name?.message
+              }
+              register={register}
+              name="name"
+            />
+            <Input
+              isErrored={errors.email === undefined ? false : true}
+              inputName={
+                errors.email === undefined ? "Email" : errors.email?.message
+              }
+              register={register}
+              name="email"
+            />
+            <Input
+              isErrored={errors.cpf === undefined ? false : true}
+              inputName={errors.cpf === undefined ? "CPF" : errors.cpf?.message}
+              register={register}
+              name="cpf"
+            />
+            <Input
+              isErrored={errors.phoneNumber === undefined ? false : true}
+              inputName={
+                errors.phoneNumber === undefined
+                  ? "Celular"
+                  : errors.phoneNumber?.message
+              }
+              register={register}
+              name="phoneNumber"
+            />
+            <Input
+              isErrored={errors.password === undefined ? false : true}
+              inputName={
+                errors.password === undefined
+                  ? "Senha"
+                  : errors.password?.message
+              }
+              register={register}
+              name="password"
+            />
+            <Input
+              isErrored={errors.password_confirm === undefined ? false : true}
+              inputName={
+                errors.password_confirm === undefined
+                  ? "Confirmar senha"
+                  : errors.password_confirm?.message
+              }
+              register={register}
+              name="password_confirm"
+            />
+            <Button colour={"blue"} hover type="submit">
               Registrar
             </Button>
           </form>
@@ -43,7 +118,6 @@ export const Register = () => {
         </ContainerFlex>
 
         <ContainerImage src={registerImg} />
-
       </ContentContainer>
     </Container>
   );
