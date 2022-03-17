@@ -11,7 +11,7 @@ function Header() {
         <div className="logo">
           <h2>DIVIDE</h2>
 
-          <p>comigo</p>
+          <p>COMIGO</p>
         </div>
 
         <div className="divNav">
