@@ -4,6 +4,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { Group } from "../pages/Group";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
+import { MyGroups } from "../pages/MyGroups";
 import { Notification } from "../pages/Notification";
 import { PasswordRecovery } from "../pages/PasswordRecovery";
 import { Profile } from "../pages/Profile";
@@ -40,6 +41,10 @@ export const Routes = () => {
       <Route path="/notification">
         <Header />
         <Notification />
+      </Route>
+      <Route path="/mygroups">
+        <Header />
+        <MyGroups />
       </Route>
       <Route path="/search">
         <Header />
