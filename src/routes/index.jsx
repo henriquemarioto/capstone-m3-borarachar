@@ -21,9 +21,11 @@ export const Routes = () => {
       <Route path="/register">
         <Register />
       </Route>
+
       <Route>
-        <PasswordRecovery path="/password-recovery"/>
+        <PasswordRecovery path="/password-recovery" />
       </Route>
+
       <Route path="/dashboard">
         <Dashboard />
       </Route>
