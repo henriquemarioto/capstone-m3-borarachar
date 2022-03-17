@@ -4,6 +4,7 @@ import { CgProfile, CgSearch } from "react-icons/cg";
 import { MdOutlineNotificationsNone, MdPeopleOutline } from "react-icons/md";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
 function Header() {
   const [showInput, setShowInput] = useState(false);
   const history = useHistory();

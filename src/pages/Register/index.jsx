@@ -1,7 +1,9 @@
 import { useHistory } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import InputRadio from "../../components/InputRadio";
 import { Logo } from "../../components/Logo";
+
 import {
   Container,
   ContainerFlex,
@@ -10,22 +12,31 @@ import {
   ContentContainer,
   ContainerAccount,
 } from "./styles";
+
+import { toast } from "react-toastify";
+
 import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
+import api from "../../services/api";
+import useUser from "../../providers/User";
+
 export const Register = () => {
+  const { saveData } = useUser();
+
   const passwordRecoverySchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
+    gender: yup.string().required("Gênero obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     cpf: yup.string().required("CPF obrigatório"),
-    phoneNumber: yup.string().required("Celular obrigatório"),
+    phone: yup.string().required("Celular obrigatório"),
     password: yup.string().required("Senha obrigatória"),
     password_confirm: yup
       .string()
       .oneOf([yup.ref("password")], "As senhas não são idênticas")
-      .required("Confirmação de senha obrigatória"),
+      .required("Confirmar senha obrigatória"),
   });
   const {
     register,
@@ -35,9 +46,19 @@ export const Register = () => {
     resolver: yupResolver(passwordRecoverySchema),
   });
 
-  const submitRegister = (data) => {
-    console.log("REGISTER TEST:", data);
-    history.push("/login");
+  const submitRegister = async (data) => {
+    delete data.password_confirm;
+    data.cpf = Number(data.cpf);
+    data.phone = Number(data.phone);
+
+    try {
+      const response = await api.post("/register", data);
+      toast.success("Conta criada com sucesso!");
+      saveData(response.data);
+      history.push("/dashboard");
+    } catch (error) {
+      toast.error("Erro ao criar a sua conta");
+    }
   };
 
   const history = useHistory();
@@ -60,6 +81,25 @@ export const Register = () => {
               register={register}
               name="name"
             />
+
+            <InputRadio
+              isErrored={errors.gender === undefined ? false : true}
+              inputName={
+                errors.gender === undefined ? "Gênero" : errors.gender?.message
+              }
+              register={register}
+              data={[
+                {
+                  label: "Masculino",
+                  name: "gender",
+                  value: "m",
+                  checked: true,
+                },
+                { label: "Feminino", name: "gender", value: "f" },
+                { label: "Outro", name: "gender", value: "o" },
+              ]}
+            />
+
             <Input
               isErrored={errors.email === undefined ? false : true}
               inputName={
@@ -67,6 +107,7 @@ export const Register = () => {
               }
               register={register}
               name="email"
+              type="email"
             />
             <Input
               isErrored={errors.cpf === undefined ? false : true}
@@ -75,14 +116,12 @@ export const Register = () => {
               name="cpf"
             />
             <Input
-              isErrored={errors.phoneNumber === undefined ? false : true}
+              isErrored={errors.phone === undefined ? false : true}
               inputName={
-                errors.phoneNumber === undefined
-                  ? "Celular"
-                  : errors.phoneNumber?.message
+                errors.phone === undefined ? "Celular" : errors.phone?.message
               }
               register={register}
-              name="phoneNumber"
+              name="phone"
             />
             <Input
               isErrored={errors.password === undefined ? false : true}
@@ -93,6 +132,7 @@ export const Register = () => {
               }
               register={register}
               name="password"
+              type="password"
             />
             <Input
               isErrored={errors.password_confirm === undefined ? false : true}
@@ -103,6 +143,7 @@ export const Register = () => {
               }
               register={register}
               name="password_confirm"
+              type="password"
             />
             <Button colour={"blue"} hover type="submit">
               Registrar

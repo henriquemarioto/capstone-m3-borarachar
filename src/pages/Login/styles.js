@@ -50,7 +50,11 @@ export const ContainerFlex = styled.div`
   flex-flow: column wrap;
   align-items: center;
   gap: 25px;
+  width: 100%;
+  max-width: 350px;
+
   form {
+    width: 100%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -68,10 +72,6 @@ export const ContainerFlex = styled.div`
   button {
     width: 120px;
   }
-
-  @medi
-  (min-width: 1024px) {
-  }
 `;
 
 export const ContentContainer = styled.div`
@@ -82,6 +82,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   max-width: 1440px;
   justify-content: center;
+
   @media screen and (min-width: 1024px) {
     display: flex;
     flex-flow: row-reverse wrap;
