@@ -14,6 +14,8 @@ import passwordRecoveryImg from "/src/images/undraw_forgot_password_re_hxwm 1.sv
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 
 export const PasswordRecovery = () => {
   const passwordRecoverySchema = yup.object().shape({
@@ -24,7 +26,7 @@ export const PasswordRecovery = () => {
       .oneOf([yup.ref("newPassword")], "As senhas não são idênticas")
       .required("Confirmação de nova senha obrigatória"),
     cpf: yup.string().required("CPF obrigatório"),
-    phoneNumber: yup.string().required("Celular obrigatório"),
+    phone: yup.string().required("Celular obrigatório"),
   });
   const {
     register,
@@ -34,9 +36,16 @@ export const PasswordRecovery = () => {
     resolver: yupResolver(passwordRecoverySchema),
   });
 
-  const submitNewPassword = (data) => {
-    console.log("PASSWORD RECOVERY TEST:", data);
-    history.push("/login")
+  const submitNewPassword = async (data) => {
+    delete data.newPassword_confirm;
+
+    try {
+      await api.patch("/recovery/password", data);
+      toast.success("Senha alterada com sucesso!");
+      history.push("/login");
+    } catch (error) {
+      toast.error("Erro ao tentar alterar a senha");
+    }
   };
 
   const history = useHistory();
@@ -65,27 +74,26 @@ export const PasswordRecovery = () => {
             />
             <Input
               inputName={
-                errors.email === undefined
-                  ? "Celular"
-                  : errors.phoneNumber?.message
+                errors.phone === undefined ? "Celular" : errors.phone?.message
               }
-              isErrored={errors.phoneNumber === undefined ? false : true}
-              name="phoneNumber"
+              isErrored={errors.phone === undefined ? false : true}
+              name="phone"
               register={register}
             />
             <Input
               inputName={
-                errors.email === undefined
+                errors.password === undefined
                   ? "Nova senha"
                   : errors.newPassword?.message
               }
               isErrored={errors.newPassword === undefined ? false : true}
               name="newPassword"
               register={register}
+              type="password"
             />
             <Input
               inputName={
-                errors.email === undefined
+                errors.newPassword_confirm === undefined
                   ? "Confirmar nova senha"
                   : errors.newPassword_confirm?.message
               }
@@ -94,6 +102,7 @@ export const PasswordRecovery = () => {
               }
               name="newPassword_confirm"
               register={register}
+              type="password"
             />
             <Button colour={"blue"} hover type="submit">
               Confirmar

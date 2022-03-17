@@ -45,6 +45,7 @@ export const Login = () => {
       toast.error("Erro ao efetuar o login");
     }
   };
+
   const history = useHistory();
   return (
     <Container>
