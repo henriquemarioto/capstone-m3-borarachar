@@ -7,7 +7,6 @@ export const Container = styled.div`
   width: 100%;
 
   input {
-    width: 100%;
     height: 30px;
     box-sizing: border-box;
     border-radius: 5px;
@@ -19,31 +18,6 @@ export const Container = styled.div`
   input:focus {
     outline: none !important;
   }
-
-  ${({ isErrored }) =>
-    isErrored === false
-      ? css`
-          input {
-            background-color: var(--lighter-gray);
-            border-color: var(--dark-gray);
-          }
-
-          input:focus {
-            border-color: var(--light-blue);
-            box-shadow: 0 0 5px var(--light-blue);
-          }
-        `
-      : css`
-          input {
-            background-color: var(--lighter-gray);
-
-            border-color: var(--red);
-          }
-
-          input:focus {
-            box-shadow: 0 0 5px var(--red);
-          }
-        `}
 `;
 
 export const TextContainer = styled.h2`
@@ -58,5 +32,33 @@ export const TextContainer = styled.h2`
 
   @media (min-width: 1024px) {
     font-size: 18px;
+  }
+`;
+
+export const InputsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  gap: 4px;
+`;
+
+export const InputContainer = styled.label`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+
+  input[type="radio"] {
+    color: var(--dark-gray);
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    border: 2px solid var(--dark-gray);
+    border-radius: 100%;
+  }
+
+  label {
   }
 `;
