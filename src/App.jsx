@@ -1,12 +1,13 @@
+import Header from "./components/Header";
+import GlobalStyle from "./styles/global";
 import Input from "./components/Input";
 import { Routes } from "./routes";
-import GlobalStyle from "./styles/global";
-
 function App() {
   return (
     <div className="App">
       <Routes />
       <GlobalStyle />
+      <Header />
     </div>
   );
 }

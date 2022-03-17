@@ -89,7 +89,6 @@ export default createGlobalStyle`
         content: '';
         content: none;
     }
-
     table {
         border-collapse: collapse;
         border-spacing: 0;
