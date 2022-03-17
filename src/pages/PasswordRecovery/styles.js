@@ -23,19 +23,16 @@ export const ContainerAccount = styled.div`
   align-items: center;
 
   h3 {
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 700;
   }
-
   h4 {
     font-size: 12px;
   }
-
   a {
     color: var(--blue);
     font-size: 12px;
   }
-  
 `;
 
 export const ContainerImage = styled.img`
@@ -79,7 +76,7 @@ export const ContentContainer = styled.div`
   justify-content: center;
   @media screen and (min-width: 1024px) {
     display: flex;
-    flex-flow: row wrap;
-    padding-right: 30px;
+    padding-left: 30px;
+    flex-flow: row-reverse wrap;
   }
 `;
