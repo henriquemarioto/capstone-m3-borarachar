@@ -1,13 +1,14 @@
 import Header from "./components/Header";
 import GlobalStyle from "./styles/global";
-/* import Routes from "./routes"; */
+import Input from "./components/Input";
+import { Routes } from "./routes";
 function App() {
   return (
     <div className="App">
-      {/*  <Routes /> */}
+      <Routes />
       <GlobalStyle />
       <Header />
-      {/*       <Input inputName={"Name"} isErrored={true} /> */}
+      <Input inputName={"Name"} isErrored={true} />
     </div>
   );
 }
