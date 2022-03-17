@@ -69,7 +69,8 @@ export const ContainerFlex = styled.div`
     width: 120px;
   }
 
-  @media (min-width: 1024px) {
+  @medi
+  (min-width: 1024px) {
   }
 `;
 
