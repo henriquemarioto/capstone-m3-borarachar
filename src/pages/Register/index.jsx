@@ -10,7 +10,7 @@ import {
   ContentContainer,
   ContainerAccount,
 } from "./styles";
-import loginImg from "/src/images/undraw_account_re_o7id 1.svg";
+import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
 
 export const Register = () => {
   const history = useHistory();
@@ -42,8 +42,8 @@ export const Register = () => {
           </ContainerAccount>
         </ContainerFlex>
 
-        <ContainerImage src={loginImg} />
-        
+        <ContainerImage src={registerImg} />
+
       </ContentContainer>
     </Container>
   );
