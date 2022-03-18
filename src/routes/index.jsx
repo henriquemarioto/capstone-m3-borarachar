@@ -23,8 +23,8 @@ export const Routes = () => {
       <Route path="/register">
         <Register />
       </Route>
-    
-      <Route path="/password-recovery">
+
+      <Route path="/recovery">
         <PasswordRecovery />
       </Route>
 
@@ -32,7 +32,7 @@ export const Routes = () => {
         <Header />
         <Dashboard />
       </Route>
-      <Route path="profile">
+      <Route path="/profile">
         <Header />
         <Profile />
       </Route>

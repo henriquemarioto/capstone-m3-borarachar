@@ -14,8 +14,14 @@ import loginImg from "/src/images/undraw_login_re_4vu2 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import api from "../../services/api";
+import { toast } from "react-toastify";
+
+import useUser from "../../providers/User";
 
 export const Login = () => {
+  const { saveData } = useUser();
+
   const loginSchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     password: yup.string().required("Senha obrigatória"),
@@ -28,10 +34,18 @@ export const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const submitLogin = (data) => {
-    console.log("LOGIN TEST:", data);
-    history.push("/dashboard")
+  const submitLogin = async (data) => {
+    try {
+      const response = await api.post("/login", data);
+      console.log(response);
+      toast.success("Login efetuado com sucesso!");
+      saveData(response.data);
+      history.push("/dashboard");
+    } catch (error) {
+      toast.error("Erro ao efetuar o login");
+    }
   };
+
   const history = useHistory();
   return (
     <Container>
@@ -61,7 +75,7 @@ export const Login = () => {
               register={register}
               type="password"
             />
-            <a onClick={() => history.push("/password-recovery")}>
+            <a onClick={() => history.push("/recovery/password")}>
               Recuperar senha
             </a>
             <Button colour={"blue"} hover type="submit">

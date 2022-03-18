@@ -51,7 +51,10 @@ export const ContainerFlex = styled.div`
   flex-flow: column wrap;
   align-items: center;
   gap: 25px;
+  width: 100%;
+  max-width: 350px;
   form {
+    width: 100%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
