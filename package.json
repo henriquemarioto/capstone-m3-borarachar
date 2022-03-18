@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "commit": "cz"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
@@ -24,8 +23,6 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "^8.11.0",
-    "eslint-plugin-react": "^7.29.4",
     "vite": "^2.8.0"
   },
   "config": {
