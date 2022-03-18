@@ -34,6 +34,7 @@ function CardGroup({
       return result;
     }
   };
+
   switch (type) {
     case "owner":
       return (
