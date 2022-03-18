@@ -22,12 +22,12 @@ export const InfoMembers = styled.div`
     display: flex;
     align-items: center;
     gap: 3px;
-  }
-  img {
-    max-width: 15px;
-    max-height: 15px;
-    width: auto;
-    height: auto;
+    img {
+      max-width: 15px;
+      max-height: 15px;
+      width: auto;
+      height: auto;
+    }
   }
 `;
 export const InfoVacancy = styled.div`
