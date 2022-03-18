@@ -89,7 +89,9 @@ function CardGroup({
             </InfoTitle>
             <InfoVacancy>
               <span>Vagas disponíeis: {showVariant("membersMissing")}</span>
-              <span>{showVariant("priceService")}</span>
+              <span classname="priceService">
+                {showVariant("priceService")}
+              </span>
               <span className="yourPrice">{showVariant("yourPrice")}</span>
             </InfoVacancy>
           </ContentInfo>

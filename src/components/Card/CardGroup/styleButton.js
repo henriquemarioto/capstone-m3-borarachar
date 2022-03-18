@@ -36,8 +36,12 @@ export const InfoVacancy = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 10px;
+  .priceService {
+    text-decoration: line-through;
+  }
   .yourPrice {
     color: var(--green);
+    font-size: 12px;
   }
 `;
 
