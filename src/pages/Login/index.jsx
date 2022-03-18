@@ -75,7 +75,7 @@ export const Login = () => {
               register={register}
               type="password"
             />
-            <a onClick={() => history.push("/password-recovery")}>
+            <a onClick={() => history.push("/recovery/password")}>
               Recuperar senha
             </a>
             <Button colour={"blue"} hover type="submit">

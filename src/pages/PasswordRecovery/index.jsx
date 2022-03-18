@@ -44,7 +44,9 @@ export const PasswordRecovery = () => {
       toast.success("Senha alterada com sucesso!");
       history.push("/login");
     } catch (error) {
-      toast.error("Erro ao tentar alterar a senha");
+      toast.error(
+        error.response.data.error || "Erro ao tentar alterar a senha"
+      );
     }
   };
 
