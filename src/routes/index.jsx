@@ -1,21 +1,25 @@
-import { Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import CardGroup from "../components/Card/CardGroup";
 import Header from "../components/Header";
 import { Popup } from "../components/Popup";
 import { Dashboard } from "../pages/Dashboard";
-import { Group } from "../pages/Group";
+import Group from "../pages/Group";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { MyGroups } from "../pages/MyGroups";
+import MyGroups from "../pages/MyGroups";
 import { Notification } from "../pages/Notification";
 import { PasswordRecovery } from "../pages/PasswordRecovery";
 import { Profile } from "../pages/Profile";
 import { Register } from "../pages/Register";
 import { Search } from "../pages/Search";
 
+import Route from "./route";
+
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/" home>
         <Home />
       </Route>
 
@@ -31,34 +35,38 @@ export const Routes = () => {
         <PasswordRecovery />
       </Route>
 
-      <Route path="/dashboard">
+      <Route path="/dashboard" isPrivate>
         <Header />
         <Dashboard />
       </Route>
 
-      <Route path="/profile">
+      <Route path="/profile" isPrivate>
         <Header />
         <Profile />
       </Route>
 
-      <Route path="/group">
+      <Route path="/group" isPrivate>
         <Header />
         <Group />
       </Route>
 
-      <Route path="/notification">
+      <Route path="/notifications" isPrivate>
         <Header />
         <Notification />
       </Route>
 
-      <Route path="/mygroups">
+      <Route path="/mygroups" isPrivate>
         <Header />
         <MyGroups />
       </Route>
 
-      <Route path="/search">
+      <Route path="/search" isPrivate>
         <Header />
         <Search />
+      </Route>
+
+      <Route>
+        <Redirect to="/" />
       </Route>
     </Switch>
   );

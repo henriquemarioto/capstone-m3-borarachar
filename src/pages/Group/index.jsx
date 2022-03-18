@@ -1,4 +1,5 @@
 import { Container } from "./styles";
-export const Group = () => {
+
+export default function Group() {
   return <Container></Container>;
-};
+}
