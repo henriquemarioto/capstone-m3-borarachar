@@ -30,7 +30,7 @@ export const Routes = () => {
         <Header />
         <Dashboard />
       </Route>
-      <Route path="profile">
+      <Route path="/profile">
         <Header />
         <Profile />
       </Route>
