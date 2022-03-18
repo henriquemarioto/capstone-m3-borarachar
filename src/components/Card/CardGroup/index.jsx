@@ -14,7 +14,6 @@ import { BsCheck2 } from "react-icons/bs";
 function CardGroup({
   group,
   type,
-  owner = false,
   addnew = true,
   service,
   moduleServece = "Duo",
@@ -38,7 +37,7 @@ function CardGroup({
   };
 
   switch (type) {
-    case "groupMember":
+    case "groupOwner":
       return (
         <Container>
           <ContentInfo>
@@ -46,11 +45,9 @@ function CardGroup({
               <img src={group.streaming.image} alt={group.name} />
               <h3>{group.name}</h3>
 
-              {owner && (
-                <i>
-                  <RiShieldUserLine size={10} />
-                </i>
-              )}
+              <i>
+                <RiShieldUserLine size={10} />
+              </i>
             </InfoTitle>
             <InfoMembers>
               <span>membros:</span>
@@ -109,13 +106,16 @@ function CardGroup({
         <Container>
           <ContentInfo>
             <InfoTitle>
-              <img src="" alt={group.name} />
-              <h3>{group.name}</h3>
+              <img
+                src={group.information.avatarGroup}
+                alt={group.information.name}
+              />
+              <h3>{group.information.name}</h3>
             </InfoTitle>
             <InfoMembers>
               <span>membros:</span>
               <div>
-                {group.map((member) => (
+                {group.members.map((member) => (
                   <img key={member.name} src={member.img} alt={member.name} />
                 ))}
               </div>

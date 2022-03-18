@@ -59,8 +59,7 @@ export const Routes = () => {
         <MyGroups />
       </Route>
 
-      <Route path="/search" isPrivate>
-        <Header />
+      <Route path="/search" /* isPrivate */>
         <Search />
       </Route>
 
