@@ -37,7 +37,8 @@ export const Routes = () => {
         <Dashboard />
       </Route>
 
-      <Route path="/profile" isPrivate>
+    <Route path="/profile" isPrivate>
+
         <Header />
         <Profile />
       </Route>
