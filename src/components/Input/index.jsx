@@ -9,9 +9,11 @@ function Input({
   type = "text",
   ...rest
 }) {
+
   const [focus, setFocus] = useState(false);
 
   return (
+
     <Container {...rest} isErrored={isErrored}>
       <TextContainer isErrored={isErrored} focus={focus}>
         {inputName}
@@ -23,7 +25,9 @@ function Input({
         type={type}
       />
     </Container>
+
   );
+  
 }
 
 export default Input;

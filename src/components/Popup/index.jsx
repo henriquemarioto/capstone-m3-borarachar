@@ -4,12 +4,12 @@ import {
   Container,
   Content,
   Buttons,
-  InputPopup,
+  // InputPopup,
   SectionInput,
   ContentnewGroup,
 } from "./styles";
-export const Popup = () => {
-  const type = "PopupAdm";
+export const Popup = ({ popUpType }) => {
+  const type = popUpType;
   switch (type) {
     case "confirm":
       return (
@@ -40,7 +40,8 @@ export const Popup = () => {
             <span>Título do Popup</span>
             <SectionInput>
               <label>Nome do input</label>
-              <InputPopup />
+              {/* <InputPopup /> */}
+              <input type="text" placeholder="Test" />
             </SectionInput>
             <Buttons>
               <Button hover size="full" colour="blue">

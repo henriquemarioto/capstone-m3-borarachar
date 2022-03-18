@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
+import { Popup } from "../components/Popup";
 import { Dashboard } from "../pages/Dashboard";
 import { Group } from "../pages/Group";
 import { Home } from "../pages/Home";
@@ -17,9 +18,11 @@ export const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
+
       <Route path="/login">
         <Login />
       </Route>
+
       <Route path="/register">
         <Register />
       </Route>
@@ -32,22 +35,27 @@ export const Routes = () => {
         <Header />
         <Dashboard />
       </Route>
+
       <Route path="/profile">
         <Header />
         <Profile />
       </Route>
+
       <Route path="/group">
         <Header />
         <Group />
       </Route>
+
       <Route path="/notification">
         <Header />
         <Notification />
       </Route>
+
       <Route path="/mygroups">
         <Header />
         <MyGroups />
       </Route>
+
       <Route path="/search">
         <Header />
         <Search />
