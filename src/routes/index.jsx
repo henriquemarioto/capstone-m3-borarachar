@@ -1,10 +1,11 @@
+import { Redirect } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import Header from "../components/Header";
 import { Dashboard } from "../pages/Dashboard";
-import { Group } from "../pages/Group";
+import Group from "../pages/Group";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { MyGroups } from "../pages/MyGroups";
+import MyGroups from "../pages/MyGroups";
 import { Notification } from "../pages/Notification";
 import { PasswordRecovery } from "../pages/PasswordRecovery";
 import { Profile } from "../pages/Profile";
@@ -37,8 +38,7 @@ export const Routes = () => {
         <Dashboard />
       </Route>
 
-    <Route path="/profile" isPrivate>
-
+      <Route path="/profile" isPrivate>
         <Header />
         <Profile />
       </Route>
@@ -48,7 +48,7 @@ export const Routes = () => {
         <Group />
       </Route>
 
-      <Route path="/notification" isPrivate>
+      <Route path="/notifications" isPrivate>
         <Header />
         <Notification />
       </Route>
@@ -61,6 +61,10 @@ export const Routes = () => {
       <Route path="/search" isPrivate>
         <Header />
         <Search />
+      </Route>
+
+      <Route>
+        <Redirect to="/" />
       </Route>
     </Switch>
   );

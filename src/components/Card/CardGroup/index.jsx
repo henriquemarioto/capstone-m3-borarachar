@@ -14,6 +14,7 @@ import { BsCheck2 } from "react-icons/bs";
 function CardGroup({
   group,
   type,
+  owner = false,
   addnew = true,
   service,
   moduleServece = "Duo",
@@ -22,6 +23,7 @@ function CardGroup({
     const findService = service[0].plans.find(
       (item) => item.name === moduleServece
     );
+
     if (modo === "yourPrice") {
       const result = findService.price / group.members.length;
       const text = `R$${result.toFixed(2).replace(".", ",")} `;
@@ -36,36 +38,39 @@ function CardGroup({
   };
 
   switch (type) {
-    case "owner":
+    case "groupMember":
       return (
         <Container>
           <ContentInfo>
             <InfoTitle>
-              <img
-                src={group.information.avatarGroup}
-                alt={group.information.name}
-              />
-              <h3>{group.information.name}</h3>
-              <i>
-                <RiShieldUserLine size={10} />
-              </i>
+              <img src={group.streaming.image} alt={group.name} />
+              <h3>{group.name}</h3>
+
+              {owner && (
+                <i>
+                  <RiShieldUserLine size={10} />
+                </i>
+              )}
             </InfoTitle>
             <InfoMembers>
               <span>membros:</span>
               <div>
-                {group.members.map((member) => (
-                  <img key={member.name} src={member.img} alt={member.name} />
+                {group.members.map(({ id, avatar_url }) => (
+                  <img key={id} src={avatar_url} alt="Member image" />
                 ))}
               </div>
             </InfoMembers>
           </ContentInfo>
           <ContentMais>
-            <button>
-              <RiArrowRightSLine size={30} />
-            </button>
+            {
+              <button>
+                <RiArrowRightSLine size={30} />
+              </button>
+            }
           </ContentMais>
         </Container>
       );
+
     case "newGroup":
       return (
         <Container addnew>
@@ -82,11 +87,8 @@ function CardGroup({
         <Container>
           <ContentInfo>
             <InfoTitle>
-              <img
-                src={group.information.avatarGroup}
-                alt={group.information.name}
-              />
-              <h3>{group.information.name}</h3>
+              <img src="" alt={group.name} />
+              <h3>{group.name}</h3>
             </InfoTitle>
             <InfoVacancy>
               <span>Vagas disponíeis: {showVariant("membersMissing")}</span>
@@ -99,46 +101,19 @@ function CardGroup({
           </ContentJoin>
         </Container>
       );
-    case "groupJoined":
-      return (
-        <Container>
-          <ContentInfo>
-            <InfoTitle>
-              <img
-                src={group.information.avatarGroup}
-                alt={group.information.name}
-              />
-              <h3>{group.information.name}</h3>
-            </InfoTitle>
-            <InfoMembers>
-              <span>membros:</span>
-              <div>
-                {group.members.map((member) => (
-                  <img key={member.name} src={member.img} alt={member.name} />
-                ))}
-              </div>
-            </InfoMembers>
-          </ContentInfo>
-          <ContentJoin>
-            <BsCheck2 size={30} />
-          </ContentJoin>
-        </Container>
-      );
+
     default:
       return (
         <Container>
           <ContentInfo>
             <InfoTitle>
-              <img
-                src={group.information.avatarGroup}
-                alt={group.information.name}
-              />
-              <h3>{group.information.name}</h3>
+              <img src="" alt={group.name} />
+              <h3>{group.name}</h3>
             </InfoTitle>
             <InfoMembers>
               <span>membros:</span>
               <div>
-                {group.members.map((member) => (
+                {group.map((member) => (
                   <img key={member.name} src={member.img} alt={member.name} />
                 ))}
               </div>
