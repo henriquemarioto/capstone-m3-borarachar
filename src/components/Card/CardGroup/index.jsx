@@ -55,8 +55,8 @@ function CardGroup({
             <InfoMembers>
               <span>membros:</span>
               <div>
-                {group.members.map(({ id, avatar_url }) => (
-                  <img key={id} src={avatar_url} alt="Member image" />
+                {group.members.map(({ _id, avatar_url }) => (
+                  <img key={_id} src={avatar_url} alt="Member image" />
                 ))}
               </div>
             </InfoMembers>
