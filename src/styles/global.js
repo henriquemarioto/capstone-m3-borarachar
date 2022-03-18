@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+    html{
+        scroll-behavior: smooth;
+    }
+
     :root{
 
         --black: #000000;
@@ -35,7 +39,6 @@ export default createGlobalStyle`
         --yellow-15: rgba(241, 196, 15, 0.15);
         --yellow: #F1C40F;
         --purple: #7B61FF;
-
     }
 
     *{
@@ -85,13 +88,19 @@ export default createGlobalStyle`
         content: '';
         content: none;
     }
-
     table {
         border-collapse: collapse;
         border-spacing: 0;
     }
     
-    button, a{
+    button{
         cursor: pointer;
+    }
+    a{
+        cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+
+      }
     }
 `;

@@ -10,22 +10,21 @@ import {
   ContentContainer,
   ContainerAccount,
 } from "./styles";
-import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
+import passwordRecoveryImg from "/src/images/undraw_forgot_password_re_hxwm 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-export const Register = () => {
+export const PasswordRecovery = () => {
   const passwordRecoverySchema = yup.object().shape({
-    name: yup.string().required("Nome completo obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
+    newPassword: yup.string().required("Nova senha obrigatória"),
+    newPassword_confirm: yup
+      .string()
+      .oneOf([yup.ref("newPassword")], "As senhas não são idênticas")
+      .required("Confirmação de nova senha obrigatória"),
     cpf: yup.string().required("CPF obrigatório"),
     phoneNumber: yup.string().required("Celular obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
-    password_confirm: yup
-      .string()
-      .oneOf([yup.ref("password")], "As senhas não são idênticas")
-      .required("Confirmação de senha obrigatória"),
   });
   const {
     register,
@@ -35,9 +34,9 @@ export const Register = () => {
     resolver: yupResolver(passwordRecoverySchema),
   });
 
-  const submitRegister = (data) => {
-    console.log("REGISTER TEST:", data);
-    history.push("/login");
+  const submitNewPassword = (data) => {
+    console.log("PASSWORD RECOVERY TEST:", data);
+    history.push("/login")
   };
 
   const history = useHistory();
@@ -47,69 +46,61 @@ export const Register = () => {
         <ContainerFlex>
           <ContainerHeaderLogin>
             <Logo />
-            <h2>Registre-se</h2>
+            <h2>Recuperar senha</h2>
           </ContainerHeaderLogin>
-          <form onSubmit={handleSubmit(submitRegister)}>
+          <form onSubmit={handleSubmit(submitNewPassword)}>
             <Input
-              isErrored={errors.name === undefined ? false : true}
-              inputName={
-                errors.name === undefined
-                  ? "Nome completo"
-                  : errors.name?.message
-              }
-              register={register}
-              name="name"
-            />
-            <Input
-              isErrored={errors.email === undefined ? false : true}
               inputName={
                 errors.email === undefined ? "Email" : errors.email?.message
               }
-              register={register}
+              isErrored={errors.email === undefined ? false : true}
               name="email"
-            />
-            <Input
-              isErrored={errors.cpf === undefined ? false : true}
-              inputName={errors.cpf === undefined ? "CPF" : errors.cpf?.message}
               register={register}
-              name="cpf"
             />
             <Input
-              isErrored={errors.phoneNumber === undefined ? false : true}
+              inputName={errors.cpf === undefined ? "CPF" : errors.cpf?.message}
+              isErrored={errors.cpf === undefined ? false : true}
+              name="cpf"
+              register={register}
+            />
+            <Input
               inputName={
-                errors.phoneNumber === undefined
+                errors.email === undefined
                   ? "Celular"
                   : errors.phoneNumber?.message
               }
-              register={register}
+              isErrored={errors.phoneNumber === undefined ? false : true}
               name="phoneNumber"
+              register={register}
             />
             <Input
-              isErrored={errors.password === undefined ? false : true}
               inputName={
-                errors.password === undefined
-                  ? "Senha"
-                  : errors.password?.message
+                errors.email === undefined
+                  ? "Nova senha"
+                  : errors.newPassword?.message
               }
+              isErrored={errors.newPassword === undefined ? false : true}
+              name="newPassword"
               register={register}
-              name="password"
             />
             <Input
-              isErrored={errors.password_confirm === undefined ? false : true}
               inputName={
-                errors.password_confirm === undefined
-                  ? "Confirmar senha"
-                  : errors.password_confirm?.message
+                errors.email === undefined
+                  ? "Confirmar nova senha"
+                  : errors.newPassword_confirm?.message
               }
+              isErrored={
+                errors.newPassword_confirm === undefined ? false : true
+              }
+              name="newPassword_confirm"
               register={register}
-              name="password_confirm"
             />
             <Button colour={"blue"} hover type="submit">
-              Registrar
+              Confirmar
             </Button>
           </form>
           <ContainerAccount>
-            <h3>Já possui uma conta?</h3>
+            <h3>Não precisa mais?</h3>
             <h4>
               <a onClick={() => history.push("/login")}>Clique aqui</a> para
               entrar!
@@ -117,7 +108,7 @@ export const Register = () => {
           </ContainerAccount>
         </ContainerFlex>
 
-        <ContainerImage src={registerImg} />
+        <ContainerImage src={passwordRecoveryImg} />
       </ContentContainer>
     </Container>
   );

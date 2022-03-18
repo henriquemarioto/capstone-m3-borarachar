@@ -1,9 +1,12 @@
 import { Switch, Route } from "react-router-dom";
+import Header from "../components/Header";
 import { Dashboard } from "../pages/Dashboard";
 import { Group } from "../pages/Group";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
+import { MyGroups } from "../pages/MyGroups";
 import { Notification } from "../pages/Notification";
+import { PasswordRecovery } from "../pages/PasswordRecovery";
 import { Profile } from "../pages/Profile";
 import { Register } from "../pages/Register";
 import { Search } from "../pages/Search";
@@ -20,19 +23,33 @@ export const Routes = () => {
       <Route path="/register">
         <Register />
       </Route>
+    
+      <Route path="/password-recovery">
+        <PasswordRecovery />
+      </Route>
+
       <Route path="/dashboard">
+        <Header />
         <Dashboard />
       </Route>
       <Route path="profile">
+        <Header />
         <Profile />
       </Route>
       <Route path="/group">
+        <Header />
         <Group />
       </Route>
       <Route path="/notification">
+        <Header />
         <Notification />
       </Route>
+      <Route path="/mygroups">
+        <Header />
+        <MyGroups />
+      </Route>
       <Route path="/search">
+        <Header />
         <Search />
       </Route>
     </Switch>
