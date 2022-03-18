@@ -28,26 +28,25 @@ function Header() {
         </div>
       </ContentLogo>
       <ContentMenu>
-        <button className="bttIcons">
-          <VscHome size={30} onClick={() => history.push("/dashboard")} />
+        <button className="bttIcons" onClick={() => history.push("/dashboard")}>
+          <VscHome size={30} />
           <span className="legenda">Home</span>
         </button>
-        <button className="bttIcons">
-          <MdPeopleOutline
-            size={30}
-            onClick={() => history.push("/mygroups")}
-          />
+
+        <button className="bttIcons" onClick={() => history.push("/mygroups")}>
+          <MdPeopleOutline size={30} />
+
           <span className="legenda">Meus grupos</span>
         </button>
-        <button className="bttIcons">
-          <CgProfile size={30} onClick={() => history.push("/profile")} />
+        <button className="bttIcons" onClick={() => history.push("/profile")}>
+          <CgProfile size={30} />
           <span className="legenda">Perfil</span>
         </button>
-        <button className="bttIcons">
-          <MdOutlineNotificationsNone
-            size={30}
-            onClick={() => history.push("/notification")}
-          />
+        <button
+          className="bttIcons"
+          onClick={() => history.push("/notifications")}
+        >
+          <MdOutlineNotificationsNone size={30} />
           <span className="legenda">Notificações</span>
         </button>
       </ContentMenu>
