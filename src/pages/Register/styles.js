@@ -23,12 +23,14 @@ export const ContainerAccount = styled.div`
   align-items: center;
 
   h3 {
-    font-size: 14px;
+    font-size: 12.5px;
     font-weight: 700;
   }
+
   h4 {
     font-size: 12px;
   }
+
   a {
     color: var(--blue);
     font-size: 12px;
@@ -51,7 +53,10 @@ export const ContainerFlex = styled.div`
   flex-flow: column wrap;
   align-items: center;
   gap: 25px;
+  max-width: 350px;
+
   form {
+    width: 100%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -78,5 +83,18 @@ export const ContentContainer = styled.div`
     display: flex;
     flex-flow: row wrap;
     padding-right: 30px;
+  }
+`;
+
+export const InputRadios = styled.div`
+  display: flex;
+  gap: 3px;
+
+  width: 100%;
+
+  > div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   }
 `;

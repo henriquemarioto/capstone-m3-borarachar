@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Container, TextContainer } from "./style";
 
-function Input({ isErrored = false, inputName, ...rest }) {
+function Input({
+  isErrored = false,
+  inputName,
+  register,
+  name,
+  type = "text",
+  ...rest
+}) {
   const [focus, setFocus] = useState(false);
 
   return (
@@ -9,7 +16,12 @@ function Input({ isErrored = false, inputName, ...rest }) {
       <TextContainer isErrored={isErrored} focus={focus}>
         {inputName}
       </TextContainer>
-      <input onBlur={() => setFocus(false)} onFocus={() => setFocus(true)} />
+      <input
+        {...register(name)}
+        onBlur={() => setFocus(false)}
+        onFocus={() => setFocus(true)}
+        type={type}
+      />
     </Container>
   );
 }

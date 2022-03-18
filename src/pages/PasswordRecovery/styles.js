@@ -16,26 +16,27 @@ export const ContainerHeaderLogin = styled.div`
   font-weight: 700;
 `;
 
-export const ContainerNewAccount = styled.div`
+export const ContainerAccount = styled.div`
   line-height: 20px;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
 
   h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
   }
   h4 {
     font-size: 12px;
   }
   a {
+    color: var(--blue);
     font-size: 12px;
   }
 `;
 
 export const ContainerImage = styled.img`
-  width: 100%;
+  width: 90%;
   max-width: 400px;
 
   @media (min-width: 1024px) {
@@ -52,7 +53,6 @@ export const ContainerFlex = styled.div`
   gap: 25px;
   width: 100%;
   max-width: 350px;
-
   form {
     width: 100%;
     display: flex;
@@ -61,16 +61,11 @@ export const ContainerFlex = styled.div`
     gap: 10px;
   }
 
-  a {
-    color: var(--blue);
-    text-align: end;
-    width: 100%;
-    font-size: 12px;
-    font-weight: 400;
-  }
-
   button {
     width: 120px;
+  }
+
+  @media (min-width: 1024px) {
   }
 `;
 
@@ -82,9 +77,9 @@ export const ContentContainer = styled.div`
   width: 100%;
   max-width: 1440px;
   justify-content: center;
-
   @media screen and (min-width: 1024px) {
     display: flex;
+    padding-left: 30px;
     flex-flow: row-reverse wrap;
   }
 `;

@@ -11,7 +11,41 @@ import {
   ContentContainer,
 } from "./styles";
 import loginImg from "/src/images/undraw_login_re_4vu2 1.svg";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import api from "../../services/api";
+import { toast } from "react-toastify";
+
+import useUser from "../../providers/User";
+
 export const Login = () => {
+  const { saveData } = useUser();
+
+  const loginSchema = yup.object().shape({
+    email: yup.string().email("Email inválido").required("Email obrigatório"),
+    password: yup.string().required("Senha obrigatória"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const submitLogin = async (data) => {
+    try {
+      const response = await api.post("/login", data);
+      console.log(response);
+      toast.success("Login efetuado com sucesso!");
+      saveData(response.data);
+      history.push("/dashboard");
+    } catch (error) {
+      toast.error("Erro ao efetuar o login");
+    }
+  };
+
   const history = useHistory();
   return (
     <Container>
@@ -21,13 +55,30 @@ export const Login = () => {
             <Logo />
             <h2>Efetuar Login</h2>
           </ContainerHeaderLogin>
-          <form>
-            <Input inputName={"Email"} />
-            <Input inputName={"Senha"} />
-            <a onClick={() => history.push("/password-recovery")}>
+          <form onSubmit={handleSubmit(submitLogin)}>
+            <Input
+              isErrored={errors.email === undefined ? false : true}
+              inputName={
+                errors.email === undefined ? "Email" : errors.email?.message
+              }
+              name="email"
+              register={register}
+            />
+            <Input
+              isErrored={errors.password === undefined ? false : true}
+              inputName={
+                errors.password === undefined
+                  ? "Senha"
+                  : errors.password?.message
+              }
+              name="password"
+              register={register}
+              type="password"
+            />
+            <a onClick={() => history.push("/recovery/password")}>
               Recuperar senha
             </a>
-            <Button colour={"blue"} hover>
+            <Button colour={"blue"} hover type="submit">
               Entrar
             </Button>
           </form>
