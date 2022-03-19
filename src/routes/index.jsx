@@ -44,6 +44,11 @@ export const Routes = () => {
         <Profile />
       </Route>
 
+      <Route path="/user/:userID" isPrivate>
+        <Header />
+        <Profile />
+      </Route>
+
       <Route path="/group/:groupID" isPrivate>
         <Header />
         <Group />
@@ -59,7 +64,7 @@ export const Routes = () => {
         <MyGroups />
       </Route>
 
-      <Route path="/search" /* isPrivate */>
+      <Route path="/search" isPrivate>
         <Search />
       </Route>
 
