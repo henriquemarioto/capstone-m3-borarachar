@@ -17,6 +17,7 @@ function CardGroup({
   owner = false,
   addnew = true,
   service,
+  onClick,
   moduleServece = "Duo",
 }) {
   const showVariant = (modo) => {
@@ -62,11 +63,9 @@ function CardGroup({
             </InfoMembers>
           </ContentInfo>
           <ContentMais>
-            {
-              <button>
-                <RiArrowRightSLine size={30} />
-              </button>
-            }
+            <button onClick={!!onClick && onClick}>
+              <RiArrowRightSLine size={30} />
+            </button>
           </ContentMais>
         </Container>
       );
