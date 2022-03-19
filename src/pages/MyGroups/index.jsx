@@ -6,6 +6,7 @@ import { Container, ContentContainer } from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
+import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
 
@@ -40,7 +41,7 @@ export default function MyGroups() {
   return (
     <Container>
       <ContentContainer>
-        {!loading && (
+        {!loading ? (
           <>
             {groups.map((group) => {
               const { _id, owner } = group;
@@ -56,6 +57,8 @@ export default function MyGroups() {
               );
             })}
           </>
+        ) : (
+          <Loading />
         )}
       </ContentContainer>
     </Container>
