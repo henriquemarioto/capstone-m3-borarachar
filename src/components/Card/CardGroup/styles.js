@@ -44,12 +44,24 @@ export const InfoVacancy = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 10px;
+  white-space: nowrap;
+
+  strong {
+    font-weight: bold;
+  }
+
   .priceService {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
     text-decoration: line-through;
+    color: var(--dark-gray);
   }
   .yourPrice {
     color: var(--green);
+    font-weight: 700;
     font-size: 12px;
+    line-height: 14px;
   }
 `;
 
@@ -62,6 +74,7 @@ export const ContentMais = styled.div`
     background-color: transparent;
   }
 `;
+
 export const ContentJoin = styled.div`
   button {
     height: 100%;
@@ -70,6 +83,10 @@ export const ContentJoin = styled.div`
     align-items: center;
     background-color: transparent;
     color: var(--blue);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
   }
+
   color: var(--blue);
 `;

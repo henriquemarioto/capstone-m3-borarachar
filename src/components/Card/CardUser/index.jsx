@@ -12,15 +12,16 @@ import { CurrencyFormatter } from "../../../services/formatters";
 
 import { RiCloseLine, RiCheckLine, RiTimeLine } from "react-icons/ri";
 
-function CardUser({ type, memberData, groupData }) {
-  const { name, avatar_url, status } = memberData;
-
-  const price = CurrencyFormatter.format(
-    groupData.streaming.plan.price / groupData.members.length
-  );
+function CardUser({ type, memberData, groupData, onClick = () => {} }) {
+  const { name, avatar_url, status, searching_for } = memberData;
+  if (!!groupData) {
+    const price = CurrencyFormatter.format(
+      groupData.streaming.plan.price / groupData.members.length
+    );
+  }
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       {!type && (
         <>
           <PerfilDiv>
@@ -40,7 +41,6 @@ function CardUser({ type, memberData, groupData }) {
           </StatusContainer>
         </>
       )}
-
       {type === "admin" && (
         <>
           <PerfilDiv>
@@ -49,7 +49,6 @@ function CardUser({ type, memberData, groupData }) {
           </PerfilDiv>
         </>
       )}
-
       {type === "userSelect" && (
         <>
           <PerfilDiv>
@@ -61,22 +60,23 @@ function CardUser({ type, memberData, groupData }) {
           </DivSelect>
         </>
       )}
-
       {type === "userFind" && (
         <>
           <ContentInfo>
             <PerfilDiv>
-              <img src={memberData.avatarUser} alt={name} />
+              <img src={avatar_url} alt={name} />
               <h3>{name}</h3>
             </PerfilDiv>
+
             <InfoFind>
               <span>Procurando por:</span>
 
-              {memberData.findFor.map((item) => (
-                <img src={item.img}></img>
+              {searching_for.map(({ _id, image }) => (
+                <img src={image} key={_id}></img>
               ))}
             </InfoFind>
           </ContentInfo>
+
           <ContentRequest>
             <button>Convidar</button>
           </ContentRequest>
