@@ -6,6 +6,7 @@ import { Container, ContentContainer } from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
+import Loading from "../../components/Loading";
 
 import CardUser from "../../components/Card/CardUser";
 
@@ -43,7 +44,7 @@ export default function Users() {
   return (
     <Container>
       <ContentContainer>
-        {!loading && (
+        {!loading ? (
           <>
             {users.map((user) => {
               const { _id, owner } = user;
@@ -58,6 +59,8 @@ export default function Users() {
               );
             })}
           </>
+        ) : (
+          <Loading />
         )}
       </ContentContainer>
     </Container>

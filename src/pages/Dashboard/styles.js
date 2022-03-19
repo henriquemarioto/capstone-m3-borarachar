@@ -15,6 +15,10 @@ export const ContentContainer = styled.div`
   max-width: 1440px;
   height: 100%;
 
+  section {
+    flex: 1;
+  }
+
   @media (min-width: 1024px) {
     flex-direction: row;
   }
