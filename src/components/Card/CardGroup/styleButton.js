@@ -11,6 +11,9 @@ export const InfoTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  h3 {
+    font-weight: bold;
+  }
 `;
 
 export const InfoMembers = styled.div`

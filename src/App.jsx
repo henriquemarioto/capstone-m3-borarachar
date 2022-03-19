@@ -9,12 +9,9 @@ import { profileOwner } from "./teste";
 function App() {
   return (
     <>
-      {/*       <ToastContainer />
-      <Routes /> */}
+      <ToastContainer />
+      <Routes />
       <GlobalStyle />
-      <CardUser perfil={profileOwner} />
-      <CardUser perfil={profileOwner} type={"userSelect"} />
-      <CardUser perfil={profileOwner} type={"userFind"} />
     </>
   );
 }

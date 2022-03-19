@@ -13,6 +13,9 @@ export const PerfilDiv = styled.div`
   img {
     border-radius: 100%;
   }
+  h3 {
+    font-weight: bold;
+  }
 `;
 export const DivSelect = styled.div`
   cursor: pointer;
@@ -64,6 +67,7 @@ export const ContentRequest = styled.div`
     align-items: center;
     background-color: transparent;
     color: var(--blue);
+    font-weight: 500;
   }
   color: var(--blue);
 `;
