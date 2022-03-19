@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Input from "../Input";
+// import Input from "../Input";
 
 export const Container = styled.div`
   position: absolute;
@@ -12,13 +12,13 @@ export const Container = styled.div`
   background: var(--black-25);
 `;
 
-export const InputPopup = styled(Input)`
-  input {
-    width: 100%;
-    background: transparent;
-    border: 2px solid var(--gray);
-  }
-`;
+// export const InputPopup = styled(Input)`
+//   input {
+//     width: 100%;
+//     background: transparent;
+//     border: 2px solid var(--gray);
+//   }
+// `;
 
 export const Content = styled.div`
   padding: 8px;
@@ -47,6 +47,13 @@ export const SectionInput = styled.section`
   text-align: left;
   font-weight: 500;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input {
+    height: 30px;
+  }
 `;
 
 export const ContentnewGroup = styled.div``;

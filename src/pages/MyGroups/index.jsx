@@ -15,16 +15,14 @@ export default function MyGroups() {
 
   const [groups, setGroups] = useState([]);
 
-  console.log(groups);
-
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await api.get("/users/groups", {
+        const response = await api.get(`/users/${id}`, {
           headers: { authorization: `Bearer ${token}` },
         });
 
-        setGroups(response.data);
+        setGroups(response.data.already_member);
       } catch (error) {
         toast.error("Algo deu errado");
       }

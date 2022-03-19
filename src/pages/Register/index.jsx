@@ -24,9 +24,10 @@ import api from "../../services/api";
 import useUser from "../../providers/User";
 
 export const Register = () => {
+
   const { saveData } = useUser();
 
-  const passwordRecoverySchema = yup.object().shape({
+  const registerSchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
     gender: yup.string().required("Gênero obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
@@ -38,12 +39,13 @@ export const Register = () => {
       .oneOf([yup.ref("password")], "As senhas não são idênticas")
       .required("Confirmar senha obrigatória"),
   });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(passwordRecoverySchema),
+    resolver: yupResolver(registerSchema),
   });
 
   const submitRegister = async (data) => {
@@ -62,6 +64,7 @@ export const Register = () => {
   };
 
   const history = useHistory();
+
   return (
     <Container>
       <ContentContainer>
@@ -159,6 +162,7 @@ export const Register = () => {
         </ContainerFlex>
 
         <ContainerImage src={registerImg} />
+        
       </ContentContainer>
     </Container>
   );

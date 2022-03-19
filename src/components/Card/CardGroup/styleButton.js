@@ -11,6 +11,9 @@ export const InfoTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  h3 {
+    font-weight: bold;
+  }
 `;
 
 export const InfoMembers = styled.div`
@@ -36,8 +39,12 @@ export const InfoVacancy = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 10px;
+  .priceService {
+    text-decoration: line-through;
+  }
   .yourPrice {
     color: var(--green);
+    font-size: 12px;
   }
 `;
 

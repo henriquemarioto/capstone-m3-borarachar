@@ -9,6 +9,8 @@ export const Container = styled.div`
   padding: 10px;
   border: 1px solid var(--light-gray);
   min-height: 70px;
+  cursor: pointer;
+
   ${(props) =>
     props.addnew === true &&
     css`

@@ -2,14 +2,17 @@ export const group = {
   members: [
     {
       name: "Jorge",
+      status: "paid",
       img: "https://i.postimg.cc/jS2RTkDw/male-avatar.png",
     },
     {
       name: "Marcão",
+      status: "unpaid",
       img: "https://i.postimg.cc/jS2RTkDw/male-avatar.png",
     },
     {
       name: "Felipin",
+      status: "pending",
       img: "https://i.postimg.cc/jS2RTkDw/male-avatar.png",
     },
   ],
@@ -44,5 +47,18 @@ export const group = {
   },
 };
 
-export const profileOwner = { name: "Pedrin o BrAbO", userId: 432 };
-export const profileDefault = { name: "Felipin do rodo", userId: 5142 };
+export const profileOwner = {
+  name: "Pedrin o BrAbO",
+  findFor: [
+    { img: "https://t2.tudocdn.net/178296?w=660&h=660" },
+    { img: "https://t2.tudocdn.net/178296?w=660&h=660" },
+    { img: "https://t2.tudocdn.net/178296?w=660&h=660" },
+  ],
+  userId: 432,
+  avatarUser: "https://i.postimg.cc/jS2RTkDw/male-avatar.png",
+};
+export const profileDefault = {
+  name: "Felipin do rodo",
+  userId: 5142,
+  avatarUser: "https://i.postimg.cc/jS2RTkDw/male-avatar.png",
+};

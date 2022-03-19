@@ -15,9 +15,9 @@ import {
   Conteudo,
 } from "./styles";
 import Button from "../../components/Button";
-import Svg1 from "../../images/undraw_movie_night_re_9umk_1.svg";
-import StreamingServices from "../../images/streamings_services.svg";
-import Calendar from "../../images/calendar.svg";
+import Svg1 from "../../images/Home/undraw_movie_night_re_9umk_1.svg";
+import StreamingServices from "../../images/Home/streamings_services.svg";
+import Calendar from "../../images/Home/calendar.svg";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 import { useHistory } from "react-router-dom";

@@ -1,6 +1,7 @@
 import { Redirect } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import Header from "../components/Header";
+import { Popup } from "../components/Popup";
 import { Dashboard } from "../pages/Dashboard";
 import Group from "../pages/Group";
 import { Home } from "../pages/Home";
@@ -43,7 +44,7 @@ export const Routes = () => {
         <Profile />
       </Route>
 
-      <Route path="/group" isPrivate>
+      <Route path="/group/:groupID" isPrivate>
         <Header />
         <Group />
       </Route>
@@ -58,8 +59,7 @@ export const Routes = () => {
         <MyGroups />
       </Route>
 
-      <Route path="/search" isPrivate>
-        <Header />
+      <Route path="/search" /* isPrivate */>
         <Search />
       </Route>
 

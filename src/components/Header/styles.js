@@ -35,7 +35,6 @@ export const Container = styled.div`
       margin-right: 5px;
       width: 100%;
       height: 30px;
-      /* margin-top: 5px; */
     }
   }
   .bttIcons {
@@ -117,4 +116,61 @@ export const ContentMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+`;
+export const ContentSearch = styled.div`
+  width: 100%;
+  border-bottom: 1px solid var(--white-15);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+
+  input {
+    width: 90%;
+    height: 30px;
+    border-radius: 70px;
+    padding-left: 6px;
+  }
+  input::placeholder {
+    color: var(--dark);
+  }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: var(--white);
+    width: 100%;
+    height: 100%;
+  }
+  button:hover {
+    transition: 0.6s;
+    filter: invert();
+  }
+  .divIconSearch {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .divIconSearch:hover {
+    transition: 0.6s;
+    filter: invert();
+  }
+
+  @media (min-width: 768px) {
+    border-bottom: none;
+
+    button:hover {
+      svg {
+        border-radius: 100%;
+        background-color: transparent;
+        color: var(--white);
+      }
+    }
+  } ;
 `;
