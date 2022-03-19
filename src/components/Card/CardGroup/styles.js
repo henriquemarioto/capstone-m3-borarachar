@@ -14,6 +14,11 @@ export const InfoTitle = styled.div`
   h3 {
     font-weight: bold;
   }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+  }
 `;
 
 export const InfoMembers = styled.div`

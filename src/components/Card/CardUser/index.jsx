@@ -5,34 +5,74 @@ import {
   DivSelect,
   InfoFind,
   PerfilDiv,
+  StatusContainer,
 } from "./styles";
 
-function CardUser({ group, type, perfil }) {
-  switch (type) {
-    case "userSelect":
-      return (
-        <Container>
+import { CurrencyFormatter } from "../../../services/formatters";
+
+import { RiCloseLine, RiCheckLine, RiTimeLine } from "react-icons/ri";
+
+function CardUser({ type, memberData, groupData }) {
+  const { name, avatar_url, status } = memberData;
+
+  const price = CurrencyFormatter.format(
+    groupData.streaming.plan.price / groupData.members.length
+  );
+
+  return (
+    <Container>
+      {!type && (
+        <>
           <PerfilDiv>
-            <img src={perfil.avatar_url} alt={perfil.name} />
-            <span>{perfil.name}</span>
+            <img src={avatar_url} alt={name} />
+            <h3>{name}</h3>
+          </PerfilDiv>
+          <StatusContainer status={status}>
+            <span>{price}</span>
+
+            {status === "pending" ? (
+              <RiTimeLine />
+            ) : status === "paid" ? (
+              <RiCheckLine />
+            ) : (
+              <RiCloseLine />
+            )}
+          </StatusContainer>
+        </>
+      )}
+
+      {type === "admin" && (
+        <>
+          <PerfilDiv>
+            <img src={avatar_url} alt={name} />
+            <h3>{name}</h3>
+          </PerfilDiv>
+        </>
+      )}
+
+      {type === "userSelect" && (
+        <>
+          <PerfilDiv>
+            <img src={avatar_url} alt={name} />
+            <h3>{name}</h3>
           </PerfilDiv>
           <DivSelect>
             <input className="radioInput" type="radio" />
           </DivSelect>
-        </Container>
-      );
-    case "userFind":
-      return (
-        <Container>
+        </>
+      )}
+
+      {type === "userFind" && (
+        <>
           <ContentInfo>
             <PerfilDiv>
-              <img src={perfil.avatarUser} alt={perfil.name} />
-              <h3>{perfil.name}</h3>
+              <img src={memberData.avatarUser} alt={name} />
+              <h3>{name}</h3>
             </PerfilDiv>
             <InfoFind>
               <span>Procurando por:</span>
 
-              {perfil.findFor.map((item) => (
+              {memberData.findFor.map((item) => (
                 <img src={item.img}></img>
               ))}
             </InfoFind>
@@ -40,18 +80,10 @@ function CardUser({ group, type, perfil }) {
           <ContentRequest>
             <button>Convidar</button>
           </ContentRequest>
-        </Container>
-      );
-    default:
-      return (
-        <Container>
-          <PerfilDiv>
-            <img src={perfil.avatarUser} alt={perfil.name} />
-            <span>{perfil.name}</span>
-          </PerfilDiv>
-        </Container>
-      );
-  }
+        </>
+      )}
+    </Container>
+  );
 }
 
 export default CardUser;

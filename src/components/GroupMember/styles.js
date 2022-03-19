@@ -41,6 +41,7 @@ export const MembersContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  width: 100%;
 
   h3 {
     font-weight: 900;
@@ -49,7 +50,7 @@ export const MembersContainer = styled.div`
     text-align: center;
   }
 
-  div {
+  > div {
     display: flex;
     flex-direction: column;
     justify-content: center;

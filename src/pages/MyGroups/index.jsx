@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 import { Container, ContentContainer } from "./styles";
 
@@ -9,6 +10,8 @@ import api from "../../services/api";
 import CardGroup from "../../components/Card/CardGroup";
 
 export default function MyGroups() {
+  const history = useHistory();
+
   const {
     user: { token, id },
   } = useUser();
@@ -42,6 +45,7 @@ export default function MyGroups() {
               type="groupMember"
               group={group}
               owner={owner === id}
+              onClick={() => history.push(`/group/${group._id}`)}
             />
           );
         })}

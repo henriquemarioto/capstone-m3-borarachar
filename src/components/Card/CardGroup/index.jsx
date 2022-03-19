@@ -5,12 +5,11 @@ import {
   InfoMembers,
   InfoTitle,
   InfoVacancy,
-} from "./styleButton";
+} from "./styles";
 import SvgAdd from "../../../images/Group13.svg";
 import { Container } from "../styles";
 import { RiShieldUserLine, RiArrowRightSLine } from "react-icons/ri";
 import { BsCheck2 } from "react-icons/bs";
-import { useHistory } from "react-router-dom";
 
 function CardGroup({
   group,
@@ -21,8 +20,6 @@ function CardGroup({
   moduleServece = "Duo",
   owner,
 }) {
-  const history = useHistory();
-
   const showVariant = (modo) => {
     const findService = group.streaming.plan;
 
@@ -40,7 +37,7 @@ function CardGroup({
   };
 
   return (
-    <Container onClick={() => history.push(`/group/${group._id}`)}>
+    <Container onClick={!!onClick && onClick}>
       {type === "groupMember" ? ( //---------------------MEMBER---------------------
         <>
           <ContentInfo>

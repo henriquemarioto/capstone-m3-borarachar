@@ -13,9 +13,9 @@ export default function GroupNonMember({ groupData }) {
       <MembersContainer>
         <h4>Membros desse grupo</h4>
         <div>
-          {groupData.members.map(({ _id, avatar_url, name }) => (
-            <MemberInfo key={_id}>
-              <img src={avatar_url} alt={_id} />
+          {groupData.members.map(({ userId, avatar_url, name }) => (
+            <MemberInfo key={userId}>
+              <img src={avatar_url} alt={name} />
               <span>{name}</span>
             </MemberInfo>
           ))}

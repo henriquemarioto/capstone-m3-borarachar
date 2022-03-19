@@ -1,6 +1,7 @@
 import { Container } from "./styles";
 
 export default function GroupHeader({ groupData }) {
+  console.log(groupData);
   return (
     <Container>
       <div>
@@ -31,11 +32,11 @@ export default function GroupHeader({ groupData }) {
         <p>Proprietário: </p>
         <img
           src={
-            groupData.members.find(({ _id }) => groupData.owner === _id)
-              .avatar_url
+            groupData.members.find(({ owner }) => owner === true)?.avatar_url ||
+            ""
           }
           alt={
-            groupData.members.find(({ _id }) => groupData.owner === _id).name
+            groupData.members.find(({ owner }) => owner === true)?.name || ""
           }
         />
       </div>
