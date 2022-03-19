@@ -13,7 +13,7 @@ import { BsCheck2 } from "react-icons/bs";
 
 import { CurrencyFormatter } from "../../../services/formatters";
 
-function CardGroup({ groupData, type, onClick = () => {}, owner }) {
+function CardGroup({ groupData, type, onClick = () => {}, userId }) {
   const price = CurrencyFormatter.format(groupData.streaming.plan.price);
   const newPrice = CurrencyFormatter.format(
     groupData.streaming.plan.price / (groupData.members.length + 1)
@@ -28,7 +28,7 @@ function CardGroup({ groupData, type, onClick = () => {}, owner }) {
               <img src={groupData.streaming.image} alt={groupData.name} />
               <h3>{groupData.name}</h3>
               {/**ICON IF OWNER */}
-              {owner && (
+              {groupData.owner === userId && (
                 <i>
                   <RiShieldUserLine size={15} />
                 </i>

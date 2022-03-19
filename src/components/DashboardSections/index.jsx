@@ -5,6 +5,7 @@ import { Container, HeaderContainer, DataContainer } from "./styles";
 import CardGrop from "../Card/CardGroup";
 import CardUser from "../Card/CardUser";
 import Button from "../Button";
+import useUser from "../../providers/User";
 
 export default function DashboardSections({
   title,
@@ -12,6 +13,10 @@ export default function DashboardSections({
   renderData,
   sectionType,
 }) {
+  const {
+    user: { id },
+  } = useUser();
+
   const history = useHistory();
 
   const handleLoadMore = () => {
@@ -58,6 +63,7 @@ export default function DashboardSections({
                   type="groupMember"
                   key={data._id}
                   groupData={data}
+                  userId={id}
                   onClick={() => handleEnter(data)}
                 />
               ) : sectionType === "groups" ? (
@@ -65,6 +71,7 @@ export default function DashboardSections({
                   type="joinGroup"
                   key={data._id}
                   groupData={data}
+                  userId={id}
                   onClick={() => handleEnter(data)}
                 />
               ) : (
