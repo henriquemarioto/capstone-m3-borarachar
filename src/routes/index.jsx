@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import { Popup } from "../components/Popup";
 import { Dashboard } from "../pages/Dashboard";
 import Group from "../pages/Group";
+import Groups from "../pages/Groups";
+import Users from "../pages/Users";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import MyGroups from "../pages/MyGroups";
@@ -52,6 +54,16 @@ export const Routes = () => {
       <Route path="/group/:groupID" isPrivate>
         <Header />
         <Group />
+      </Route>
+
+      <Route path="/groups" isPrivate>
+        <Header />
+        <Groups />
+      </Route>
+
+      <Route path="/users" isPrivate>
+        <Header />
+        <Users />
       </Route>
 
       <Route path="/notifications" isPrivate>

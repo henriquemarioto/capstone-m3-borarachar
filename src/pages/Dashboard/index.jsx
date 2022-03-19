@@ -28,7 +28,8 @@ export const Dashboard = () => {
       });
       setNomMemberGroups(
         nomMemberGroupsResponse.data.filter(
-          ({ members }) => !members.some(({ _id }) => _id === id)
+          ({ members, searching_for_members }) =>
+            !members.some(({ _id }) => _id === id) && searching_for_members
         )
       );
 
