@@ -5,7 +5,7 @@ import {
   InfoMembers,
   InfoTitle,
   InfoVacancy,
-} from "./styleButton";
+} from "./styles";
 import SvgAdd from "../../../images/Group13.svg";
 import { Container } from "../styles";
 import { RiShieldUserLine, RiArrowRightSLine } from "react-icons/ri";
@@ -16,6 +16,7 @@ function CardGroup({
   type,
   addnew = true,
   service,
+  onClick,
   moduleServece = "Duo",
   owner,
 }) {
@@ -36,7 +37,7 @@ function CardGroup({
   };
 
   return (
-    <Container>
+    <Container onClick={!!onClick && onClick}>
       {type === "groupMember" ? ( //---------------------MEMBER---------------------
         <>
           <ContentInfo>

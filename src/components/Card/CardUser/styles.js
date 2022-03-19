@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 export const ContentInfo = styled.div`
   display: flex;
@@ -6,17 +7,62 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   gap: 5px;
 `;
-export const PerfilDiv = styled.div`
-  gap: 8px;
+
+export const StatusContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  img {
-    border-radius: 100%;
+  gap: 10px;
+
+  ${({ status }) => {
+    switch (status) {
+      case "pending":
+        return css`
+          color: var(--blue);
+        `;
+      case "unpaid":
+        return css`
+          color: var(--red);
+        `;
+      case "paid":
+        return css`
+          color: var(--green);
+        `;
+      default:
+        break;
+    }
+  }}
+
+  span {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    white-space: nowrap;
   }
-  h3 {
-    font-weight: bold;
+
+  svg {
+    font-size: 20px;
   }
 `;
+
+export const PerfilDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+
+  img {
+    border-radius: 100%;
+    height: 40px;
+  }
+
+  h3 {
+    font-weight: 900;
+    font-size: 17px;
+    line-height: 20px;
+  }
+`;
+
 export const DivSelect = styled.div`
   cursor: pointer;
 

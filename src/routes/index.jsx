@@ -44,7 +44,7 @@ export const Routes = () => {
         <Profile />
       </Route>
 
-      <Route path="/group" isPrivate>
+      <Route path="/group/:groupID" isPrivate>
         <Header />
         <Group />
       </Route>

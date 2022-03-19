@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 import { Container, ContentContainer } from "./styles";
 
@@ -9,22 +10,22 @@ import api from "../../services/api";
 import CardGroup from "../../components/Card/CardGroup";
 
 export default function MyGroups() {
+  const history = useHistory();
+
   const {
     user: { token, id },
   } = useUser();
 
   const [groups, setGroups] = useState([]);
 
-  console.log(groups);
-
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await api.get("/users/groups", {
+        const response = await api.get(`/users/${id}`, {
           headers: { authorization: `Bearer ${token}` },
         });
 
-        setGroups(response.data);
+        setGroups(response.data.already_member);
       } catch (error) {
         toast.error("Algo deu errado");
       }
@@ -44,6 +45,7 @@ export default function MyGroups() {
               type="groupMember"
               group={group}
               owner={owner === id}
+              onClick={() => history.push(`/group/${group._id}`)}
             />
           );
         })}
