@@ -51,7 +51,7 @@ export default function MyGroups() {
                   key={_id}
                   type="groupMember"
                   groupData={group}
-                  owner={owner === id}
+                  userId={id}
                   onClick={() => history.push(`/group/${group._id}`)}
                 />
               );
