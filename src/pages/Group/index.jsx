@@ -9,6 +9,7 @@ import useUser from "../../providers/User";
 import GroupHeader from "../../components/GroupHeader";
 import GroupMember from "../../components/GroupMember";
 import GroupNonMember from "../../components/GroupNonMember";
+import Loading from "../../components/Loading";
 
 export default function Group() {
   const {
@@ -18,18 +19,18 @@ export default function Group() {
   let { groupID } = useParams();
 
   const [groupData, setGroupData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      setIsLoading(true);
+      setLoading(true);
 
       const response = await api.get(`/groups/${groupID}`, {
         headers: { authorization: `Bearer ${token}` },
       });
 
       setGroupData(response.data);
-      setIsLoading(false);
+      setLoading(false);
     };
     getData();
   }, []);
@@ -39,7 +40,7 @@ export default function Group() {
   return (
     <Container>
       <ContentContainer>
-        {!isLoading && (
+        {!loading ? (
           <>
             <GroupHeader groupData={groupData} />
             {!!groupData.members.some(({ userId }) => userId === id) ? (
@@ -48,6 +49,8 @@ export default function Group() {
               <GroupNonMember groupData={groupData} />
             )}
           </>
+        ) : (
+          <Loading />
         )}
       </ContentContainer>
     </Container>
