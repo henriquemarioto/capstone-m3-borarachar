@@ -1,176 +1,242 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-  min-height: 90px;
-  max-height: 150px;
+  display: flex;
+  justify-content: center;
   width: 100%;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
+`;
+
+export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  background: var(--darker-blue);
-  background: linear-gradient(to bottom, #07387b, #050b2f);
-  font-family: "Roboto", sans-serif;
 
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
-    font-size: 2rem;
-  }
-  .legenda {
-    display: none;
-  }
+  gap: 15px;
 
-  .divNav {
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  max-width: 1440px;
 
-    input {
-      border-radius: 70px;
-      padding: 3px;
-      margin-right: 5px;
-      width: 100%;
-      height: 30px;
-    }
-  }
-  .bttIcons {
-    color: var(--white-50);
-    border: none;
-    background-color: transparent;
-    text-align: center;
-  }
-  .bttIcons :hover {
-    border-radius: 100%;
-    background-color: var(--white);
-    color: var(--darker-blue);
-  }
+  padding: 10px;
 
-  .bttPesquisar {
-    background-color: var(--white-15);
-    border-radius: 100%;
-    padding: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .bttPesquisar:hover {
-    background-color: var(--white);
-    color: var(--darker-blue);
-  }
+  min-height: fit-content;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    .bttIcons {
-      min-width: 120px;
-    }
-    .legenda {
-      display: unset;
-      margin-left: 5px;
-    }
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 
-    button:hover {
-      svg {
-        border-radius: 100%;
-        background-color: var(--white);
-        color: var(--darker-blue);
-      }
-
-      .legenda {
-        background-color: transparent;
-        color: var(--white);
-      }
-    }
-  } ;
+    min-height: 75px;
+  }
 `;
 
-export const ContentLogo = styled.div`
-  width: 100%;
-  border-bottom: 1px solid var(--white-15);
+export const TopHeader = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
+  position: relative;
 
-  h2 {
-    font-weight: bold;
+  overflow: hidden;
+
+  img {
+    position: relative;
+    transform: translateX(0);
+
+    margin-right: 0;
+
+    transition: 300ms transform, 300ms margin-right;
   }
 
+  ${({ openInput }) =>
+    openInput &&
+    css`
+      img {
+        position: relative;
+        transform: translateX(-178px);
+        margin-right: -178px;
+      }
+
+      @media (min-width: 1024px) {
+        img {
+          position: relative;
+          transform: translateX(0);
+          margin-right: 0;
+        }
+      }
+    `}
+
   @media (min-width: 768px) {
-    border-bottom: none;
-  } ;
+    flex: 1;
+  }
 `;
-export const ContentMenu = styled.div`
-  width: 100%;
-  padding: 0.5rem;
+
+export const SearchContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
-export const ContentSearch = styled.div`
   width: 100%;
-  border-bottom: 1px solid var(--white-15);
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  gap: 10px;
+  position: relative;
   align-items: center;
-  padding: 0.5rem;
+  justify-content: end;
 
   input {
-    width: 90%;
+    width: 0;
+    border-radius: 1000px;
+    padding: 0;
+
     height: 30px;
-    border-radius: 70px;
-    padding-left: 6px;
+
+    position: absolute;
+    transform: translateX(-40px);
+
+    :focus {
+      outline: none;
+    }
+
+    transition: 300ms width, 300ms padding;
+
+    @media (min-width: 768px) {
+      max-width: 375px;
+    }
+
+    ${({ openInput }) =>
+      openInput &&
+      css`
+        width: calc(100% - 40px);
+        padding: 0 10px;
+
+        @media (min-width: 768px) {
+          padding: 0 10px;
+        }
+      `}
   }
-  input::placeholder {
-    color: var(--dark);
+`;
+
+export const SearchButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+  width: 30px;
+
+  z-index: 2;
+
+  background: var(--white-15);
+  color: var(--white);
+
+  border-radius: 100%;
+
+  svg {
+    font-size: 20px;
   }
-  button {
+
+  transition: 300ms color, 300ms background;
+
+  :hover {
+    background: var(--white);
+    color: var(--darker-blue);
+  }
+
+  ${({ openInput }) =>
+    openInput &&
+    css`
+      background: var(--blue);
+
+      :hover {
+        background: var(--white);
+        color: var(--blue);
+      }
+    `}
+`;
+
+export const Divider = styled.div`
+  height: 1px;
+  background: var(--white-15);
+  width: calc(100% + 20px);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+export const MenuButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  background: transparent;
+
+  color: var(--white-50);
+
+  svg {
+    font-size: 23px;
+
+    transition: 300ms transform;
+  }
+
+  span {
+    display: none;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+
+    transition: 300ms color;
+  }
+
+  .circle {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
-    color: var(--white);
-    width: 100%;
-    height: 100%;
-  }
-  button:hover {
-    transition: 0.6s;
-    filter: invert();
-  }
-  .divIconSearch {
-    width: 30px;
-    height: 30px;
+
+    color: var(--white-50);
+    background: var(--white-0);
     border-radius: 100%;
-    background-color: var(--blue);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+    height: 30px;
+    width: 30px;
+
+    transition: 300ms color, 300ms background, 300ms border-radius;
   }
-  .divIconSearch:hover {
-    transition: 0.6s;
-    filter: invert();
+
+  :hover {
+    svg {
+      transform: rotate(5deg) scale(105%);
+    }
+  }
+
+  :hover,
+  &.active {
+    span {
+      color: var(--white);
+    }
+
+    .circle {
+      color: var(--darker-blue);
+      background: var(--white);
+      border-radius: 100%;
+    }
   }
 
   @media (min-width: 768px) {
-    border-bottom: none;
-
-    button:hover {
-      svg {
-        border-radius: 100%;
-        background-color: transparent;
-        color: var(--white);
-      }
+    span {
+      display: block;
     }
-  } ;
+  }
+`;
+
+export const BottomMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  white-space: nowrap;
+
+  @media (min-width: 768px) {
+    justify-content: end;
+    gap: 10px;
+    width: fit-content;
+  }
 `;
