@@ -33,13 +33,24 @@ export const Profile = () => {
   const history = useHistory();
 
   useEffect(() => {
+    let componentDidMount = true;
+
     api
       .get(`/users/${userRequest.user.id}`, {
         headers: {
           Authorization: `Bearer ${userRequest.user.token}`,
         },
       })
-      .then((response) => setUser(response.data));
+      .then((response) => {
+        if (componentDidMount) {
+          setUser(response.data);
+        }
+      });
+
+    return () => {
+      // clean up
+      componentDidMount = false;
+    };
   }, []);
 
   const updateUser = (data) => {

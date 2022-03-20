@@ -1,7 +1,6 @@
 import CardGroup from "../../components/Card/CardGroup";
 import CardUser from "../../components/Card/CardUser";
 import Header from "../../components/Header";
-import { group, profileOwner } from "../../teste";
 import { Container, ContentGroup, ContentMembers } from "./styles";
 export const Search = () => {
   return (
