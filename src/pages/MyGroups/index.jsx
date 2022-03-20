@@ -18,24 +18,33 @@ export default function MyGroups() {
   } = useUser();
 
   const [groups, setGroups] = useState([]);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let componentDidMount = true;
+
     const getData = async () => {
-      setLoading(true);
       try {
         const response = await api.get(`/users/${id}`, {
           headers: { authorization: `Bearer ${token}` },
         });
 
-        setGroups(response.data.already_member);
-        setLoading(false);
+        if (componentDidMount) {
+          setGroups(response.data.already_member);
+
+          setLoading(false);
+        }
       } catch (error) {
         toast.error("Algo deu errado");
       }
     };
+
     getData();
+
+    return () => {
+      // clean up
+      componentDidMount = false;
+    };
   }, []);
 
   return (
