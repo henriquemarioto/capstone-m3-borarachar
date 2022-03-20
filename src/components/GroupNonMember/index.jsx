@@ -13,18 +13,22 @@ import { useParams } from "react-router-dom";
 
 export default function GroupNonMember({ groupData }) {
   const {
-    user: { token },
+    user: { token, id },
   } = useUser();
 
   const { groupID } = useParams();
 
   const handleJoin = async () => {
     try {
-      await api.patch(`/groups/${groupID}/join`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
+      await api.patch(
+        `/groups/${groupID}/join`,
+        { userId: id },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       toast.success("Você entrou nesse grupo!");
     } catch (error) {
       toast.error("Algo de errado aconteceu");

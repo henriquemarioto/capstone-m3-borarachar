@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
-      <ToastContainer hideProgressBar autoClose={1000} />
+      <ToastContainer autoClose={1000} />
       <Routes />
       <GlobalStyle />
     </>
