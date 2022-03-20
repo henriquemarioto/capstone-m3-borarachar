@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.header`
   display: flex;
   justify-content: center;
   width: 100%;
   align-items: center;
   background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
+  position: fixed;
 `;
 
 export const ContentContainer = styled.div`
@@ -13,6 +14,7 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   justify-items: center;
   align-items: center;
+  position: relative;
 
   gap: 15px;
 
@@ -32,12 +34,20 @@ export const ContentContainer = styled.div`
 
 export const TopHeader = styled.div`
   display: flex;
+  transform: translateY(
+    ${({ scrollPage }) => (scrollPage ? "calc(-100% - 30px)" : "0")}
+  );
+
+  margin-bottom: ${({ scrollPage }) => (scrollPage ? "-60px" : "0")};
+
   gap: 10px;
   width: 100%;
   justify-content: space-between;
   position: relative;
 
   overflow: hidden;
+
+  transition: 300ms margin-bottom, 300ms transform;
 
   img {
     position: relative;
@@ -68,6 +78,9 @@ export const TopHeader = styled.div`
 
   @media (min-width: 768px) {
     flex: 1;
+
+    transform: translateY(0);
+    margin-bottom: 0;
   }
 `;
 
@@ -227,7 +240,7 @@ export const MenuButton = styled.button`
   }
 `;
 
-export const BottomMenu = styled.div`
+export const BottomMenu = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;

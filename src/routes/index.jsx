@@ -1,7 +1,5 @@
 import { Redirect } from "react-router-dom";
 import { Switch } from "react-router-dom";
-import Header from "../components/Header";
-import { Popup } from "../components/Popup";
 import { Dashboard } from "../pages/Dashboard";
 import Group from "../pages/Group";
 import Groups from "../pages/Groups";
@@ -14,6 +12,7 @@ import { PasswordRecovery } from "../pages/PasswordRecovery";
 import { Profile } from "../pages/Profile";
 import { Register } from "../pages/Register";
 import { Search } from "../pages/Search";
+import Layout from "../components/Layout";
 
 import Route from "./route";
 
@@ -36,53 +35,49 @@ export const Routes = () => {
         <PasswordRecovery />
       </Route>
 
-      <Route path="/dashboard" isPrivate>
-        <Header />
-        <Dashboard />
-      </Route>
+      <Layout>
+        <Switch>
+          <Route path="/dashboard" isPrivate>
+            <Dashboard />
+          </Route>
 
-      <Route path="/profile" isPrivate>
-        <Header />
-        <Profile />
-      </Route>
+          <Route path="/profile" isPrivate>
+            <Profile />
+          </Route>
 
-      <Route path="/user/:userID" isPrivate>
-        <Header />
-        <Profile />
-      </Route>
+          <Route path="/user/:userID" isPrivate>
+            <Profile />
+          </Route>
 
-      <Route path="/group/:groupID" isPrivate>
-        <Header />
-        <Group />
-      </Route>
+          <Route path="/group/:groupID" isPrivate>
+            <Group />
+          </Route>
 
-      <Route path="/groups" isPrivate>
-        <Header />
-        <Groups />
-      </Route>
+          <Route path="/groups" isPrivate>
+            <Groups />
+          </Route>
 
-      <Route path="/users" isPrivate>
-        <Header />
-        <Users />
-      </Route>
+          <Route path="/users" isPrivate>
+            <Users />
+          </Route>
 
-      <Route path="/notifications" isPrivate>
-        <Header />
-        <Notification />
-      </Route>
+          <Route path="/notifications" isPrivate>
+            <Notification />
+          </Route>
 
-      <Route path="/mygroups" isPrivate>
-        <Header />
-        <MyGroups />
-      </Route>
+          <Route path="/mygroups" isPrivate>
+            <MyGroups />
+          </Route>
 
-      <Route path="/search" isPrivate>
-        <Search />
-      </Route>
+          <Route path="/search" isPrivate>
+            <Search />
+          </Route>
 
-      <Route>
-        <Redirect to="/" />
-      </Route>
+          <Route>
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </Layout>
     </Switch>
   );
 };

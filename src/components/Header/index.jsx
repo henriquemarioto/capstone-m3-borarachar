@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   MdHome,
   MdGroups,
@@ -21,15 +21,39 @@ import {
   SearchContainer,
 } from "./styles";
 
-function Header({ search = false }) {
+function Header() {
   const [openInput, setOpenInput] = useState(false);
+  const [pageScrollY, setPageScrollY] = useState(0);
+  const [scrollPage, setScrollPage] = useState(false);
 
   const history = useHistory();
+  const location = useLocation();
+
+  const handleClick = (link) => {
+    history.push(link);
+  };
+
+  window.onscroll = () => {
+    if (window.pageYOffset > pageScrollY) {
+      setScrollPage(true);
+    } else {
+      setScrollPage(false);
+    }
+
+    setPageScrollY(window.pageYOffset);
+  };
+
+  const endpoints = {
+    dashboard: "/dashboard",
+    mygroups: "/mygroups",
+    profile: "/profile",
+    notifications: "/notifications",
+  };
 
   return (
-    <Container>
+    <Container scrollPage={scrollPage}>
       <ContentContainer>
-        <TopHeader openInput={openInput}>
+        <TopHeader openInput={openInput} scrollPage={scrollPage}>
           <img src={logo} alt="Logotipo BoraRachar" />
 
           <SearchContainer openInput={openInput}>
@@ -46,27 +70,41 @@ function Header({ search = false }) {
         <Divider />
 
         <BottomMenu>
-          <MenuButton onClick={() => history.push("/dashboard")}>
+          <MenuButton
+            onClick={() => handleClick(endpoints.dashboard)}
+            className={location.pathname === endpoints.dashboard && "active"}
+          >
             <div className="circle">
               <MdHome />
             </div>
             <span>Home</span>
           </MenuButton>
 
-          <MenuButton onClick={() => history.push("/mygroups")}>
+          <MenuButton
+            onClick={() => handleClick(endpoints.mygroups)}
+            className={location.pathname === endpoints.mygroups && "active"}
+          >
             <div className="circle">
               <MdGroups />
             </div>
             <span>Meus grupos</span>
           </MenuButton>
-          <MenuButton onClick={() => history.push("/profile")}>
+          <MenuButton
+            onClick={() => handleClick(endpoints.profile)}
+            className={location.pathname === endpoints.profile && "active"}
+          >
             <div className="circle">
               <MdPerson />
             </div>
 
             <span>Perfil</span>
           </MenuButton>
-          <MenuButton onClick={() => history.push("/notifications")}>
+          <MenuButton
+            onClick={() => handleClick(endpoints.notifications)}
+            className={
+              location.pathname === endpoints.notifications && "active"
+            }
+          >
             <div className="circle">
               <MdNotifications />
             </div>
