@@ -10,7 +10,7 @@ import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useHistory, useParams } from "react-router-dom";
 
-export default function GroupMember({ groupData }) {
+export default function GroupMember({ groupData, handlePopup }) {
   const history = useHistory();
 
   const { groupID } = useParams();
@@ -68,9 +68,7 @@ export default function GroupMember({ groupData }) {
         </div>
       </MembersContainer>
 
-      <a onClick={() => console.log("Abre popup de infos")}>
-        Informações da assinatura
-      </a>
+      <a onClick={handlePopup}>Informações da assinatura</a>
 
       <button
         className="report"

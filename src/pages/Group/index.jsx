@@ -10,6 +10,7 @@ import GroupHeader from "../../components/GroupHeader";
 import GroupMember from "../../components/GroupMember";
 import GroupNonMember from "../../components/GroupNonMember";
 import Loading from "../../components/Loading";
+import SubscriptionPopup from "../../components/SubscriptionPopup";
 
 export default function Group() {
   const {
@@ -20,6 +21,8 @@ export default function Group() {
 
   const [groupData, setGroupData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -35,14 +38,34 @@ export default function Group() {
     getData();
   }, []);
 
+  const handlePopup = (event) => {
+    if (
+      event.currentTarget.tagName === "BUTTON" ||
+      event.currentTarget === event.target
+    ) {
+      setPopupOpen(!popupOpen);
+
+      setTimeout(() => {
+        setPopupIsOpen(!popupOpen);
+      }, 300);
+    }
+  };
+
   return (
     <Container>
       <ContentContainer>
         {!loading ? (
           <>
+            <SubscriptionPopup
+              groupData={groupData}
+              handlePopup={handlePopup}
+              popupOpen={popupOpen}
+              popupIsOpen={popupIsOpen}
+            />
+
             <GroupHeader groupData={groupData} userId={id} />
             {!!groupData.members.some(({ userId }) => userId === id) ? (
-              <GroupMember groupData={groupData} />
+              <GroupMember handlePopup={handlePopup} groupData={groupData} />
             ) : (
               <GroupNonMember groupData={groupData} />
             )}
