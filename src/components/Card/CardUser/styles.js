@@ -10,23 +10,104 @@ export const ContentInfo = styled.div`
 
 export const ContentContainer = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ContainerForMenu = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 export const MenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-height: 92px;
 
-  .close-menu {
-    font-size: 25px;
-    background: transparent;
-    color: var(--dark-gray);
+  overflow: hidden;
+  position: relative;
+
+  transition: 300ms min-height;
+
+  min-height: ${({ showMenu }) => {
+    if (showMenu) {
+      return "0px";
+    }
+  }};
+
+  @media (min-width: 473px) {
+    min-height: 46px;
+
+    min-height: ${({ showMenu }) => {
+      if (showMenu) {
+        return "0px";
+      }
+    }};
+  }
+
+  .menu {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    padding-top: 10px;
+
+    .pills {
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      justify-content: space-around;
+
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .close-menu {
+      font-size: 25px;
+      background: transparent;
+      color: var(--dark-gray);
+
+      transition: 300ms transform;
+
+      transform: rotate(
+        ${({ showMenu }) => {
+          if (showMenu) {
+            return "180deg";
+          }
+        }}
+      );
+    }
+
+    transition: 300ms transform;
+
+    transform: translateY(
+      ${({ showMenu }) => {
+        if (showMenu) {
+          return "-92px";
+        }
+      }}
+    );
+
+    @media (min-width: 473px) {
+      transform: translateY(
+        ${({ showMenu }) => {
+          if (showMenu) {
+            return "-46px";
+          }
+        }}
+      );
+    }
   }
 `;
 
 export const UserInfo = styled.div`
   display: flex;
   width: 100%;
+  min-height: 48px;
+
+  background-color: var(--white);
+  z-index: 1;
+
   justify-content: space-between;
 `;
 

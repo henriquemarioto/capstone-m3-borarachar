@@ -11,6 +11,8 @@ export const Container = styled.div`
   background-color: var(--white);
   min-height: 70px;
   cursor: pointer;
+  overflow: hidden;
+  height: fit-content;
 
   ${({ addnew }) =>
     !!addnew &&

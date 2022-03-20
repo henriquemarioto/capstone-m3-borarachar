@@ -185,8 +185,6 @@ export const MenuButton = styled.button`
 
   svg {
     font-size: 23px;
-
-    transition: 300ms transform;
   }
 
   span {
@@ -203,6 +201,7 @@ export const MenuButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     color: var(--white-50);
     background: var(--white-0);
@@ -215,8 +214,8 @@ export const MenuButton = styled.button`
   }
 
   :hover {
-    svg {
-      transform: rotate(5deg) scale(105%);
+    .circle {
+      animation: hover 250ms infinite alternate;
     }
   }
 
@@ -236,6 +235,16 @@ export const MenuButton = styled.button`
   @media (min-width: 768px) {
     span {
       display: block;
+    }
+  }
+
+  @keyframes hover {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-3px);
     }
   }
 `;
