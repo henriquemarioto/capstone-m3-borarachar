@@ -10,6 +10,7 @@ import api from "../../services/api";
 import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function GroupNonMember({ groupData }) {
   const {
@@ -17,6 +18,8 @@ export default function GroupNonMember({ groupData }) {
   } = useUser();
 
   const { groupID } = useParams();
+
+  const [memberStatus, setMemberStatus] = useState(false);
 
   const handleJoin = async () => {
     try {
@@ -30,10 +33,16 @@ export default function GroupNonMember({ groupData }) {
         }
       );
       toast.success("Você entrou nesse grupo!");
+
+      setMemberStatus(true);
     } catch (error) {
       toast.error("Algo de errado aconteceu");
     }
   };
+
+  useEffect(() => {
+    groupData = { ...groupData };
+  }, [memberStatus]);
 
   return (
     <Container>

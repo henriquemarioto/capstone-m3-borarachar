@@ -9,6 +9,7 @@ import {
   UserInfo,
   ContentContainer,
   MenuContainer,
+  ContainerForMenu,
 } from "./styles";
 
 import { CurrencyFormatter } from "../../../services/formatters";
@@ -18,6 +19,8 @@ import { MdPersonRemove } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
 import PillButton from "../../PillButton";
 
+import { useState } from "react";
+
 function CardUser({ type, memberData, groupData, onClick = () => {} }) {
   const { name, avatar_url, status, searching_for } = memberData;
 
@@ -25,6 +28,12 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
     CurrencyFormatter.format(
       groupData.streaming.plan.price / groupData.members.length
     );
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <Container onClick={onClick}>
@@ -49,14 +58,14 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
       )}
 
       {type === "withMenu" && (
-        <>
-          <ContentContainer>
+        <ContainerForMenu>
+          <ContentContainer showMenu={showMenu}>
             <UserInfo>
               <PerfilDiv>
                 <img src={avatar_url} alt={name} />
                 <h3>{name}</h3>
               </PerfilDiv>
-              <StatusContainer status={status}>
+              <StatusContainer status={status} onClick={handleMenu}>
                 <span>{price()}</span>
                 {status === "pending" ? (
                   <RiTimeLine />
@@ -67,17 +76,29 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
                 )}
               </StatusContainer>
             </UserInfo>
-            <MenuContainer>
-              <PillButton label="Pagou" icon={RiCheckLine} color="green" />
-              <PillButton label="Não pagou" icon={RiCloseLine} color="red" />
-              <PillButton label="Remover" icon={MdPersonRemove} color="gray" />
+            <MenuContainer showMenu={showMenu}>
+              <div className="menu">
+                <div className="pills">
+                  <PillButton label="Pagou" icon={RiCheckLine} color="green" />
+                  <PillButton
+                    label="Não pagou"
+                    icon={RiCloseLine}
+                    color="red"
+                  />
+                  <PillButton
+                    label="Remover usuário"
+                    icon={MdPersonRemove}
+                    color="gray"
+                  />
+                </div>
 
-              <button className="close-menu">
-                <IoIosArrowUp />
-              </button>
+                <button className="close-menu" onClick={handleMenu}>
+                  <IoIosArrowUp />
+                </button>
+              </div>
             </MenuContainer>
           </ContentContainer>
-        </>
+        </ContainerForMenu>
       )}
 
       {type === "admin" && (
