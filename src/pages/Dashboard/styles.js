@@ -17,7 +17,6 @@ export const ContentContainer = styled.div`
 
   section {
     flex: 1;
-    min-height: 230px;
   }
 
   @media (min-width: 1024px) {

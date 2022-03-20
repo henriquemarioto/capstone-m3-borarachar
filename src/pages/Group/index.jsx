@@ -35,8 +35,6 @@ export default function Group() {
     getData();
   }, []);
 
-  console.log(groupData);
-
   return (
     <Container>
       <ContentContainer>
