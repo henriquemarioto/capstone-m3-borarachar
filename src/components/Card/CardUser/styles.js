@@ -8,6 +8,28 @@ export const ContentInfo = styled.div`
   gap: 5px;
 `;
 
+export const ContentContainer = styled.div`
+  width: 100%;
+`;
+
+export const MenuContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .close-menu {
+    font-size: 25px;
+    background: transparent;
+    color: var(--dark-gray);
+  }
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 export const StatusContainer = styled.div`
   display: flex;
   justify-content: center;

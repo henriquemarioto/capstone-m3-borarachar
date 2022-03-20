@@ -7,35 +7,48 @@ export const Container = styled.section`
   gap: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--light-gray);
-
-  .title {
+  .header {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    width: 100%;
 
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 5px;
-    }
-
-    div {
+    .title {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      flex: 1;
+      align-items: center;
       gap: 8px;
 
-      h3 {
-        font-weight: 900;
-        font-size: 25px;
-        line-height: 29px;
+      img {
+        width: 60px;
+        height: 60px;
+        border-radius: 5px;
       }
 
-      span {
-        font-weight: 500;
-        font-size: 9px;
-        line-height: 11px;
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 8px;
+
+        h3 {
+          font-weight: 900;
+          font-size: 25px;
+          line-height: 29px;
+        }
+
+        span {
+          font-weight: 500;
+          font-size: 9px;
+          line-height: 11px;
+        }
       }
+    }
+
+    .settings {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+      background: transparent;
     }
   }
 
