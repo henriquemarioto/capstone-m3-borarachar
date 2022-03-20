@@ -1,67 +1,79 @@
-import { Container, ContentLogo, ContentMenu, ContentSearch } from "./styles";
-import { VscHome } from "react-icons/vsc";
-import { CgProfile, CgSearch } from "react-icons/cg";
-import { MdOutlineNotificationsNone, MdPeopleOutline } from "react-icons/md";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import {
+  MdHome,
+  MdGroups,
+  MdPerson,
+  MdNotifications,
+  MdSearch,
+} from "react-icons/md";
+
+import logo from "../../images/logo-white.svg";
+
+import {
+  Container,
+  ContentContainer,
+  Divider,
+  MenuButton,
+  BottomMenu,
+  TopHeader,
+  SearchButton,
+  SearchContainer,
+} from "./styles";
 
 function Header({ search = false }) {
-  const [showInput, setShowInput] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
+
   const history = useHistory();
+
   return (
     <Container>
-      {search ? (
-        <ContentSearch>
-          <input type="text" placeholder="Pesquise aqui" />
-          <div className="divIconSearch">
-            <button>
-              <CgSearch size={20} />
-            </button>
-          </div>
-        </ContentSearch>
-      ) : (
-        <ContentLogo>
-          <div className="logo">
-            <h2>DIVIDE</h2>
+      <ContentContainer>
+        <TopHeader openInput={openInput}>
+          <img src={logo} alt="Logotipo BoraRachar" />
 
-            <p>COMIGO</p>
-          </div>
-
-          <div className="divNav">
-            {showInput && <input type="text" placeholder="Pesquise aqui" />}
-            <button
-              onClick={() => setShowInput(!showInput)}
-              className="bttPesquisar"
+          <SearchContainer openInput={openInput}>
+            <input type="text" placeholder="Pesquise aqui" />
+            <SearchButton
+              onClick={() => setOpenInput(!openInput)}
+              openInput={openInput}
             >
-              <CgSearch size={20} />
-            </button>
-          </div>
-        </ContentLogo>
-      )}
+              <MdSearch />
+            </SearchButton>
+          </SearchContainer>
+        </TopHeader>
 
-      <ContentMenu>
-        <button className="bttIcons" onClick={() => history.push("/dashboard")}>
-          <VscHome size={30} />
-          <span className="legenda">Home</span>
-        </button>
+        <Divider />
 
-        <button className="bttIcons" onClick={() => history.push("/mygroups")}>
-          <MdPeopleOutline size={30} />
+        <BottomMenu>
+          <MenuButton onClick={() => history.push("/dashboard")}>
+            <div className="circle">
+              <MdHome />
+            </div>
+            <span>Home</span>
+          </MenuButton>
 
-          <span className="legenda">Meus grupos</span>
-        </button>
-        <button className="bttIcons" onClick={() => history.push("/profile")}>
-          <CgProfile size={30} />
-          <span className="legenda">Perfil</span>
-        </button>
-        <button
-          className="bttIcons"
-          onClick={() => history.push("/notifications")}
-        >
-          <MdOutlineNotificationsNone size={30} />
-          <span className="legenda">Notificações</span>
-        </button>
-      </ContentMenu>
+          <MenuButton onClick={() => history.push("/mygroups")}>
+            <div className="circle">
+              <MdGroups />
+            </div>
+            <span>Meus grupos</span>
+          </MenuButton>
+          <MenuButton onClick={() => history.push("/profile")}>
+            <div className="circle">
+              <MdPerson />
+            </div>
+
+            <span>Perfil</span>
+          </MenuButton>
+          <MenuButton onClick={() => history.push("/notifications")}>
+            <div className="circle">
+              <MdNotifications />
+            </div>
+            <span>Notificações</span>
+          </MenuButton>
+        </BottomMenu>
+      </ContentContainer>
     </Container>
   );
 }
