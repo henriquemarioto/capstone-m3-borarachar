@@ -50,6 +50,13 @@ export default function GroupMember({ groupData }) {
                 groupData={groupData}
                 key={member.userId}
               />
+            ) : groupData.owner === id ? (
+              <CardUser
+                type="withMenu"
+                memberData={member}
+                groupData={groupData}
+                key={member.userId}
+              />
             ) : (
               <CardUser
                 memberData={member}

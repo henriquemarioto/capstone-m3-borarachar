@@ -42,7 +42,7 @@ export default function Group() {
       <ContentContainer>
         {!loading ? (
           <>
-            <GroupHeader groupData={groupData} />
+            <GroupHeader groupData={groupData} userId={id} />
             {!!groupData.members.some(({ userId }) => userId === id) ? (
               <GroupMember groupData={groupData} />
             ) : (

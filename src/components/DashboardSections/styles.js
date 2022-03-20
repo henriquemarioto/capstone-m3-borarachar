@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  height: 100%;
 `;
 
 export const HeaderContainer = styled.div`
@@ -21,4 +22,5 @@ export const DataContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  flex: 1;
 `;

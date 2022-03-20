@@ -12,12 +12,16 @@ export const Dashboard = () => {
     user: { id, token },
   } = useUser();
 
+  const [loading, setLoading] = useState(true);
+
   const [myGroups, setMyGroups] = useState([]);
   const [nomMemberGroups, setNomMemberGroups] = useState([]);
   const [searchingFoGroups, setSearchingFoGroups] = useState([]);
 
   useEffect(() => {
     const getNomMemberGroupsData = async () => {
+      setLoading(true);
+
       const nomMemberGroupsResponse = await api.get("/groups", {
         headers: {
           authorization: `Bearer ${token}`,
@@ -29,18 +33,26 @@ export const Dashboard = () => {
             !members.some(({ _id }) => _id === id) && searching_for_members
         )
       );
+
+      setLoading(false);
     };
 
     const getMyGroupsData = async () => {
+      setLoading(true);
+
       const myGroupsResponse = await api.get(`/users/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
       setMyGroups(myGroupsResponse.data.already_member);
+
+      setLoading(false);
     };
 
     const getSearchingFoGroupsData = async () => {
+      setLoading(true);
+
       const searchingFoGroupsResponse = await api.get(`/users`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -51,6 +63,8 @@ export const Dashboard = () => {
           ({ searching_for }) => searching_for.length !== 0
         )
       );
+
+      setLoading(false);
     };
     getMyGroupsData();
     getNomMemberGroupsData();
@@ -61,7 +75,7 @@ export const Dashboard = () => {
     <Container>
       <ContentContainer>
         <section>
-          {myGroups.length !== 0 ? (
+          {!loading ? (
             <DashboardSections
               title="Grupos ativos"
               emptyMessage="Você não faz parte de nenhum grupo"
@@ -74,7 +88,7 @@ export const Dashboard = () => {
         </section>
 
         <section>
-          {nomMemberGroups.length !== 0 ? (
+          {!loading ? (
             <DashboardSections
               title="Procurando por membros"
               emptyMessage="Ninguém procurando por membros no momento"
@@ -87,7 +101,7 @@ export const Dashboard = () => {
         </section>
 
         <section>
-          {searchingFoGroups.length !== 0 ? (
+          {!loading ? (
             <DashboardSections
               title="Procurando por grupos"
               emptyMessage="Ninguém procurando por grupos no momento"

@@ -53,42 +53,50 @@ export default function DashboardSections({
         <h3>{title}</h3>
       </HeaderContainer>
 
-      {renderData.length !== 0 ? (
-        <DataContainer>
-          {renderData
-            .slice(0, 2)
-            .map((data) =>
-              sectionType === "myGroups" ? (
-                <CardGrop
-                  type="groupMember"
-                  key={data._id}
-                  groupData={data}
-                  userId={id}
-                  onClick={() => handleEnter(data)}
-                />
-              ) : sectionType === "groups" ? (
-                <CardGrop
-                  type="joinGroup"
-                  key={data._id}
-                  groupData={data}
-                  userId={id}
-                  onClick={() => handleEnter(data)}
-                />
-              ) : (
-                <CardUser
-                  type="userFind"
-                  key={data._id}
-                  memberData={data}
-                  onClick={() => handleEnter(data)}
-                />
-              )
-            )}
-        </DataContainer>
-      ) : (
-        <span>{emptyMessage}</span>
-      )}
+      <DataContainer>
+        {renderData.length !== 0 ? (
+          <>
+            {renderData
+              .slice(0, 2)
+              .map((data) =>
+                sectionType === "myGroups" ? (
+                  <CardGrop
+                    type="groupMember"
+                    key={data._id}
+                    groupData={data}
+                    userId={id}
+                    onClick={() => handleEnter(data)}
+                  />
+                ) : sectionType === "groups" ? (
+                  <CardGrop
+                    type="joinGroup"
+                    key={data._id}
+                    groupData={data}
+                    userId={id}
+                    onClick={() => handleEnter(data)}
+                  />
+                ) : (
+                  <CardUser
+                    type="userFind"
+                    key={data._id}
+                    memberData={data}
+                    onClick={() => handleEnter(data)}
+                  />
+                )
+              )}
+          </>
+        ) : (
+          <span>{emptyMessage}</span>
+        )}
+      </DataContainer>
 
-      <Button size="full" colour="blue" hover onClick={handleLoadMore}>
+      <Button
+        className="load-more-button"
+        size="full"
+        colour="blue"
+        hover
+        onClick={handleLoadMore}
+      >
         Ver mais...
       </Button>
     </Container>

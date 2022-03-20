@@ -1,10 +1,11 @@
 import { Container } from "./styles";
 
-export default function GroupHeader({ groupData }) {
-  console.log(groupData);
+import { ImCog } from "react-icons/im";
+
+export default function GroupHeader({ groupData, userId }) {
   return (
     <Container>
-      <div>
+      <div className="header">
         <div className="title">
           <img src={groupData.streaming.image} alt={groupData.streaming.name} />
           <div>
@@ -14,6 +15,11 @@ export default function GroupHeader({ groupData }) {
             </span>
           </div>
         </div>
+        {userId === groupData.owner && (
+          <button className="settings">
+            <ImCog />
+          </button>
+        )}
       </div>
       <p>
         {groupData.searching_for_members
