@@ -14,8 +14,10 @@ export const UserProvider = ({ children }) => {
     setUser(data);
   };
 
+  const userUpdate = (data) => console.log(data);
+
   return (
-    <UserContext.Provider value={{ user, saveData }}>
+    <UserContext.Provider value={{ user, saveData, userUpdate }}>
       {children}
     </UserContext.Provider>
   );
