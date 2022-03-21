@@ -8,8 +8,6 @@ import {
   MdSearch,
 } from "react-icons/md";
 
-import logo from "../../images/logo-white.svg";
-
 import {
   Container,
   ContentContainer,
@@ -20,6 +18,7 @@ import {
   SearchButton,
   SearchContainer,
 } from "./styles";
+import { Logo } from "../Logo";
 
 function Header() {
   const [openInput, setOpenInput] = useState(false);
@@ -72,7 +71,7 @@ function Header() {
     <Container scrollPage={scrollPage}>
       <ContentContainer>
         <TopHeader openInput={openInput} scrollPage={scrollPage}>
-          <img src={logo} alt="Logotipo BoraRachar" />
+          <Logo />
 
           <SearchContainer openInput={openInput}>
             <form onSubmit={handleSubmit}>
