@@ -66,8 +66,6 @@ export const Profile = () => {
       .then((_) => setIsEditing(!isEditing));
   };
 
-  console.log(user);
-
   return (
     <Container onSubmit={handleSubmit(updateUser)}>
       {user.searching_for ? (
