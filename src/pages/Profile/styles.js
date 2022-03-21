@@ -16,6 +16,7 @@ export const Container = styled.form`
     gap: 10px;
   }
   .divBtt {
+    min-width: 280px;
     width: 50%;
   }
 `;
@@ -157,7 +158,7 @@ export const InfoDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  @media (width: 425px) {
+  @media (max-width: 425px) {
     flex-direction: column;
   }
 `;
@@ -169,7 +170,7 @@ export const PerfilDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (width: 425px) {
+  @media (max-width: 425px) {
     border: none;
   }
 `;
