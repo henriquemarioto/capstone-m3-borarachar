@@ -7,7 +7,6 @@ export default createGlobalStyle`
     }
 
     :root{
-
         --black: #000000;
         --black-75: rgba(0, 0, 0, 0.75);
         --black-50: rgba(0, 0, 0, 0.5);
@@ -74,7 +73,7 @@ export default createGlobalStyle`
         line-height: 1;
         background-color: var(--light);
         min-height: 100vh;
-        min-width: 100vw;
+        min-width: 100%;
     }
     ol, ul {
         list-style: none;
