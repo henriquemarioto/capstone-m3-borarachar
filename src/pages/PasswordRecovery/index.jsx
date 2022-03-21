@@ -56,7 +56,7 @@ export const PasswordRecovery = () => {
       <ContentContainer>
         <ContainerFlex>
           <ContainerHeaderLogin>
-            <Logo />
+            <Logo darkLogo />
             <h2>Recuperar senha</h2>
           </ContainerHeaderLogin>
           <form onSubmit={handleSubmit(submitNewPassword)}>

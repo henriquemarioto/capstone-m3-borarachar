@@ -19,11 +19,11 @@ import Svg1 from "../../images/Home/undraw_movie_night_re_9umk_1.svg";
 import StreamingServices from "../../images/Home/streamings_services.svg";
 import Calendar from "../../images/Home/calendar.svg";
 import { RiArrowDownSLine } from "react-icons/ri";
-
 import { useHistory } from "react-router-dom";
+import { Logo } from "../../components/Logo";
 
 export const Home = () => {
-  const history = useHistory()
+  const history = useHistory();
   const arrDevs = [
     {
       name: "Lucas Anacleto",
@@ -54,9 +54,7 @@ export const Home = () => {
 
   return (
     <Container>
-      <h1>
-        DIVIDE<span>COMIGO</span>
-      </h1>
+      <Logo header={false} />
       <ContainerDividir>
         <Dividir>
           <Conteudo>
@@ -129,12 +127,14 @@ export const Home = () => {
         </p>
 
         <ContainerPessoas>
-          {arrDevs.map((item, index) => <CardPessoa key={index}>
-            <img src={item.img} />
+          {arrDevs.map((item, index) => (
+            <CardPessoa key={index}>
+              <img src={item.img} />
 
-            <p>{item.name}</p>
-            <span>{item.job}</span>
-          </CardPessoa>)}
+              <p>{item.name}</p>
+              <span>{item.job}</span>
+            </CardPessoa>
+          ))}
         </ContainerPessoas>
       </ContainerTime>
 

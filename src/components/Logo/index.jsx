@@ -1,8 +1,13 @@
 import { ContainerImgH1 } from "./style";
-import logo from "/src/images/Logo.svg";
+import logoWhite from "/src/images/logo-white.svg";
+import logoBlue from "/src/images/logo.svg";
+import logoDark from "/src/images/logoDark.svg";
 
-export const Logo = () => (
+export const Logo = ({ header = true, darkLogo }) => (
   <ContainerImgH1>
-    <img src={logo} alt="DivideComigo" />
+    <img
+      src={darkLogo ? logoDark : header ? logoWhite : logoBlue}
+      alt="Logotipo BoraRachar"
+    />
   </ContainerImgH1>
 );
