@@ -54,7 +54,7 @@ export default function MyGroups() {
           <>
             {groups.map((group) => {
               const { _id, owner } = group;
-
+              console.log(group);
               return (
                 <CardGroup
                   key={_id}
