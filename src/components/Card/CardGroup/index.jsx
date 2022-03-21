@@ -13,14 +13,18 @@ import { BsCheck2 } from "react-icons/bs";
 
 import { CurrencyFormatter } from "../../../services/formatters";
 
-function CardGroup({ groupData, type, onClick = () => {}, userId }) {
-  const price = CurrencyFormatter.format(groupData.streaming.plan.price);
-  const newPrice = CurrencyFormatter.format(
-    groupData.streaming.plan.price / (groupData.members.length + 1)
-  );
+function CardGroup({ groupData, type,  userId , ...rest}) {
+  const price = () => {
+    return CurrencyFormatter.format(groupData.streaming.plan.price);
+  };
+  const newPrice = () => {
+    return CurrencyFormatter.format(
+      groupData.streaming.plan.price / (groupData.members.length + 1)
+    );
+  };
 
   return (
-    <Container onClick={onClick}>
+    <Container {...rest}>
       {type === "groupMember" && ( //---------------------MEMBER---------------------
         <>
           <ContentInfo>
@@ -56,7 +60,7 @@ function CardGroup({ groupData, type, onClick = () => {}, userId }) {
         <Container addnew>
           <ContentInfo>
             <InfoTitle>
-              <img src={SvgAdd} alt="" />
+              <img src={SvgAdd} alt="Add group" />
               <h1>Criar novo grupo</h1>
             </InfoTitle>
           </ContentInfo>
@@ -76,8 +80,8 @@ function CardGroup({ groupData, type, onClick = () => {}, userId }) {
                 Vagas disponíveis:{" "}
                 <strong>{`${groupData.members.length}/${groupData.members_limit}`}</strong>
               </span>
-              <span className="priceService">{price}</span>
-              <span className="yourPrice">{newPrice}</span>
+              <span className="priceService">{price()}</span>
+              <span className="yourPrice">{newPrice()}</span>
             </InfoVacancy>
           </ContentInfo>
 

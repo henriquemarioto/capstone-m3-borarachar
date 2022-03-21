@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
-import { Container, ContentContainer } from "./styles";
+import {
+  Container,
+  ContentContainer,
+} from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
 import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
+import GroupCreationAndEditing from "../../components/GroupCreation-Editing";
 
 export default function MyGroups() {
   const history = useHistory();
@@ -19,6 +23,7 @@ export default function MyGroups() {
 
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   useEffect(() => {
     let componentDidMount = true;
@@ -48,28 +53,41 @@ export default function MyGroups() {
   }, []);
 
   return (
-    <Container>
-      <ContentContainer>
-        {!loading ? (
-          <>
-            {groups.map((group) => {
-              const { _id, owner } = group;
+    <>
+      {!isCreatingGroup ? (
+        <Container>
+          <ContentContainer>
+            {!loading ? (
+              <>
+                {groups.map((group) => {
+                  const { _id, owner } = group;
 
-              return (
+                  return (
+                    <>
+                      <CardGroup
+                        key={_id}
+                        type="groupMember"
+                        groupData={group}
+                        userId={id}
+                        onClick={() => history.push(`/group/${group._id}`)}
+                      />
+                    </>
+                  );
+                })}
                 <CardGroup
-                  key={_id}
-                  type="groupMember"
-                  groupData={group}
-                  userId={id}
-                  onClick={() => history.push(`/group/${group._id}`)}
+                  key={"newGroup"}
+                  type={"newGroup"}
+                  onClick={() => setIsCreatingGroup(true)}
                 />
-              );
-            })}
-          </>
-        ) : (
-          <Loading />
-        )}
-      </ContentContainer>
-    </Container>
+              </>
+            ) : (
+              <Loading />
+            )}
+          </ContentContainer>
+        </Container>
+      ) : (
+        <GroupCreationAndEditing setIsCreatingGroup={setIsCreatingGroup} />
+      )}
+    </>
   );
 }
