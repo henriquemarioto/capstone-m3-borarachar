@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
+  z-index: 5;
   ${({ popupOpen, popupIsOpen }) => {
     if (popupOpen) {
       return css`
