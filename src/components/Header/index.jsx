@@ -25,6 +25,7 @@ function Header() {
   const [openInput, setOpenInput] = useState(false);
   const [pageScrollY, setPageScrollY] = useState(0);
   const [scrollPage, setScrollPage] = useState(false);
+  const [input, setInput] = useState("");
 
   const history = useHistory();
   const location = useLocation();
@@ -50,6 +51,23 @@ function Header() {
     notifications: "/notifications",
   };
 
+  const handleOpenInput = () => {
+    if (!(openInput && input)) {
+      setOpenInput(!openInput);
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if (!input) {
+      return
+    }
+
+    history.push(`/search?search=${input}`);
+
+  };
+
   return (
     <Container scrollPage={scrollPage}>
       <ContentContainer>
@@ -57,13 +75,17 @@ function Header() {
           <img src={logo} alt="Logotipo BoraRachar" />
 
           <SearchContainer openInput={openInput}>
-            <input type="text" placeholder="Pesquise aqui" />
-            <SearchButton
-              onClick={() => setOpenInput(!openInput)}
-              openInput={openInput}
-            >
-              <MdSearch />
-            </SearchButton>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Pesquise aqui"
+                value={input}
+                onChange={(evt) => setInput(evt.target.value)}
+              />
+              <SearchButton onClick={handleOpenInput} openInput={openInput}>
+                <MdSearch />
+              </SearchButton>
+            </form>
           </SearchContainer>
         </TopHeader>
 

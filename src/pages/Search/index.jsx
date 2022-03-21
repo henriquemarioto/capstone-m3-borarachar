@@ -11,7 +11,7 @@ export const Search = () => {
           <div>
             <h1>Grupos</h1>
           </div>
-          {[group, group, group].map((item) => (
+          {[1,2,3].map((item) => (
             <CardGroup group={item} />
           ))}
           <div>
