@@ -31,8 +31,26 @@ export const Register = () => {
     gender: yup.string().required("Gênero obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     cpf: yup.string().required("CPF obrigatório"),
-    phone: yup.string().required("Celular obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
+    phone: yup
+      .string()
+
+      .required("Celular obrigatório"),
+    password: yup
+      .string()
+      .matches(
+        /.*[a-zA-Z].*/,
+        "Precisa conter pelo menos uma letra, podendo ser maiúscula"
+      )
+      .matches(/^^(?=.*[0-9])/, "Precisa conter pelo menos um número")
+      .matches(
+        /(?=.*[!@#$%^&*])/,
+        "Precisa conter pelo menos um símbolo: @,%,#, etc"
+      )
+      .matches(
+        /[a-zA-Z0-9!@#$%^&*]{8,}$/,
+        "Precisa conter pelo menos 8 caracteres"
+      )
+      .required("Senha obrigatória"),
     password_confirm: yup
       .string()
       .oneOf([yup.ref("password")], "As senhas não são idênticas")
@@ -116,6 +134,7 @@ export const Register = () => {
               inputName={errors.cpf === undefined ? "CPF" : errors.cpf?.message}
               register={register}
               name="cpf"
+              type="number"
             />
             <Input
               isErrored={errors.phone === undefined ? false : true}
@@ -124,6 +143,7 @@ export const Register = () => {
               }
               register={register}
               name="phone"
+              type="number"
             />
             <Input
               isErrored={errors.password === undefined ? false : true}

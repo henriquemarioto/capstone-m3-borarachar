@@ -26,9 +26,11 @@ export default function MyGroups() {
   const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   useEffect(() => {
+
     let componentDidMount = true;
 
     const getData = async () => {
+
       try {
         const response = await api.get(`/users/${id}`, {
           headers: { authorization: `Bearer ${token}` },
@@ -36,12 +38,12 @@ export default function MyGroups() {
 
         if (componentDidMount) {
           setGroups(response.data.already_member);
-
           setLoading(false);
         }
       } catch (error) {
         toast.error("Algo deu errado");
       }
+
     };
 
     getData();
@@ -49,7 +51,9 @@ export default function MyGroups() {
     return () => {
       // clean up
       componentDidMount = false;
+
     };
+    
   }, []);
 
   return (
@@ -74,11 +78,13 @@ export default function MyGroups() {
                     </>
                   );
                 })}
+
                 <CardGroup
                   key={"newGroup"}
                   type={"newGroup"}
                   onClick={() => setIsCreatingGroup(true)}
                 />
+
               </>
             ) : (
               <Loading />
