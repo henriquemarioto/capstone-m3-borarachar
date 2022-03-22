@@ -122,7 +122,6 @@ export const Dashboard = () => {
             <Loading />
           )}
         </section>
-        <Popup popUpType={"PopupStreamings"} />
         <section>
           {!searchingFoGroupsLoading ? (
             <DashboardSections
