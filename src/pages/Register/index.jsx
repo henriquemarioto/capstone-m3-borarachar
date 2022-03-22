@@ -25,7 +25,6 @@ import useUser from "../../providers/User";
 
 export const Register = () => {
   const { saveData } = useUser();
-
   const registerSchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
     gender: yup.string().required("Gênero obrigatório"),
