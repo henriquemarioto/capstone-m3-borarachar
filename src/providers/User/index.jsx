@@ -59,9 +59,9 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const patchUser = (data) => {
+  const patchUser = async (data) => {
     try {
-      api.patch(`/users/${user.id}`, data, {
+      await api.patch(`/users/${user.id}`, data, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

@@ -32,20 +32,29 @@ import UserStreamingAdd from "../../components/UserStreamingAdd";
 export const Profile = ({ myProfile }) => {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const [modalAddStreaming, setmodalAddStreaming] = useState(false);
+  const [update, setUpdate] = useState(0);
   const history = useHistory();
+  const { register, handleSubmit } = useForm();
   const { getUserInfo, patchUser } = useUser();
 
-  const [modalAddStreaming, setmodalAddStreaming] = useState(true);
-
-  const updateUser = (data) => {
-    patchUser(data);
+  const updateUser = async (data) => {
+    await patchUser(data);
+    setUpdate(update + 1);
+    await getUser();
     setIsEditing(!isEditing);
   };
 
-  useEffect(async () => {
+  const getUser = async () => {
     setUser(await getUserInfo());
-  }, []);
+  };
+
+  useEffect(() => {
+    async function getData() {
+      await getUser();
+    }
+    getData()
+  }, [update]);
 
   return (
     <Container onSubmit={handleSubmit(updateUser)}>
@@ -93,8 +102,22 @@ export const Profile = ({ myProfile }) => {
                   ) : (
                     <p>Não foi definido nenhuma streaming.</p>
                   )}
-                  {isEditing ? <NewStreaming>+</NewStreaming> : <></>}
-                  {modalAddStreaming ? <UserStreamingAdd /> : <></>}
+                  {isEditing ? (
+                    <NewStreaming
+                      type="button"
+                      onClick={() => setmodalAddStreaming(true)}
+                    >
+                      +
+                    </NewStreaming>
+                  ) : (
+                    <></>
+                  )}
+                  {modalAddStreaming && (
+                    <UserStreamingAdd
+                      register={register}
+                      setmodalAddStreaming={setmodalAddStreaming}
+                    />
+                  )}
                 </StreamingList>
               </SearchingFor>
               <SearchingFor>

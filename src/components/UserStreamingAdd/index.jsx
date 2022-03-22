@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { Checked, Container, Streamings, StreamingsCheck } from "./styles";
+import Button from "../Button";
+import CardStreamingSearchingFor from "../Card/CardStreamingSearchingFor";
 
-const UserStreamingAdd = () => {
+const UserStreamingAdd = ({ register, setmodalAddStreaming }) => {
   const [streamings, setStreamings] = useState([]);
   const [userStreamings, setUserStreamings] = useState();
   const [newUserStreaming, setNewUserStreaming] = useState([]);
@@ -12,16 +14,22 @@ const UserStreamingAdd = () => {
   }, []);
 
   return (
-    <Container>
+    <Container onClick={(evt) => evt.currentTarget === evt.target && setmodalAddStreaming(false)}>
       <StreamingsCheck>
-        <h1>Pure CSS Custom Checkboxes</h1>
+        <h1>Selecionar streamings</h1>
         <Streamings>
-          Streamings
           {streamings.map((item) => (
-            <img key={item._id} src={item.image} alt={item.name} />
+            <CardStreamingSearchingFor
+              key={item._id}
+              streaming={item}
+              register={register}
+            />
           ))}
         </Streamings>
-        <Checked>As que você já possui</Checked>
+        {/* <Checked>As que você já possui</Checked> */}
+        <Button type="button" colour="blue">
+          Confirmar
+        </Button>
       </StreamingsCheck>
     </Container>
   );
