@@ -13,18 +13,15 @@ import {
   ContainerAccount,
 } from "./styles";
 
-import { toast } from "react-toastify";
-
 import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-import api from "../../services/api";
 import useUser from "../../providers/User";
 
 export const Register = () => {
-  const { saveData } = useUser();
+  const { submitRegister, saveData } = useUser();
   const registerSchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
     gender: yup.string().required("Gênero obrigatório"),
@@ -63,21 +60,6 @@ export const Register = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
-
-  const submitRegister = async (data) => {
-    delete data.password_confirm;
-    data.cpf = Number(data.cpf);
-    data.phone = Number(data.phone);
-
-    try {
-      const response = await api.post("/register", data);
-      toast.success("Conta criada com sucesso!");
-      saveData(response.data);
-      history.push("/dashboard");
-    } catch (error) {
-      toast.error("Erro ao criar a sua conta");
-    }
-  };
 
   const history = useHistory();
 

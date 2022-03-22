@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import useUser from "../../providers/User";
 
 export const Login = () => {
-  const { saveData } = useUser();
+  const { saveData, submitLogin } = useUser();
 
   const loginSchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),
@@ -34,19 +34,8 @@ export const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const submitLogin = async (data) => {
-    try {
-      const response = await api.post("/login", data);
-      console.log(response);
-      toast.success("Login efetuado com sucesso!");
-      saveData(response.data);
-      history.push("/dashboard");
-    } catch (error) {
-      toast.error("Erro ao efetuar o login");
-    }
-  };
-
   const history = useHistory();
+
   return (
     <Container>
       <ContentContainer>

@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import { Loader } from "../../components/Loading/styles";
-import { UserContext } from "../../providers/User";
+import useUser from "../../providers/User";
 import api from "../../services/api";
 import { useForm } from "react-hook-form";
 
@@ -28,47 +26,26 @@ import {
 } from "./styles";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import UserStreamingAdd from "../../components/UserStreamingAdd";
 export const Profile = () => {
-  const userRequest = useContext(UserContext);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
-
-  useEffect(() => {
-    let componentDidMount = true;
-
-    api
-      .get(`/users/${userRequest.user.id}`, {
-        headers: {
-          Authorization: `Bearer ${userRequest.user.token}`,
-        },
-      })
-      .then((response) => {
-        if (componentDidMount) {
-          setUser(response.data);
-        }
-      });
-
-    return () => {
-      // clean up
-      componentDidMount = false;
-    };
-  }, []);
+  const { getUserInfo, patchUser } = useUser();
 
   const updateUser = (data) => {
-    api
-      .patch(`/users/${userRequest.user.id}`, data, {
-        headers: {
-          Authorization: `Bearer ${userRequest.user.token}`,
-        },
-      })
-      .then((_) => setIsEditing(!isEditing));
+    patchUser(data);
+    setIsEditing(!isEditing);
   };
+
+  useEffect(async () => {
+    setUser(await getUserInfo());
+  }, []);
 
   return (
     <Container onSubmit={handleSubmit(updateUser)}>
-      {user.searching_for ? (
+      {user?.searching_for ? (
         <>
           <InfoDiv>
             <PerfilDiv>
@@ -94,7 +71,7 @@ export const Profile = () => {
                   {user.phone ? (
                     <SpanContact>{user.phone}</SpanContact>
                   ) : (
-                    <SpanContact>adionar um número de telefone</SpanContact>
+                    <SpanContact>Adicionar um número de telefone</SpanContact>
                   )}
                 </Contact>
               </div>
