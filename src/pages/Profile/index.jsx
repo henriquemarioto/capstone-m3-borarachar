@@ -163,7 +163,7 @@ export const Profile = ({ myProfile }) => {
             <Button
               onClick={() => {
                 localStorage.clear();
-                history.push("/login");
+                history.push("/");
                 toast.success("Deslogado!");
               }}
               colour="red"

@@ -12,7 +12,7 @@ import { RiShieldUserLine, RiArrowRightSLine } from "react-icons/ri";
 
 import { CurrencyFormatter } from "../../../services/formatters";
 
-function CardGroup({ groupData, type,  userId , ...rest}) {
+function CardGroup({ groupData, type, userId, ...rest }) {
   const price = () => {
     return CurrencyFormatter.format(groupData.streaming.plan.price);
   };
@@ -86,8 +86,10 @@ function CardGroup({ groupData, type,  userId , ...rest}) {
                 Vagas disponíveis:{" "}
                 <strong>{`${groupData.members.length}/${groupData.members_limit}`}</strong>
               </span>
-              <span className="priceService">{price()}</span>
-              <span className="yourPrice">{newPrice()}</span>
+              <div>
+                <span className="priceService">{price()}</span>
+                <span className="yourPrice">{newPrice()}</span>
+              </div>
             </InfoVacancy>
           </ContentInfo>
 
