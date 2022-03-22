@@ -1,9 +1,6 @@
 import { useContext, useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
 import { UserContext } from "../../../providers/User";
-
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
 import { CurrencyFormatter } from "../../../services/formatters";
 import {
   ContentStreaming,
