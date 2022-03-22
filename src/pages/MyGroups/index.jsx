@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
-import { Container, ContentContainer } from "./styles";
+import {
+  Container,
+  ContentContainer,
+} from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
@@ -23,9 +26,11 @@ export default function MyGroups() {
   const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   useEffect(() => {
+
     let componentDidMount = true;
 
     const getData = async () => {
+
       try {
         const response = await api.get(`/users/${id}`, {
           headers: { authorization: `Bearer ${token}` },
@@ -38,6 +43,7 @@ export default function MyGroups() {
       } catch (error) {
         toast.error("Algo deu errado");
       }
+
     };
 
     getData();
@@ -45,7 +51,9 @@ export default function MyGroups() {
     return () => {
       // clean up
       componentDidMount = false;
+
     };
+    
   }, []);
 
   return (
@@ -76,6 +84,7 @@ export default function MyGroups() {
                   type={"newGroup"}
                   onClick={() => setIsCreatingGroup(true)}
                 />
+
               </>
             ) : (
               <Loading />
