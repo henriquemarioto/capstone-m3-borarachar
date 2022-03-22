@@ -7,6 +7,7 @@ export const Container = styled.header`
   align-items: center;
   background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
   position: fixed;
+  z-index: 10;
 `;
 
 export const ContentContainer = styled.div`
@@ -63,11 +64,11 @@ export const TopHeader = styled.div`
     css`
       img {
         position: relative;
-        transform: translateX(-178px);
+        transform: translateX(-296px);
         margin-right: -178px;
       }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 1154px) {
         img {
           position: relative;
           transform: translateX(0);
@@ -85,6 +86,9 @@ export const TopHeader = styled.div`
 `;
 
 export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   width: 100%;
 
   form {
@@ -93,6 +97,7 @@ export const SearchContainer = styled.div`
     position: relative;
     align-items: center;
     justify-content: end;
+    width: 100%;
 
     input {
       width: 0;
@@ -100,6 +105,7 @@ export const SearchContainer = styled.div`
       padding: 0;
 
       height: 30px;
+      width: 0%;
 
       position: absolute;
       transform: translateX(-40px);
@@ -110,18 +116,14 @@ export const SearchContainer = styled.div`
 
       transition: 300ms width, 300ms padding;
 
-      @media (min-width: 768px) {
-        max-width: 375px;
-      }
-
       ${({ openInput }) =>
         openInput &&
         css`
-          width: calc(100% - 40px);
+          width: 100%;
           padding: 0 10px;
 
           @media (min-width: 768px) {
-            padding: 0 10px;
+            max-width: 375px;
           }
         `}
     }

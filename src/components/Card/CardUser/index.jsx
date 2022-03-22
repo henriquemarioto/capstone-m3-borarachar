@@ -133,9 +133,11 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
             <InfoFind>
               <span>Procurando por:</span>
 
-              {searching_for.map(({ _id, image }) => (
-                <img src={image} key={_id}></img>
-              ))}
+              <div>
+                {searching_for.map(({ _id, image }) => (
+                  <img src={image} key={_id}></img>
+                ))}
+              </div>
             </InfoFind>
           </ContentInfo>
 

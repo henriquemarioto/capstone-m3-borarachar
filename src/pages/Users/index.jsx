@@ -18,35 +18,64 @@ export default function Users() {
   } = useUser();
 
   const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let componentDidMount = true;
+
     const getData = async () => {
       setLoading(true);
+
       try {
-        const response = await api.get(`/users`, {
+        const userResponse = await api.get(`/users/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        const usersResponse = await api.get(`/users`, {
           headers: { authorization: `Bearer ${token}` },
         });
 
-        setUsers(
-          response.data.filter(
-            ({ searching_for }) => searching_for.length !== 0
-          )
-        );
-        setLoading(false);
+        if (componentDidMount) {
+          setUsers(
+            usersResponse.data.filter(
+              ({ searching_for }) => searching_for.length !== 0
+            )
+          );
+
+          setUserData(userResponse.data);
+
+          setLoading(false);
+        }
       } catch (error) {
         toast.error("Algo deu errado");
       }
     };
     getData();
+
+    return () => {
+      componentDidMount = false;
+    };
   }, []);
+
+  const filteredUsers = users.filter((data) => {
+    if (
+      userData.already_member?.some(({ streaming }) =>
+        data.searching_for.some(({ _id }) => _id === streaming._id)
+      )
+    ) {
+      return data;
+    }
+  });
 
   return (
     <Container>
       <ContentContainer>
         {!loading ? (
           <>
-            {users.map((user) => {
+            {filteredUsers.map((user) => {
               const { _id, owner } = user;
 
               return (

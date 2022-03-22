@@ -42,12 +42,21 @@ export default function Groups() {
     getData();
   }, []);
 
+  const filteredGroups = groups.filter((group) => {
+    if (
+      group.searching_for_members &&
+      group.members.length < group.members_limit
+    ) {
+      return group;
+    }
+  });
+
   return (
     <Container>
       <ContentContainer>
         {!loading ? (
           <>
-            {groups.map((group) => {
+            {filteredGroups.map((group) => {
               const { _id, owner } = group;
 
               return (

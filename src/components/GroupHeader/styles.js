@@ -16,6 +16,7 @@ export const Container = styled.section`
       flex: 1;
       align-items: center;
       gap: 8px;
+      width: 100%;
 
       img {
         width: 60px;
@@ -28,11 +29,18 @@ export const Container = styled.section`
         flex-direction: column;
         justify-content: space-between;
         gap: 8px;
+        width: 100%;
+
+        overflow: hidden;
 
         h3 {
           font-weight: 900;
           font-size: 25px;
           line-height: 29px;
+          width: 100%;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
         }
 
         span {
