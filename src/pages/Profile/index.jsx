@@ -4,7 +4,6 @@ import { Loader } from "../../components/Loading/styles";
 import useUser from "../../providers/User";
 import api from "../../services/api";
 import { useForm } from "react-hook-form";
-
 import {
   Container,
   UserImg,
@@ -25,9 +24,12 @@ import {
   PerfilDiv,
 } from "./styles";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../components/Loading";
 import UserStreamingAdd from "../../components/UserStreamingAdd";
-export const Profile = () => {
+
+export const Profile = ({ myProfile }) => {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -127,6 +129,7 @@ export const Profile = () => {
           ) : (
             <></>
           )}
+
           {!isEditing ? (
             <EditUser onClick={() => setIsEditing(!isEditing)}>
               Editar Informações
@@ -151,7 +154,7 @@ export const Profile = () => {
           </div>
         </>
       ) : (
-        <Loader />
+        <Loading />
       )}
     </Container>
   );
