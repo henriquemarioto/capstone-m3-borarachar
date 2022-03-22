@@ -1,7 +1,9 @@
+import { useContext, useState } from "react";
 import { BsArrowRepeat } from "react-icons/bs";
 import { FiAlertTriangle } from "react-icons/fi";
-
+import { UserContext } from "../../providers/User";
 import Button from "../Button";
+import { Popup } from "../Popup";
 import {
   AlertContainer,
   ButtonContainer,
@@ -16,11 +18,18 @@ import {
 } from "./style";
 
 function GroupCreationAndEditing({ setIsCreatingGroup }) {
+  const [showPopUp, setShowPopUp] = useState(false);
+  const { selectedStreaming } = useContext(UserContext);
+  //Criar use state para mostrar informações do usuário quando o botão de "sim" do popup for clickado
+  //
+  console.log(selectedStreaming);
+
   return (
     <Container>
+      {showPopUp && <Popup popUpType={"PopupStreamings"} />}
       <ContentContainer>
         <GroupNameContainer>
-          <button>
+          <button onClick={() => setShowPopUp(true)}>
             <BsArrowRepeat />
           </button>
 

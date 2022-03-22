@@ -176,7 +176,7 @@ export const GroupDescription = styled.div`
     gap: 10px;
     color: var(--dark-gray);
   }
-  input[type="checkbox"] {
+  /* input[type="checkbox"] {
     position: relative;
     cursor: pointer;
   }
@@ -203,7 +203,7 @@ export const GroupDescription = styled.div`
     position: absolute;
     top: 2px;
     left: 6px;
-  }
+  } */
   textarea {
     border: 1px solid var(--gray);
     border-radius: 5px;
