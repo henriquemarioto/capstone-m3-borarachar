@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { UserContext } from "../../../providers/User";
+
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
 import { CurrencyFormatter } from "../../../services/formatters";
 import {
   ContentStreaming,
@@ -13,6 +17,11 @@ import {
 function CardStreamings({ type, listStream }) {
   const [showPlans, setShowPlans] = useState(false);
   const { name, image, plans, profiles } = listStream;
+  const { streamSelection } = useContext(UserContext);
+  const planSelection = (ev) => {
+    [listStream].map((list) => streamSelection([list, { ID: ev.target.id }]));
+  };
+
   switch (type) {
     case "Plans":
       return (
@@ -50,6 +59,7 @@ function CardStreamings({ type, listStream }) {
                           name="plan"
                           type="radio"
                           id={item.name}
+                          onChange={planSelection}
                         />
                         <label htmlFor={item.name}>
                           {item.name} - {item.screens} Telas ={" "}
