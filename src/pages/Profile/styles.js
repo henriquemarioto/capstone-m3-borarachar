@@ -9,6 +9,7 @@ export const Container = styled.form`
   align-items: center;
   justify-content: space-evenly;
   padding-top: 15px;
+  width: 100%;
   .editing {
     display: flex;
     flex-direction: column;
@@ -17,7 +18,8 @@ export const Container = styled.form`
   }
   .divBtt {
     min-width: 280px;
-    width: 50%;
+    width: 350px;
+    max-width: 40%;
   }
 `;
 

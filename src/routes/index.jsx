@@ -15,6 +15,7 @@ import { Search } from "../pages/Search";
 import Layout from "../components/Layout";
 
 import Route from "./route";
+import AnotherProfile from "../pages/AnotherProfile";
 
 export const Routes = () => {
   return (
@@ -42,11 +43,11 @@ export const Routes = () => {
           </Route>
 
           <Route path="/profile" isPrivate>
-            <Profile />
+            <Profile myProfile />
           </Route>
 
           <Route path="/user/:userID" isPrivate>
-            <Profile />
+            <AnotherProfile />
           </Route>
 
           <Route path="/group/:groupID" isPrivate>

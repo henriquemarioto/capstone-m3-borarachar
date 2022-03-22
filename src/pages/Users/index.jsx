@@ -54,7 +54,7 @@ export default function Users() {
                   type="userFind"
                   key={_id}
                   memberData={user}
-                  onClick={() => history.push(`/group/${_id}`)}
+                  onClick={() => history.push(`/user/${_id}`)}
                 />
               );
             })}

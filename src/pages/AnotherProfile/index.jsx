@@ -1,85 +1,55 @@
-import { useState } from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
-import Button from "../../components/Button";
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../../providers/User";
 import api from "../../services/api";
-import { useForm } from "react-hook-form";
 import {
-  Container,
-  UserImg,
-  Streamings,
-  SearchingFor,
-  EditUser,
-  Contact,
-  UserName,
   Bio,
-  EditIcon,
-  StreamingImg,
-  Section,
-  StreamingList,
-  Buttons,
-  NewStreaming,
-  SpanContact,
+  Contact,
+  Container,
   InfoDiv,
+  NewStreaming,
   PerfilDiv,
-} from "./styles";
-import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+  SearchingFor,
+  Section,
+  SpanContact,
+  StreamingImg,
+  StreamingList,
+  Streamings,
+  UserImg,
+  UserName,
+} from "../Profile/styles";
 import Loading from "../../components/Loading";
-export const Profile = ({ myProfile }) => {
+
+function AnotherProfile() {
   const userRequest = useContext(UserContext);
   const [user, setUser] = useState([]);
+  const params = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm();
-  const history = useHistory();
-  const params = useParams();
 
   useEffect(() => {
     let componentDidMount = true;
-    myProfile
-      ? api
-          .get(`/users/${userRequest.user.id}`, {
-            headers: {
-              Authorization: `Bearer ${userRequest.user.token}`,
-            },
-          })
-          .then((response) => {
-            if (componentDidMount) {
-              setUser(response.data);
-            }
-          })
-      : api
-          .get(`/users/${params.userID}`, {
-            headers: {
-              Authorization: `Bearer ${userRequest.user.token}`,
-            },
-          })
-          .then((response) => {
-            if (componentDidMount) {
-              setUser(response.data);
-            }
-          });
+    api
+      .get(`/users/${params.userID}`, {
+        headers: {
+          Authorization: `Bearer ${userRequest.user.token}`,
+        },
+      })
+      .then((response) => {
+        if (componentDidMount) {
+          setUser(response.data);
+        }
+      });
 
     return () => {
       // clean up
       componentDidMount = false;
     };
-  }, [params.userID]);
-
-  const updateUser = (data) => {
-    api
-      .patch(`/users/${userRequest.user.id}`, data, {
-        headers: {
-          Authorization: `Bearer ${userRequest.user.token}`,
-        },
-      })
-      .then((_) => setIsEditing(!isEditing));
-  };
+  }, []);
 
   return (
-    <Container onSubmit={handleSubmit(updateUser)}>
+    <Container>
       {user.searching_for ? (
         <>
           <InfoDiv>
@@ -103,11 +73,7 @@ export const Profile = ({ myProfile }) => {
                   placeholder={user.bio === "" ? "Sem bio" : user.bio}
                 />
                 <Contact>
-                  {user.phone ? (
-                    <SpanContact>{user.phone}</SpanContact>
-                  ) : (
-                    <SpanContact>adionar um número de telefone</SpanContact>
-                  )}
+                  {user.phone && <SpanContact>{user.phone}</SpanContact>}
                 </Contact>
               </div>
             </PerfilDiv>
@@ -140,49 +106,17 @@ export const Profile = ({ myProfile }) => {
                       ))}
                     </>
                   ) : (
-                    <p>Você ainda não é membro de nenhum grupo.</p>
+                    <p>Ainda não é membro de nenhum grupo.</p>
                   )}
                 </StreamingList>
               </SearchingFor>
             </Streamings>
           </InfoDiv>
-          {isEditing ? (
-            <Buttons>
-              <Button type="submit" colour="blue">
-                Salvar Alterações
-              </Button>
-              <Button colour="red">Excluir Conta</Button>
-            </Buttons>
-          ) : (
-            <></>
-          )}
-
-          {!isEditing ? (
-            <EditUser onClick={() => setIsEditing(!isEditing)}>
-              Editar Informações
-              <EditIcon />
-            </EditUser>
-          ) : (
-            <></>
-          )}
-
-          <div className="divBtt">
-            <Button
-              onClick={() => {
-                localStorage.clear();
-                history.push("/login");
-                toast.success("Deslogado!");
-              }}
-              colour="red"
-              size="full"
-            >
-              Sair
-            </Button>
-          </div>
         </>
       ) : (
         <Loading />
       )}
     </Container>
   );
-};
+}
+export default AnotherProfile;
