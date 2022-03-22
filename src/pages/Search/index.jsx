@@ -6,10 +6,13 @@ import useUser from "../../providers/User";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useQuery } from "../../Hook";
+import { useHistory } from "react-router-dom";
 
 export const Search = () => {
+  const history = useHistory()
+
   const {
-    user: { token },
+    user: { id, token },
   } = useUser();
   const [resSearch, setResSearch] = useState({});
   const query = useQuery();
@@ -34,12 +37,16 @@ export const Search = () => {
         <div>
           <h1>Grupos</h1>
         </div>
-        {resSearch.groups?.map((item) => (
+        {resSearch.groups?.map((group) => (
           <CardGroup
-            key={item._id}
-            type="joinGroup"
-            groupData={item}
-            owner={item.owner === item._id}
+            key={group._id}
+            type={
+              group.members.some((member) => member._id === id)
+                ? "groupMember"
+                : "joinGroup"
+            }
+            groupData={group}
+            userId={id}
             onClick={() => history.push(`/group/${group._id}`)}
           />
         ))}
