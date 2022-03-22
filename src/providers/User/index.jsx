@@ -6,14 +6,15 @@ import api from "../../services/api";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [selectedStreaming, setSelectredStreaming] = useState([]);
   const history = useHistory();
 
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("@DivideComigo:user")) || {}
+    JSON.parse(localStorage.getItem("@BoraRachar:user")) || {}
   );
 
   const saveData = (data) => {
-    localStorage.setItem("@DivideComigo:user", JSON.stringify(data));
+    localStorage.setItem("@BoraRachar:user", JSON.stringify(data));
     setUser(data);
   };
 
@@ -84,6 +85,16 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
+
+  const streamSelection = (item) => {
+    const planName = item[1].ID;
+
+    const filterPlan = item[0].plans.filter((plan) => {
+      return plan.name === planName;
+    });
+    setSelectredStreaming([{ plan: filterPlan[0] }, item[0]]);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -94,6 +105,8 @@ export const UserProvider = ({ children }) => {
         submitRegister,
         patchUser,
         changePassword,
+        selectedStreaming,
+        streamSelection,
       }}
     >
       {children}
