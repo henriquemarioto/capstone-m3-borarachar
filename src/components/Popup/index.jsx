@@ -7,23 +7,16 @@ import {
   // InputPopup,
   SectionInput,
 } from "./styles";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardStreamings from "../Card/CardStreaming";
 import api from "../../services/api";
-import { UserContext } from "../../providers/User";
-export const Popup = ({ popUpType, setStreamingInfo }) => {
+export const Popup = ({ popUpType }) => {
   const [streamings, setStreamings] = useState([]);
-  const { selectedStreaming } = useContext(UserContext);
 
   useEffect(() => {
     api.get("/streamings").then((response) => setStreamings(response.data));
   }, []);
 
-  // const confirmStreamShow = () => {
-  //   setStreamingInfo(true);
-  // };
-
-  console.log(selectedStreaming);
   const type = popUpType;
   switch (type) {
     case "confirm":
@@ -102,11 +95,7 @@ export const Popup = ({ popUpType, setStreamingInfo }) => {
             </div>
 
             <Buttons>
-              <Button
-                hover
-                size="full"
-                colour="blue"
-              >
+              <Button hover size="full" colour="blue">
                 Sim
               </Button>
               <Button hover size="full" colour="gray">

@@ -74,7 +74,6 @@ export const PasswordRecovery = () => {
               isErrored={errors.cpf === undefined ? false : true}
               name="cpf"
               register={register}
-              type="number"
             />
             <Input
               inputName={
@@ -83,7 +82,6 @@ export const PasswordRecovery = () => {
               isErrored={errors.phone === undefined ? false : true}
               name="phone"
               register={register}
-              type="number"
             />
             <Input
               inputName={
