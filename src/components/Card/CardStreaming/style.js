@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ContentStreaming = styled.div`
   display: flex;
@@ -9,7 +9,16 @@ export const ContentStreaming = styled.div`
     display: flex;
     justify-content: space-between;
     border: 1px solid var(--light-gray);
-    border-radius: 10px;
+    ${({ plansOpen }) => {
+      return !plansOpen
+        ? css`
+            border-radius: 10px;
+          `
+        : css`
+            border-radius: 10px 10px 0 0;
+          `;
+    }}
+
     padding: 10px;
   }
   button {
@@ -37,6 +46,10 @@ export const TitleStream = styled.div`
   gap: 5px;
 `;
 export const Plans = styled.div`
+  background-color: var(--lighter-gray);
+  border-radius: 5px;
+  padding: 10px;
+
   .radioInput {
     cursor: pointer;
     appearance: none;
@@ -72,7 +85,8 @@ export const DivInputs = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    height: 25px;
   }
   label {
     font-size: 10px;
