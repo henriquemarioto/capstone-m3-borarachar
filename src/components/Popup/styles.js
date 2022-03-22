@@ -1,15 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 // import Input from "../Input";
 
 export const Container = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: var(--black-25);
+  position: fixed;
 `;
 
 // export const InputPopup = styled(Input)`
@@ -30,6 +30,13 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 500px;
+  .streamings {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 100%;
+  }
   span {
     font-size: 18px;
     font-weight: bold;

@@ -6,9 +6,17 @@ import {
   Buttons,
   // InputPopup,
   SectionInput,
-  ContentnewGroup,
 } from "./styles";
+import { useEffect, useState } from "react";
+import CardStreamings from "../Card/CardStreaming";
+import api from "../../services/api";
 export const Popup = ({ popUpType }) => {
+  const [streamings, setStreamings] = useState([]);
+
+  useEffect(() => {
+    api.get("/streamings").then((response) => setStreamings(response.data));
+  }, []);
+
   const type = popUpType;
   switch (type) {
     case "confirm":
@@ -59,6 +67,29 @@ export const Popup = ({ popUpType }) => {
         <Container>
           <Content>
             <span>Título do Popup</span>
+            <Buttons>
+              <Button hover size="full" colour="blue">
+                Sim
+              </Button>
+              <Button hover size="full" colour="gray">
+                Não
+              </Button>
+            </Buttons>
+          </Content>
+        </Container>
+      );
+    case "PopupStreamings":
+      return (
+        <Container>
+          <Content>
+            <span>Escolha os streamings</span>
+
+            <div className="streamings">
+              {streamings.map((item) => (
+                <CardStreamings type={"Plans"} listStream={item} />
+              ))}
+            </div>
+
             <Buttons>
               <Button hover size="full" colour="blue">
                 Sim

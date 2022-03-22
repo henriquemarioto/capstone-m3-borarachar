@@ -6,6 +6,7 @@ import api from "../../services/api";
 import useUser from "../../providers/User";
 import DashboardSections from "../../components/DashboardSections";
 import Loading from "../../components/Loading";
+import { Popup } from "../../components/Popup";
 
 export const Dashboard = () => {
   const {
@@ -121,7 +122,7 @@ export const Dashboard = () => {
             <Loading />
           )}
         </section>
-
+        <Popup popUpType={"PopupStreamings"} />
         <section>
           {!searchingFoGroupsLoading ? (
             <DashboardSections
