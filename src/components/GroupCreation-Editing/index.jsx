@@ -17,16 +17,24 @@ import {
   SubInfo,
 } from "./style";
 
+import useUser from "../../providers/User";
+
 function GroupCreationAndEditing({ setIsCreatingGroup }) {
   const [showPopUp, setShowPopUp] = useState(false);
-  const { selectedStreaming } = useContext(UserContext);
+  const { selectedStreaming, setSelectedStreaming } = useUser();
   //Criar use state para mostrar informações do usuário quando o botão de "sim" do popup for clickado
   //
   console.log(selectedStreaming);
 
   return (
     <Container>
-      {showPopUp && <Popup popUpType={"PopupStreamings"} />}
+      {showPopUp && (
+        <Popup
+          popUpType={"PopupStreamings"}
+          setShowPopUp={setShowPopUp}
+          setSelectedStreaming={setSelectedStreaming}
+        />
+      )}
       <ContentContainer>
         <GroupNameContainer>
           <button onClick={() => setShowPopUp(true)}>

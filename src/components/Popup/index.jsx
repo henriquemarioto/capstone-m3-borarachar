@@ -11,19 +11,13 @@ import { useContext, useEffect, useState } from "react";
 import CardStreamings from "../Card/CardStreaming";
 import api from "../../services/api";
 import { UserContext } from "../../providers/User";
-export const Popup = ({ popUpType, setStreamingInfo }) => {
+export const Popup = ({ popUpType, setSelectedStreaming, setShowPopUp }) => {
   const [streamings, setStreamings] = useState([]);
-  const { selectedStreaming } = useContext(UserContext);
 
   useEffect(() => {
     api.get("/streamings").then((response) => setStreamings(response.data));
   }, []);
 
-  // const confirmStreamShow = () => {
-  //   setStreamingInfo(true);
-  // };
-
-  console.log(selectedStreaming);
   const type = popUpType;
   switch (type) {
     case "confirm":
@@ -90,7 +84,6 @@ export const Popup = ({ popUpType, setStreamingInfo }) => {
         <Container>
           <Content>
             <span>Escolha os streamings</span>
-
             <div className="streamings">
               {streamings.map((item) => (
                 <CardStreamings
@@ -106,10 +99,18 @@ export const Popup = ({ popUpType, setStreamingInfo }) => {
                 hover
                 size="full"
                 colour="blue"
+                type="submit"
+                onClick={() => setShowPopUp(false)}
               >
                 Sim
               </Button>
-              <Button hover size="full" colour="gray">
+
+              <Button
+                hover
+                size="full"
+                colour="gray"
+                onClick={() => setShowPopUp(false)}
+              >
                 Não
               </Button>
             </Buttons>

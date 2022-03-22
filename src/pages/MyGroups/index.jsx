@@ -57,23 +57,19 @@ export default function MyGroups() {
               <>
                 {groups.map((group) => {
                   const { _id, owner } = group;
-
                   return (
-                    <>
-                      <CardGroup
-                        key={_id}
-                        type="groupMember"
-                        groupData={group}
-                        userId={id}
-                        onClick={() => history.push(`/group/${group._id}`)}
-                      />
-                    </>
+                    <CardGroup
+                      key={_id}
+                      type="groupMember"
+                      groupData={group}
+                      userId={id}
+                      onClick={() => history.push(`/group/${group._id}`)}
+                    />
                   );
                 })}
 
                 <CardGroup
-                  key={"newGroup"}
-                  type={"newGroup"}
+                  type="newGroup"
                   onClick={() => setIsCreatingGroup(true)}
                 />
               </>

@@ -22,7 +22,7 @@ function CardStreamings({ type, listStream }) {
   switch (type) {
     case "Plans":
       return (
-        <ContentStreaming plansOpen={showPlans}>
+        <ContentStreaming plansOpen={!!showPlans}>
           <div className="mainStream">
             <InfoStream>
               <TitleStream>
@@ -34,41 +34,34 @@ function CardStreamings({ type, listStream }) {
               </span>
             </InfoStream>
             <button onClick={() => setShowPlans(!showPlans)}>
-              {showPlans ? (
-                <IoIosArrowUp size={30} />
-              ) : (
-                <IoIosArrowDown size={30} />
-              )}
+              <IoIosArrowDown size={30} />
             </button>
           </div>
-          {showPlans && (
-            <Plans isOpen={showPlans}>
-              <div className="sla">
-                <span className="spanStream">
-                  {profiles} perfis disponíveis
-                </span>
-                <div>
-                  {plans.map((item) => (
-                    <DivInputs key={item.name}>
-                      <div className="divRadio">
-                        <input
-                          className="radioInput"
-                          name="plan"
-                          type="radio"
-                          id={item.name}
-                          onChange={planSelection}
-                        />
-                        <label htmlFor={item.name}>
-                          {item.name} - {item.screens} Telas ={" "}
-                          {CurrencyFormatter.format(item.price)}
-                        </label>
-                      </div>
-                    </DivInputs>
-                  ))}
-                </div>
-              </div>
-            </Plans>
-          )}
+
+          <Plans plansOpen={showPlans}>
+            <span className="spanStream">
+              <strong>{profiles}</strong> perfis disponíveis
+            </span>
+            <div>
+              {plans.map((item) => (
+                <DivInputs key={item.name}>
+                  <div className="divRadio">
+                    <input
+                      className="radioInput"
+                      name="plan"
+                      type="radio"
+                      id={item.name}
+                      onChange={planSelection}
+                    />
+                    <label htmlFor={item.name}>
+                      {item.name} - <strong>{item.screens} Telas</strong> (
+                      {CurrencyFormatter.format(item.price)})
+                    </label>
+                  </div>
+                </DivInputs>
+              ))}
+            </div>
+          </Plans>
         </ContentStreaming>
       );
   }
