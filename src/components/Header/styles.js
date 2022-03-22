@@ -85,43 +85,46 @@ export const TopHeader = styled.div`
 `;
 
 export const SearchContainer = styled.div`
-  display: flex;
   width: 100%;
-  gap: 10px;
-  position: relative;
-  align-items: center;
-  justify-content: end;
 
-  input {
-    width: 0;
-    border-radius: 1000px;
-    padding: 0;
+  form {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    align-items: center;
+    justify-content: end;
 
-    height: 30px;
+    input {
+      width: 0;
+      border-radius: 1000px;
+      padding: 0;
 
-    position: absolute;
-    transform: translateX(-40px);
+      height: 30px;
 
-    :focus {
-      outline: none;
-    }
+      position: absolute;
+      transform: translateX(-40px);
 
-    transition: 300ms width, 300ms padding;
+      :focus {
+        outline: none;
+      }
 
-    @media (min-width: 768px) {
-      max-width: 375px;
-    }
+      transition: 300ms width, 300ms padding;
 
-    ${({ openInput }) =>
-      openInput &&
-      css`
-        width: calc(100% - 40px);
-        padding: 0 10px;
+      @media (min-width: 768px) {
+        max-width: 375px;
+      }
 
-        @media (min-width: 768px) {
+      ${({ openInput }) =>
+        openInput &&
+        css`
+          width: calc(100% - 40px);
           padding: 0 10px;
-        }
-      `}
+
+          @media (min-width: 768px) {
+            padding: 0 10px;
+          }
+        `}
+    }
   }
 `;
 
