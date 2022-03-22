@@ -64,7 +64,6 @@ function Header() {
     }
 
     history.push(`/search?search=${input}`);
-
   };
 
   return (
