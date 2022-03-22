@@ -14,10 +14,10 @@ import passwordRecoveryImg from "/src/images/undraw_forgot_password_re_hxwm 1.sv
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import api from "../../services/api";
+import useUser from "../../providers/User";
 
 export const PasswordRecovery = () => {
+  const { changePassword } = useUser();
   const passwordRecoverySchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     newPassword: yup.string().required("Nova senha obrigatória"),
@@ -36,20 +36,6 @@ export const PasswordRecovery = () => {
     resolver: yupResolver(passwordRecoverySchema),
   });
 
-  const submitNewPassword = async (data) => {
-    delete data.newPassword_confirm;
-
-    try {
-      await api.patch("/recovery/password", data);
-      toast.success("Senha alterada com sucesso!");
-      history.push("/login");
-    } catch (error) {
-      toast.error(
-        error.response.data.error || "Erro ao tentar alterar a senha"
-      );
-    }
-  };
-
   const history = useHistory();
   return (
     <Container>
@@ -59,7 +45,7 @@ export const PasswordRecovery = () => {
             <Logo darkLogo />
             <h2>Recuperar senha</h2>
           </ContainerHeaderLogin>
-          <form onSubmit={handleSubmit(submitNewPassword)}>
+          <form onSubmit={handleSubmit(changePassword)}>
             <Input
               inputName={
                 errors.email === undefined ? "Email" : errors.email?.message
