@@ -36,6 +36,8 @@ export const Profile = ({ myProfile }) => {
   const history = useHistory();
   const { getUserInfo, patchUser } = useUser();
 
+  const [modalAddStreaming, setmodalAddStreaming] = useState(true);
+
   const updateUser = (data) => {
     patchUser(data);
     setIsEditing(!isEditing);
@@ -91,13 +93,8 @@ export const Profile = ({ myProfile }) => {
                   ) : (
                     <p>Não foi definido nenhuma streaming.</p>
                   )}
-                  {isEditing ? (
-                    <NewStreaming >
-                      +
-                    </NewStreaming>
-                  ) : (
-                    <></>
-                  )}
+                  {isEditing ? <NewStreaming>+</NewStreaming> : <></>}
+                  {modalAddStreaming ? <UserStreamingAdd /> : <></>}
                 </StreamingList>
               </SearchingFor>
               <SearchingFor>
