@@ -82,8 +82,10 @@ function CardGroup({ groupData, type, onClick = () => {}, userId }) {
                 Vagas disponíveis:{" "}
                 <strong>{`${groupData.members.length}/${groupData.members_limit}`}</strong>
               </span>
-              <span className="priceService">{price}</span>
-              <span className="yourPrice">{newPrice}</span>
+              <div>
+                <span className="priceService">{price}</span>
+                <span className="yourPrice">{newPrice}</span>
+              </div>
             </InfoVacancy>
           </ContentInfo>
 

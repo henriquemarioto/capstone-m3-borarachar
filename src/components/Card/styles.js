@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding: 10px;
   border: 1px solid var(--light-gray);
   background-color: var(--white);
-  min-height: 70px;
+  min-height: 76px;
   cursor: pointer;
   overflow: hidden;
 
@@ -60,5 +60,9 @@ export const Container = styled.div`
     to {
       transform: translateY(-4px);
     }
+  }
+
+  :hover .yourPrice::before {
+    left: 100%;
   }
 `;

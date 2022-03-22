@@ -7,6 +7,7 @@ export const Container = styled.header`
   align-items: center;
   background: linear-gradient(to bottom, var(--dark-blue), var(--darker-blue));
   position: fixed;
+  z-index: 10;
 `;
 
 export const ContentContainer = styled.div`

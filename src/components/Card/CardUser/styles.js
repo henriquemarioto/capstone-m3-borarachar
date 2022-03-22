@@ -6,6 +6,10 @@ export const ContentInfo = styled.div`
   justify-content: space-between;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
+
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const ContentContainer = styled.div`
@@ -31,7 +35,7 @@ export const MenuContainer = styled.div`
   transition: 300ms min-height;
 
   min-height: ${({ showMenu }) => {
-    if (showMenu) {
+    if (!showMenu) {
       return "0px";
     }
   }};
@@ -40,7 +44,7 @@ export const MenuContainer = styled.div`
     min-height: 46px;
 
     min-height: ${({ showMenu }) => {
-      if (showMenu) {
+      if (!showMenu) {
         return "0px";
       }
     }};
@@ -71,7 +75,7 @@ export const MenuContainer = styled.div`
 
       transform: rotate(
         ${({ showMenu }) => {
-          if (showMenu) {
+          if (!showMenu) {
             return "180deg";
           }
         }}
@@ -82,7 +86,7 @@ export const MenuContainer = styled.div`
 
     transform: translateY(
       ${({ showMenu }) => {
-        if (showMenu) {
+        if (!showMenu) {
           return "-92px";
         }
       }}
@@ -91,7 +95,7 @@ export const MenuContainer = styled.div`
     @media (min-width: 473px) {
       transform: translateY(
         ${({ showMenu }) => {
-          if (showMenu) {
+          if (!showMenu) {
             return "-46px";
           }
         }}
@@ -154,15 +158,22 @@ export const PerfilDiv = styled.div`
   width: 100%;
   gap: 8px;
 
+  overflow: hidden;
+
   img {
     border-radius: 100%;
-    height: 40px;
+    height: 30px;
   }
 
   h3 {
-    font-weight: 900;
-    font-size: 17px;
-    line-height: 20px;
+    width: 100%;
+
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    text-align: start;
   }
 `;
 
@@ -202,10 +213,17 @@ export const InfoFind = styled.div`
   align-items: center;
   gap: 4px;
   font-size: 10px;
-  img {
-    border-radius: 3px;
-    width: 13px;
-    height: 13px;
+  width: 100%;
+
+  div {
+    overflow: auto;
+    display: flex;
+    gap: 4px;
+    img {
+      border-radius: 3px;
+      width: 13px;
+      height: 13px;
+    }
   }
 `;
 export const ContentRequest = styled.div`

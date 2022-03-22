@@ -5,8 +5,8 @@ export const ContentInfo = styled.div`
   justify-content: space-between;
   flex-direction: column;
   gap: 5px;
-
-  width: calc(100% - 35px);
+  width: 100%;
+  overflow: hidden;
 `;
 
 export const InfoTitle = styled.div`
@@ -14,10 +14,9 @@ export const InfoTitle = styled.div`
   align-items: center;
   gap: 5px;
 
-  width: 100%;
-
   h3 {
     font-weight: bold;
+
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -64,28 +63,54 @@ export const InfoMembers = styled.div`
 `;
 export const InfoVacancy = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 10px;
   font-size: 10px;
   white-space: nowrap;
+  width: 100%;
+  overflow: auto;
 
   strong {
     font-weight: bold;
   }
 
-  .priceService {
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    text-decoration: line-through;
-    color: var(--dark-gray);
-  }
-  .yourPrice {
-    color: var(--green);
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 14px;
+  div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+
+    .priceService {
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 12px;
+      text-decoration: line-through;
+      color: var(--dark-gray);
+    }
+    .yourPrice {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--white-50),
+          transparent
+        );
+        transition: 0.5s;
+      }
+    }
   }
 `;
 
