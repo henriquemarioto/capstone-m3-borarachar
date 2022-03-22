@@ -173,6 +173,8 @@ export const PerfilDiv = styled.div`
     white-space: nowrap;
     overflow: hidden;
 
+    font-size: 18px;
+
     text-align: start;
   }
 `;
