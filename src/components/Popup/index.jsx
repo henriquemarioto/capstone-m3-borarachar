@@ -93,7 +93,11 @@ export const Popup = ({ popUpType, setStreamingInfo }) => {
 
             <div className="streamings">
               {streamings.map((item) => (
-                <CardStreamings type={"Plans"} listStream={item} />
+                <CardStreamings
+                  key={item._id}
+                  type={"Plans"}
+                  listStream={item}
+                />
               ))}
             </div>
 

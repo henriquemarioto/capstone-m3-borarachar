@@ -36,6 +36,18 @@ export const Content = styled.div`
     flex-direction: column;
     overflow: auto;
     height: 100%;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--gray);
+      border-radius: 20px;
+    }
   }
   span {
     font-size: 18px;

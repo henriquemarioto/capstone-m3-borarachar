@@ -121,6 +121,8 @@ export const Dashboard = () => {
           ) : (
             <Loading />
           )}
+        </section>
+        <section>
           {!searchingFoGroupsLoading ? (
             <DashboardSections
               title="Procurando por membros"

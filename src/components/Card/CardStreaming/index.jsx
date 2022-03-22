@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { UserContext } from "../../../providers/User";
+
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
 import { CurrencyFormatter } from "../../../services/formatters";
 import {
   ContentStreaming,
@@ -22,7 +25,7 @@ function CardStreamings({ type, listStream }) {
   switch (type) {
     case "Plans":
       return (
-        <ContentStreaming>
+        <ContentStreaming plansOpen={showPlans}>
           <div className="mainStream">
             <InfoStream>
               <TitleStream>
@@ -34,18 +37,22 @@ function CardStreamings({ type, listStream }) {
               </span>
             </InfoStream>
             <button onClick={() => setShowPlans(!showPlans)}>
-              <IoIosArrowDown size={30} />
+              {showPlans ? (
+                <IoIosArrowUp size={30} />
+              ) : (
+                <IoIosArrowDown size={30} />
+              )}
             </button>
           </div>
           {showPlans && (
             <Plans isOpen={showPlans}>
-              <div>
+              <div className="sla">
                 <span className="spanStream">
                   {profiles} perfis disponíveis
                 </span>
-                <div className="sla">
+                <div>
                   {plans.map((item) => (
-                    <DivInputs>
+                    <DivInputs key={item.name}>
                       <div className="divRadio">
                         <input
                           className="radioInput"
