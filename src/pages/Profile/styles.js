@@ -135,7 +135,7 @@ export const Buttons = styled.div`
   padding-bottom: 10px;
 `;
 
-export const NewStreaming = styled.div`
+export const NewStreaming = styled.button`
   :hover {
     cursor: pointer;
   }

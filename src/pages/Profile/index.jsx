@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
-import { UserContext } from "../../providers/User";
+import { Loader } from "../../components/Loading/styles";
+import useUser from "../../providers/User";
 import api from "../../services/api";
 import { useForm } from "react-hook-form";
 import {
@@ -28,59 +27,27 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
+import UserStreamingAdd from "../../components/UserStreamingAdd";
+
 export const Profile = ({ myProfile }) => {
-  const userRequest = useContext(UserContext);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
-  const params = useParams();
-
-  useEffect(() => {
-    let componentDidMount = true;
-    myProfile
-      ? api
-          .get(`/users/${userRequest.user.id}`, {
-            headers: {
-              Authorization: `Bearer ${userRequest.user.token}`,
-            },
-          })
-          .then((response) => {
-            if (componentDidMount) {
-              setUser(response.data);
-            }
-          })
-      : api
-          .get(`/users/${params.userID}`, {
-            headers: {
-              Authorization: `Bearer ${userRequest.user.token}`,
-            },
-          })
-          .then((response) => {
-            if (componentDidMount) {
-              setUser(response.data);
-            }
-          });
-
-    return () => {
-      // clean up
-      componentDidMount = false;
-    };
-  }, [params.userID]);
+  const { getUserInfo, patchUser } = useUser();
 
   const updateUser = (data) => {
-    api
-      .patch(`/users/${userRequest.user.id}`, data, {
-        headers: {
-          Authorization: `Bearer ${userRequest.user.token}`,
-        },
-      })
-      .then((_) => setIsEditing(!isEditing));
+    patchUser(data);
+    setIsEditing(!isEditing);
   };
+
+  useEffect(async () => {
+    setUser(await getUserInfo());
+  }, []);
 
   return (
     <Container onSubmit={handleSubmit(updateUser)}>
-      {user.searching_for ? (
+      {user?.searching_for ? (
         <>
           <InfoDiv>
             <PerfilDiv>
@@ -106,7 +73,7 @@ export const Profile = ({ myProfile }) => {
                   {user.phone ? (
                     <SpanContact>{user.phone}</SpanContact>
                   ) : (
-                    <SpanContact>adionar um número de telefone</SpanContact>
+                    <SpanContact>Adicionar um número de telefone</SpanContact>
                   )}
                 </Contact>
               </div>
@@ -124,7 +91,13 @@ export const Profile = ({ myProfile }) => {
                   ) : (
                     <p>Não foi definido nenhuma streaming.</p>
                   )}
-                  {isEditing ? <NewStreaming>+</NewStreaming> : <></>}
+                  {isEditing ? (
+                    <NewStreaming >
+                      +
+                    </NewStreaming>
+                  ) : (
+                    <></>
+                  )}
                 </StreamingList>
               </SearchingFor>
               <SearchingFor>

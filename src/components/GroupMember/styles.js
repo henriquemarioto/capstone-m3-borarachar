@@ -43,7 +43,7 @@ export const MembersContainer = styled.div`
   gap: 10px;
   width: 100%;
 
-  h3 {
+  > h3 {
     font-weight: 900;
     font-size: 25px;
     line-height: 29px;

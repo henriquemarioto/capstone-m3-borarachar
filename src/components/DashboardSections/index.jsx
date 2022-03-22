@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { Container, HeaderContainer, DataContainer } from "./styles";
 
@@ -7,6 +8,9 @@ import CardUser from "../Card/CardUser";
 import Button from "../Button";
 import useUser from "../../providers/User";
 
+import api from "../../services/api";
+import { toast } from "react-toastify";
+
 export default function DashboardSections({
   title,
   emptyMessage,
@@ -14,8 +18,33 @@ export default function DashboardSections({
   sectionType,
 }) {
   const {
-    user: { id },
+    user: { token, id },
   } = useUser();
+
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    let componentDidMount = true;
+
+    if (sectionType === "members") {
+      const getData = async () => {
+        const response = await api.get(`/users/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (componentDidMount) {
+          setUserData(response.data);
+        }
+      };
+      getData();
+    }
+
+    return () => {
+      componentDidMount = false;
+    };
+  }, []);
 
   const history = useHistory();
 
@@ -47,6 +76,27 @@ export default function DashboardSections({
     }
   };
 
+  const filteredData = renderData.filter((data) => {
+    if (sectionType === "myGroups") {
+      return data;
+    } else if (sectionType === "groups") {
+      if (
+        data.searching_for_members &&
+        data.members.length < data.members_limit
+      ) {
+        return data;
+      }
+    } else {
+      if (
+        userData.already_member?.some(({ streaming }) =>
+          data.searching_for.some(({ _id }) => _id === streaming._id)
+        )
+      ) {
+        return data;
+      }
+    }
+  });
+
   return (
     <Container>
       <HeaderContainer>
@@ -54,9 +104,9 @@ export default function DashboardSections({
       </HeaderContainer>
 
       <DataContainer>
-        {renderData.length !== 0 ? (
+        {filteredData.length !== 0 ? (
           <>
-            {renderData
+            {filteredData
               .slice(0, 2)
               .map((data) =>
                 sectionType === "myGroups" ? (

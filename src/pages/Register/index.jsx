@@ -13,26 +13,40 @@ import {
   ContainerAccount,
 } from "./styles";
 
-import { toast } from "react-toastify";
-
 import registerImg from "/src/images/undraw_account_re_o7id 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
-import api from "../../services/api";
 import useUser from "../../providers/User";
 
 export const Register = () => {
-  const { saveData } = useUser();
-
+  const { submitRegister, saveData } = useUser();
   const registerSchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
     gender: yup.string().required("Gênero obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     cpf: yup.string().required("CPF obrigatório"),
-    phone: yup.string().required("Celular obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
+    phone: yup
+      .string()
+
+      .required("Celular obrigatório"),
+    password: yup
+      .string()
+      .matches(
+        /.*[a-zA-Z].*/,
+        "Precisa conter pelo menos uma letra, podendo ser maiúscula"
+      )
+      .matches(/^^(?=.*[0-9])/, "Precisa conter pelo menos um número")
+      .matches(
+        /(?=.*[!@#$%^&*])/,
+        "Precisa conter pelo menos um símbolo: @,%,#, etc"
+      )
+      .matches(
+        /[a-zA-Z0-9!@#$%^&*]{8,}$/,
+        "Precisa conter pelo menos 8 caracteres"
+      )
+      .required("Senha obrigatória"),
     password_confirm: yup
       .string()
       .oneOf([yup.ref("password")], "As senhas não são idênticas")
@@ -46,21 +60,6 @@ export const Register = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
-
-  const submitRegister = async (data) => {
-    delete data.password_confirm;
-    data.cpf = Number(data.cpf);
-    data.phone = Number(data.phone);
-
-    try {
-      const response = await api.post("/register", data);
-      toast.success("Conta criada com sucesso!");
-      saveData(response.data);
-      history.push("/dashboard");
-    } catch (error) {
-      toast.error("Erro ao criar a sua conta");
-    }
-  };
 
   const history = useHistory();
 
@@ -116,6 +115,7 @@ export const Register = () => {
               inputName={errors.cpf === undefined ? "CPF" : errors.cpf?.message}
               register={register}
               name="cpf"
+              type="number"
             />
             <Input
               isErrored={errors.phone === undefined ? false : true}
@@ -124,6 +124,7 @@ export const Register = () => {
               }
               register={register}
               name="phone"
+              type="number"
             />
             <Input
               isErrored={errors.password === undefined ? false : true}
