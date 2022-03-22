@@ -63,7 +63,7 @@ export const TopHeader = styled.div`
     css`
       img {
         position: relative;
-        transform: translateX(-178px);
+        transform: translateX(-206px);
         margin-right: -178px;
       }
 
@@ -115,7 +115,7 @@ export const SearchContainer = styled.div`
     ${({ openInput }) =>
       openInput &&
       css`
-        width: calc(100% - 40px);
+        width: calc(100%);
         padding: 0 10px;
 
         @media (min-width: 768px) {

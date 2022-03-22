@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const ContainerImgH1 = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     width: 210px;
   }

@@ -5,31 +5,55 @@ export const ContentInfo = styled.div`
   justify-content: space-between;
   flex-direction: column;
   gap: 5px;
+
+  width: calc(100% - 35px);
 `;
 
 export const InfoTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+
+  width: 100%;
+
   h3 {
     font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
+
   img {
     width: 30px;
     height: 30px;
     border-radius: 5px;
   }
+
+  i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
 `;
 
 export const InfoMembers = styled.div`
   display: flex;
-
+  width: 100%;
   gap: 4px;
 
+  span {
+    padding-top: 3px;
+  }
+
   div {
+    padding-top: 3px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 3px;
+
     img {
       max-width: 15px;
       max-height: 15px;
@@ -72,6 +96,7 @@ export const ContentMais = styled.div`
     justify-content: center;
     align-items: center;
     background-color: transparent;
+    position: relative;
   }
 `;
 
