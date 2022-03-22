@@ -11,8 +11,10 @@ import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function GroupNonMember({ groupData }) {
+  const history = useHistory();
   const {
     user: { token, id },
   } = useUser();
@@ -33,7 +35,7 @@ export default function GroupNonMember({ groupData }) {
         }
       );
       toast.success("Você entrou nesse grupo!");
-
+      history.push(`/mygroups`);
       setMemberStatus(true);
     } catch (error) {
       toast.error("Algo de errado aconteceu");
