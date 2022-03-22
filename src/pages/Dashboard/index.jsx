@@ -122,7 +122,6 @@ export const Dashboard = () => {
             <Loading />
           )}
         </section>
-
         <section>
           {!searchingFoGroupsLoading ? (
             <DashboardSections

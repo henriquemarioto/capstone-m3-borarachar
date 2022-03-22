@@ -39,6 +39,8 @@ export const Profile = ({ myProfile }) => {
   const { getUserInfo, patchUser } = useUser();
 
   const updateUser = async (data) => {
+    data.searching_for = !data.searching_for ? user.searching_for : data.searching_for;
+    console.log(data)
     await patchUser(data);
     setUpdate(update + 1);
     await getUser();
@@ -159,19 +161,21 @@ export const Profile = ({ myProfile }) => {
             <></>
           )}
 
-          <div className="divBtt">
-            <Button
-              onClick={() => {
-                localStorage.clear();
-                history.push("/login");
-                toast.success("Deslogado!");
-              }}
-              colour="red"
-              size="full"
-            >
-              Sair
-            </Button>
-          </div>
+          {!isEditing && (
+            <div className="divBtt">
+              <Button
+                onClick={() => {
+                  localStorage.clear();
+                  history.push("/");
+                  toast.success("Deslogado!");
+                }}
+                colour="red"
+                size="full"
+              >
+                Sair
+              </Button>
+            </div>
+          )}
         </>
       ) : (
         <Loading />

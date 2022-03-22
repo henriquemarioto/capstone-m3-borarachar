@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 
@@ -7,6 +7,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const history = useHistory();
+  const location = useLocation();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@DivideComigo:user")) || {}
@@ -84,6 +85,11 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("@DivideComigo:user")) || {});
+  }, [location.pathname]);
+
   return (
     <UserContext.Provider
       value={{

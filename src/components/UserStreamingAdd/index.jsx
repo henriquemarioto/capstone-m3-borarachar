@@ -14,7 +14,11 @@ const UserStreamingAdd = ({ register, setmodalAddStreaming }) => {
   }, []);
 
   return (
-    <Container onClick={(evt) => evt.currentTarget === evt.target && setmodalAddStreaming(false)}>
+    <Container
+      onClick={(evt) =>
+        evt.currentTarget === evt.target && setmodalAddStreaming(false)
+      }
+    >
       <StreamingsCheck>
         <h1>Selecionar streamings</h1>
         <Streamings>
@@ -27,7 +31,11 @@ const UserStreamingAdd = ({ register, setmodalAddStreaming }) => {
           ))}
         </Streamings>
         {/* <Checked>As que você já possui</Checked> */}
-        <Button type="button" colour="blue">
+        <Button
+          type="button"
+          colour="blue"
+          onClick={() => setmodalAddStreaming(false)}
+        >
           Confirmar
         </Button>
       </StreamingsCheck>
