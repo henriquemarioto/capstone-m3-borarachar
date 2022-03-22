@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   padding: 10px;
   gap: 25px;
   width: 100%;
@@ -19,6 +19,10 @@ export const ContentContainer = styled.div`
 
   section {
     flex: 1;
+
+    @media (min-width: 1024px) {
+      max-width: 33%;
+    }
   }
 
   @media (min-width: 1024px) {

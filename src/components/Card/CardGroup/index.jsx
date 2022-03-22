@@ -9,7 +9,6 @@ import {
 import SvgAdd from "../../../images/Group13.svg";
 import { Container } from "../styles";
 import { RiShieldUserLine, RiArrowRightSLine } from "react-icons/ri";
-import { BsCheck2 } from "react-icons/bs";
 
 import { CurrencyFormatter } from "../../../services/formatters";
 
@@ -34,7 +33,7 @@ function CardGroup({ groupData, type,  userId , ...rest}) {
               {/**ICON IF OWNER */}
               {groupData.owner === userId && (
                 <i>
-                  <RiShieldUserLine size={15} />
+                  <RiShieldUserLine />
                 </i>
               )}
             </InfoTitle>
@@ -42,14 +41,21 @@ function CardGroup({ groupData, type,  userId , ...rest}) {
               <span>membros:</span>
               <div>
                 {groupData.members.map(({ _id, avatar_url }) => (
-                  <img key={_id} src={avatar_url} alt="Member image" />
+                  <img
+                    key={_id}
+                    src={avatar_url}
+                    alt="Member image"
+                    className={`member-${Math.floor(
+                      Math.random() * (5 - 1 + 1) + 1
+                    )}`}
+                  />
                 ))}
               </div>
             </InfoMembers>
           </ContentInfo>
 
           <ContentMais>
-            <button>
+            <button className="arrow">
               <RiArrowRightSLine size={30} />
             </button>
           </ContentMais>

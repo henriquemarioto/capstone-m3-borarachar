@@ -52,7 +52,7 @@ export const Login = () => {
       <ContentContainer>
         <ContainerFlex>
           <ContainerHeaderLogin>
-            <Logo />
+            <Logo darkLogo />
             <h2>Efetuar Login</h2>
           </ContainerHeaderLogin>
           <form onSubmit={handleSubmit(submitLogin)}>

@@ -1,11 +1,8 @@
 import { Container, MembersContainer } from "./styles";
 import CardUser from "../../components/Card/CardUser";
 import Button from "../Button";
-
 import { FiAlertTriangle } from "react-icons/fi";
-
 import api from "../../services/api";
-
 import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useHistory, useParams } from "react-router-dom";

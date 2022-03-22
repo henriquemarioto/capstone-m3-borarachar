@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 100vw;
+  min-width: 100%;
   min-height: 100vh;
 `;
 export const ContainerHeaderLogin = styled.div`
@@ -72,6 +72,7 @@ export const ContainerFlex = styled.div`
 `;
 
 export const ContentContainer = styled.div`
+  padding: 10px 0;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
@@ -79,6 +80,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   max-width: 1440px;
   justify-content: center;
+
   @media screen and (min-width: 1024px) {
     display: flex;
     flex-flow: row wrap;

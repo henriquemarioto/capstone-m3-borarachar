@@ -12,6 +12,7 @@ import {
   InputContainer,
   NameContainer,
   PaymentDate,
+  SubInfo,
 } from "./style";
 
 function GroupCreationAndEditing({ setIsCreatingGroup }) {
@@ -22,26 +23,45 @@ function GroupCreationAndEditing({ setIsCreatingGroup }) {
           <button>
             <BsArrowRepeat />
           </button>
+
           <NameContainer>
             <InputContainer type="name" placeholder="Nome do grupo" />
             <span>Limite de usuarios: X</span>
           </NameContainer>
         </GroupNameContainer>
+
         <GroupDescription>
           <h3>
             Producurando por pessoas? <input type="checkbox" />
           </h3>
+          <h2>Descrição do grupo</h2>
+          <textarea />
         </GroupDescription>
+
+        <SubInfo>
+          <h2>Informações da assinatura</h2>
+          <h3>
+            Valor da assinatura <span> R$:1000000000</span>
+          </h3>
+          <h3>
+            Valor por pessoa <span> R$:1000000000</span>
+          </h3>
+        </SubInfo>
 
         <form>
           <h2>Chave pix</h2>
+
           <InputContainer placeholder="Sua chave PIX" />
+
           <PaymentDate>
-            <h3>Dia do pagamento</h3>
+            <h2>Dia do pagamento</h2>
             <InputContainer type="date" />
           </PaymentDate>
-          <h3>Email da conta</h3>
+
+          <h2>Email da conta</h2>
+
           <InputContainer type="email" placeholder="Email" />
+
           <AlertContainer className="alert-email">
             <div>
               <FiAlertTriangle />
@@ -52,8 +72,11 @@ function GroupCreationAndEditing({ setIsCreatingGroup }) {
               para garantir a sua privacidade!
             </h3>
           </AlertContainer>
-          <h3>Senha da conta</h3>
+
+          <h2>Senha da conta</h2>
+
           <InputContainer type="password" placeholder="Senha" />
+
           <AlertContainer className="alert-password">
             <div>
               <FiAlertTriangle />
@@ -64,6 +87,7 @@ function GroupCreationAndEditing({ setIsCreatingGroup }) {
               membro deixar o grupo para garantir a segurança da conta!
             </h3>
           </AlertContainer>
+
           <ButtonContainer>
             <Button
               size={"full"}

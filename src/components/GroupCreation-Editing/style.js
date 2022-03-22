@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: 20px;
 `;
 
 export const ContentContainer = styled.div`
@@ -14,7 +15,7 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   width: 100%;
   max-width: 1440px;
   height: 100%;
@@ -24,8 +25,12 @@ export const ContentContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     width: 100%;
+    h2 {
+      font-weight: 500;
+      font-size: 14px;
+    }
   }
 `;
 
@@ -34,12 +39,15 @@ export const GroupNameContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  span {
+    font-size: 10px;
+  }
   button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     border-radius: 5px;
     background-color: var(--gray);
     font-size: 40px;
@@ -47,6 +55,7 @@ export const GroupNameContainer = styled.div`
     :hover {
       background-color: var(--light-blue);
       transition: 500ms;
+      color: var(--gray);
     }
   }
 `;
@@ -55,6 +64,13 @@ export const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
+  input {
+    width: 100%;
+
+    height: 35px;
+    font-size: 23px;
+  }
 `;
 export const AlertContainer = styled.div`
   overflow: hidden;
@@ -109,7 +125,7 @@ export const PaymentDate = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -117,9 +133,43 @@ export const ButtonContainer = styled.div`
     height: 40px;
   }
 `;
+export const SubInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  h3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  span {
+    font-weight: 400;
+    color: var(--dark);
+  }
+`;
 
 export const GroupDescription = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  gap: 10px;
+  border-bottom: 1px solid var(--light-gray);
+  h2 {
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 20px;
+  }
+
   h3 {
     text-align: start;
     display: flex;
@@ -153,5 +203,13 @@ export const GroupDescription = styled.div`
     position: absolute;
     top: 2px;
     left: 6px;
+  }
+  textarea {
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    resize: none;
+    width: 100%;
+    height: 52px;
+    padding: 5px;
   }
 `;

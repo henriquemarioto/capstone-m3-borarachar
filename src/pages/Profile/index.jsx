@@ -22,6 +22,9 @@ import {
   StreamingList,
   Buttons,
   NewStreaming,
+  SpanContact,
+  InfoDiv,
+  PerfilDiv,
 } from "./styles";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -65,26 +68,37 @@ export const Profile = () => {
 
   return (
     <Container onSubmit={handleSubmit(updateUser)}>
-      <>
-        {user.searching_for ? (
-          <>
-            <UserImg src={user.avatar_url} />
-            <Section>
-              <UserName
-                bordered={isEditing}
-                {...register("name")}
-                disabled={!isEditing}
-                type="text"
-                placeholder={user.name}
-              />
-            </Section>
-            <Bio
-              bordered={isEditing}
-              {...register("bio")}
-              type="text"
-              disabled={!isEditing}
-              placeholder={user.bio === "" ? "Sem bio" : user.bio}
-            />
+      {user.searching_for ? (
+        <>
+          <InfoDiv>
+            <PerfilDiv>
+              <UserImg src={user.avatar_url} />
+              <div className="editing">
+                <Section>
+                  <UserName
+                    bordered={isEditing}
+                    {...register("name")}
+                    disabled={!isEditing}
+                    type="text"
+                    placeholder={user.name}
+                  />
+                </Section>
+                <Bio
+                  bordered={isEditing}
+                  {...register("bio")}
+                  type="text"
+                  disabled={!isEditing}
+                  placeholder={user.bio === "" ? "Sem bio" : user.bio}
+                />
+                <Contact>
+                  {user.phone ? (
+                    <SpanContact>{user.phone}</SpanContact>
+                  ) : (
+                    <SpanContact>adionar um número de telefone</SpanContact>
+                  )}
+                </Contact>
+              </div>
+            </PerfilDiv>
             <Streamings>
               <SearchingFor>
                 <span>Procurando por:</span>
@@ -110,7 +124,7 @@ export const Profile = () => {
               <SearchingFor>
                 <span>Já usa:</span>
                 <StreamingList>
-                  {user.already_member > 0 ? (
+                  {user.already_member.length > 0 ? (
                     <>
                       {user.already_member.map((item) => (
                         <StreamingImg
@@ -125,27 +139,27 @@ export const Profile = () => {
                 </StreamingList>
               </SearchingFor>
             </Streamings>
-            <Contact>
-              {user.contact ? user.contact.map((item) => item) : <></>}
-            </Contact>
-            {isEditing ? (
-              <Buttons>
-                <Button type="submit" colour="blue">
-                  Salvar Alterações
-                </Button>
-                <Button colour="red">Excluir Conta</Button>
-              </Buttons>
-            ) : (
-              <></>
-            )}
-            {!isEditing ? (
-              <EditUser onClick={() => setIsEditing(!isEditing)}>
-                Editar Informações
-                <EditIcon />
-              </EditUser>
-            ) : (
-              <></>
-            )}
+          </InfoDiv>
+          {isEditing ? (
+            <Buttons>
+              <Button type="submit" colour="blue">
+                Salvar Alterações
+              </Button>
+              <Button colour="red">Excluir Conta</Button>
+            </Buttons>
+          ) : (
+            <></>
+          )}
+          {!isEditing ? (
+            <EditUser onClick={() => setIsEditing(!isEditing)}>
+              Editar Informações
+              <EditIcon />
+            </EditUser>
+          ) : (
+            <></>
+          )}
+
+          <div className="divBtt">
             <Button
               onClick={() => {
                 localStorage.clear();
@@ -157,11 +171,11 @@ export const Profile = () => {
             >
               Sair
             </Button>
-          </>
-        ) : (
-          <Loader />
-        )}
-      </>
+          </div>
+        </>
+      ) : (
+        <Loader />
+      )}
     </Container>
   );
 };

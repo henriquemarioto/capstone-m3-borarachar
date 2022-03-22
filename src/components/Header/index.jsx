@@ -8,8 +8,6 @@ import {
   MdSearch,
 } from "react-icons/md";
 
-import logo from "../../images/logo-white.svg";
-
 import {
   Container,
   ContentContainer,
@@ -20,11 +18,13 @@ import {
   SearchButton,
   SearchContainer,
 } from "./styles";
+import { Logo } from "../Logo";
 
 function Header() {
   const [openInput, setOpenInput] = useState(false);
   const [pageScrollY, setPageScrollY] = useState(0);
   const [scrollPage, setScrollPage] = useState(false);
+  const [input, setInput] = useState("");
 
   const history = useHistory();
   const location = useLocation();
@@ -50,20 +50,40 @@ function Header() {
     notifications: "/notifications",
   };
 
+  const handleOpenInput = () => {
+    if (!(openInput && input)) {
+      setOpenInput(!openInput);
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if (!input) {
+      return
+    }
+
+    history.push(`/search?search=${input}`);
+  };
+
   return (
     <Container scrollPage={scrollPage}>
       <ContentContainer>
         <TopHeader openInput={openInput} scrollPage={scrollPage}>
-          <img src={logo} alt="Logotipo BoraRachar" />
+          <Logo />
 
           <SearchContainer openInput={openInput}>
-            <input type="text" placeholder="Pesquise aqui" />
-            <SearchButton
-              onClick={() => setOpenInput(!openInput)}
-              openInput={openInput}
-            >
-              <MdSearch />
-            </SearchButton>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Pesquise aqui"
+                value={input}
+                onChange={(evt) => setInput(evt.target.value)}
+              />
+              <SearchButton onClick={handleOpenInput} openInput={openInput}>
+                <MdSearch />
+              </SearchButton>
+            </form>
           </SearchContainer>
         </TopHeader>
 

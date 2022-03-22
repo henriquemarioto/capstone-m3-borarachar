@@ -24,7 +24,6 @@ import api from "../../services/api";
 import useUser from "../../providers/User";
 
 export const Register = () => {
-
   const { saveData } = useUser();
 
   const registerSchema = yup.object().shape({
@@ -70,7 +69,7 @@ export const Register = () => {
       <ContentContainer>
         <ContainerFlex>
           <ContainerHeaderLogin>
-            <Logo />
+            <Logo darkLogo />
             <h2>Registre-se</h2>
           </ContainerHeaderLogin>
           <form onSubmit={handleSubmit(submitRegister)}>
@@ -162,7 +161,6 @@ export const Register = () => {
         </ContainerFlex>
 
         <ContainerImage src={registerImg} />
-        
       </ContentContainer>
     </Container>
   );
