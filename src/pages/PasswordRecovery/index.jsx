@@ -20,7 +20,22 @@ export const PasswordRecovery = () => {
   const { changePassword } = useUser();
   const passwordRecoverySchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),
-    newPassword: yup.string().required("Nova senha obrigatória"),
+    newPassword: yup
+      .string()
+      .matches(
+        /.*[a-zA-Z].*/,
+        "Precisa conter pelo menos uma letra, podendo ser maiúscula"
+      )
+      .matches(/^^(?=.*[0-9])/, "Precisa conter pelo menos um número")
+      .matches(
+        /(?=.*[!@#$%^&*])/,
+        "Precisa conter pelo menos um símbolo: @,%,#, etc"
+      )
+      .matches(
+        /[a-zA-Z0-9!@#$%^&*]{8,}$/,
+        "Precisa conter pelo menos 8 caracteres"
+      )
+      .required("Nova senha obrigatória"),
     newPassword_confirm: yup
       .string()
       .oneOf([yup.ref("newPassword")], "As senhas não são idênticas")

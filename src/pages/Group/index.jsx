@@ -18,7 +18,6 @@ export default function Group() {
   } = useUser();
 
   let { groupID } = useParams();
-
   const [groupData, setGroupData] = useState({});
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);

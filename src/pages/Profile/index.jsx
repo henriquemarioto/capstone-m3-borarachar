@@ -89,8 +89,13 @@ export const Profile = () => {
                   ) : (
                     <p>Não foi definido nenhuma streaming.</p>
                   )}
-                  {isEditing ? <NewStreaming>+</NewStreaming> : <></>}
-                  {/* <UserStreamingAdd></UserStreamingAdd> */}
+                  {isEditing ? (
+                    <NewStreaming >
+                      +
+                    </NewStreaming>
+                  ) : (
+                    <></>
+                  )}
                 </StreamingList>
               </SearchingFor>
               <SearchingFor>
