@@ -27,6 +27,7 @@ export default createGlobalStyle`
         --dark-blue: #07387B;
         --blue-gradient: #07387B - #050B2F ;
         --blue: #2E7DB4;
+        --blue-15: rgba(46,125,180, 0.15);
         --light-blue: #439AD8;
         --dark-purple-blue: #171D6D;
         --purple-blue: #4D47E9;
