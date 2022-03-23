@@ -84,7 +84,7 @@ function CardGroup({ groupData, type, userId, ...rest }) {
             <InfoVacancy>
               <span>
                 Vagas disponíveis:{" "}
-                <strong>{`${groupData.members.length}/${groupData.members_limit}`}</strong>
+                <strong>{`${groupData.members_limit - groupData.members.length}/${groupData.members_limit}`}</strong>
               </span>
               <div>
                 <span className="priceService">{price()}</span>

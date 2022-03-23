@@ -127,9 +127,9 @@ export const Profile = ({ myProfile }) => {
               <SearchingFor>
                 <span>Já usa:</span>
                 <StreamingList>
-                  {filteredStreamings.length > 0 ? (
+                  {user.already_member.length > 0 ? (
                     <>
-                      {filteredStreamings.map((item) => (
+                      {user.already_member.map((item) => (
                         <StreamingImg
                           key={item._id}
                           src={item.streaming.image}

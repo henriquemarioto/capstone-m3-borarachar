@@ -21,6 +21,8 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
+  console.log(groupData);
+
   const handleExit = async () => {
     try {
       await api.patch(
@@ -97,7 +99,7 @@ export default function GroupMember({
           size="full"
           onClick={groupData.members.length === 1 ? handleExit : () => {}}
         >
-          Sair do grupo
+          {groupData.members.length === 1 ? "Excluir grupo" : "Sair do grupo"}
         </Button>
       ) : (
         <Button colour="red" hover size="full" onClick={handleExit}>
