@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 
@@ -8,6 +8,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [selectedStreaming, setSelectredStreaming] = useState([]);
   const history = useHistory();
+  const location = useLocation();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@BoraRachar:user")) || {}
@@ -60,9 +61,9 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const patchUser = (data) => {
+  const patchUser = async (data) => {
     try {
-      api.patch(`/users/${user.id}`, data, {
+      await api.patch(`/users/${user.id}`, data, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -94,6 +95,9 @@ export const UserProvider = ({ children }) => {
     });
     setSelectredStreaming([{ plan: filterPlan[0] }, item[0]]);
   };
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
+  }, [location.pathname]);
 
   return (
     <UserContext.Provider
