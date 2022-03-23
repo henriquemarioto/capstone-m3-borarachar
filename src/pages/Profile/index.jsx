@@ -148,7 +148,7 @@ export const Profile = ({ myProfile }) => {
               <Button type="submit" colour="blue">
                 Salvar Alterações
               </Button>
-              <Button colour="red">Excluir Conta</Button>
+              {/* <Button colour="red">Excluir Conta</Button> */}
             </Buttons>
           ) : (
             <></>
