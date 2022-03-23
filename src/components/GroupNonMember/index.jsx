@@ -13,15 +13,13 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function GroupNonMember({ groupData }) {
+export default function GroupNonMember({ groupData, setUpdate, update }) {
   const history = useHistory();
   const {
     user: { token, id },
   } = useUser();
 
   const { groupID } = useParams();
-
-  const [memberStatus, setMemberStatus] = useState(false);
 
   const handleJoin = async () => {
     try {
@@ -36,15 +34,11 @@ export default function GroupNonMember({ groupData }) {
       );
       toast.success("Você entrou nesse grupo!");
       history.push(`/group/${groupID}`);
-      setMemberStatus(true);
+      setUpdate(!update);
     } catch (error) {
       toast.error("Algo de errado aconteceu");
     }
   };
-
-  useEffect(() => {
-    groupData = { ...groupData };
-  }, [memberStatus]);
 
   return (
     <Container>

@@ -103,7 +103,7 @@ export default function GroupMember({
           size="full"
           onClick={groupData.members.length === 1 ? handleExit : () => {}}
         >
-          {groupData.members.length === 1 ? "Excluir grupo" : "Sair do grupo"}
+          Excluir grupo
         </Button>
       ) : (
         <Button colour="red" hover size="full" onClick={handleExit}>

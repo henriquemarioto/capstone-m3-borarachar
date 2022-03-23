@@ -73,7 +73,11 @@ export default function Group() {
                 setUpdate={setUpdate}
               />
             ) : (
-              <GroupNonMember groupData={groupData} />
+              <GroupNonMember
+                groupData={groupData}
+                setUpdate={setUpdate}
+                update={update}
+              />
             )}
           </>
         ) : (
