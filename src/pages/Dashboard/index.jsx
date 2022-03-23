@@ -78,8 +78,6 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    let componentDidMount = true;
-
     const getNomMemberGroupsResponseData = async () => {
       const nomMemberGroupsResponse = await api.get("/groups", {
         headers: {
@@ -87,16 +85,14 @@ export const Dashboard = () => {
         },
       });
 
-      if (componentDidMount) {
-        setNomMemberGroups(
-          nomMemberGroupsResponse.data.filter(
-            ({ members, searching_for_members }) =>
-              !members.some(({ _id }) => _id === id) && searching_for_members
-          )
-        );
+      setNomMemberGroups(
+        nomMemberGroupsResponse.data.filter(
+          ({ members, searching_for_members }) =>
+            !members.some(({ _id }) => _id === id) && searching_for_members
+        )
+      );
 
-        setNomMemberGroupsResponseLoading(false);
-      }
+      setNomMemberGroupsResponseLoading(false);
     };
 
     getNomMemberGroupsResponseData();
