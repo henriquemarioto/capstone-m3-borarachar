@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BsArrowRepeat} from "react-icons/bs";
+import { BsArrowRepeat } from "react-icons/bs";
 import { FiAlertTriangle } from "react-icons/fi";
 import Button from "../../components/Button";
 // import { Popup } from "../../components/Popup";
@@ -23,26 +23,28 @@ import * as yup from "yup";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+
 function EditGroup() {
   // const [showPopUp, setShowPopUp] = useState(false);
+  const history = useHistory();
   const [showInfo, setShowInfo] = useState(false);
   const [planInfo, setPlanInfo] = useState({});
   const { selectedStreaming, setSelectedStreaming } = useUser();
   const {
     user: { token },
   } = useUser();
-  const history = useHistory();
+  const groupData = JSON.parse(localStorage.getItem("@BoraRachar:editgroup"));
 
   const streamingSchema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
+    description: yup.string(),
+    pix_key: yup.string().required("Chave pix obrigatória"),
+    pay_day: yup.string().required("Dia do pagamento obrigatório"),
     account_email: yup
       .string()
       .email("Email inválido")
       .required("Email obrigatório"),
     account_password: yup.string().required("Senha obrigatória"),
-    pix_key: yup.string().required("Chave pix obrigatória"),
-    pay_day: yup.string().required("Dia do pagamento obrigatório"),
-    description: yup.string(),
   });
 
   const {
@@ -56,32 +58,22 @@ function EditGroup() {
   const submitNewGroup = async (data) => {
     try {
       data.pay_day = Number(data.pay_day.slice(-2));
-      data.members_limit = planInfo.screens === 1 ? 2 : planInfo.screens;
-      data.streaming = {
-        streamingId: selectedStreaming[1]._id,
-        plan: planInfo.name,
-      };
 
       const response = await api
-        .post("/groups", data, {
+        .patch(`/groups/${groupData._id}`, data, {
           headers: {
             authorization: `bearer ${token}`,
           },
         })
         .then((res) => {
           toast.success("Grupo criado com sucesso");
-          history.push(`/group/${res.data.id}`);
+          history.push(`/group/${groupData._id}`);
         });
     } catch (error) {
       console.log(error);
       toast.error("Algo deu errado");
     }
   };
-
-  useEffect(() => {
-    if (selectedStreaming.length > 0)
-      return setPlanInfo(selectedStreaming[0].plan);
-  }, [selectedStreaming]);
 
   return (
     <Container>
@@ -103,32 +95,19 @@ function EditGroup() {
               //   setShowInfo(false);
               // }}
             >
-              {showInfo & (selectedStreaming.length > 0) ? (
-                <img
-                  src={selectedStreaming[1].image}
-                  alt={selectedStreaming.name}
-                />
-              ) : (
-                <BsArrowRepeat />
-              )}
+              <img src={groupData.streaming.image} alt={groupData.name} />
             </button>
 
             <NameContainer>
               <InputContainer
                 type="name"
-                placeholder={
-                  errors.name?.message === undefined
-                    ? "Nome do grupo"
-                    : errors.name?.message
-                }
+                defaultValue={groupData.name}
                 {...register("name")}
               />
               <span>
-                {showInfo & (selectedStreaming.length > 0)
-                  ? `Limite de usuarios: ${
-                      planInfo.screens === 1 ? 2 : planInfo.screens
-                    }`
-                  : "Limite de usuarios: 0"}
+                {`Limite de usuarios: ${
+                  groupData.members.length === 1 ? 2 : planInfo.screens
+                }`}
               </span>
             </NameContainer>
           </GroupNameContainer>
@@ -138,7 +117,10 @@ function EditGroup() {
             Producurando por pessoas? <input type="checkbox"  />
           </h3> */}
             <h2>Descrição do grupo</h2>
-            <textarea {...register("description")} />
+            <textarea
+              defaultValue={groupData.description}
+              {...register("description")}
+            />
           </GroupDescription>
 
           <SubInfo>
@@ -146,30 +128,24 @@ function EditGroup() {
             <h3>
               Valor da assinatura
               <span>
-                {showInfo & (selectedStreaming.length > 0)
-                  ? CurrencyFormatter.format(planInfo.price)
-                  : "R$ 00,00"}
+                {CurrencyFormatter.format(groupData.streaming.plan.price)}
               </span>
             </h3>
             <h3>
               Valor por pessoa
               <span>
-                {showInfo & (selectedStreaming.length > 0)
-                  ? CurrencyFormatter.format(planInfo.price / planInfo.screens)
-                  : "R$ 00,00"}
+                {CurrencyFormatter.format(
+                  groupData.streaming.plan.price /
+                    groupData.streaming.plan.screens
+                )}
               </span>
             </h3>
           </SubInfo>
 
-          <h2>
-            {" "}
-            {errors.pix_key?.message === undefined
-              ? "Chave pix"
-              : errors.pix_key?.message}
-          </h2>
+          <h2>Chave pix</h2>
 
           <InputContainer
-            placeholder="Sua chave PIX"
+            defaultValue={groupData.pix_key}
             {...register("pix_key")}
           />
 
@@ -182,15 +158,11 @@ function EditGroup() {
             <InputContainer type="date" {...register("pay_day")} />
           </PaymentDate>
 
-          <h2>
-            {errors.account_email?.message === undefined
-              ? "Email da conta"
-              : errors.account_email?.message}
-          </h2>
+          <h2>Email da conta</h2>
 
           <InputContainer
             type="email"
-            placeholder="Email"
+            defaultValue={groupData.account_email}
             {...register("account_email")}
           />
 
@@ -205,15 +177,11 @@ function EditGroup() {
             </h3>
           </AlertContainer>
 
-          <h2>
-            {errors.account_password?.message === undefined
-              ? "Senha da conta"
-              : errors.account_password?.message}
-          </h2>
+          <h2>Senha da conta</h2>
 
           <InputContainer
             type="password"
-            placeholder="Senha"
+            defaultValue={groupData.account_password}
             {...register("account_password")}
           />
 
@@ -230,14 +198,14 @@ function EditGroup() {
 
           <ButtonContainer>
             <Button size={"full"} colour={"blue"} type="submit" hover>
-              Criar grupo
+              Atualizar
             </Button>
 
             <Button
               size={"full"}
               colour={"red"}
               hover
-              onClick={() => history.push("/mygroups")}
+              onClick={() => history.push(`/group/${groupData._id}`)}
               type="button"
             >
               Cancelar

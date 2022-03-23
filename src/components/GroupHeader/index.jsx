@@ -5,6 +5,12 @@ import { useHistory } from "react-router-dom";
 
 export default function GroupHeader({ groupData, userId }) {
   const history = useHistory();
+
+  const handleEdit = () => {
+    localStorage.setItem("@BoraRachar:editgroup", JSON.stringify(groupData));
+    history.push(`/group/${groupData._id}/edit`);
+  };
+
   return (
     <Container>
       <div className="header">
@@ -18,10 +24,7 @@ export default function GroupHeader({ groupData, userId }) {
           </div>
         </div>
         {userId === groupData.owner && (
-          <button
-            className="settings"
-            onClick={() => history.push(`/group/${groupData._id}/edit`)}
-          >
+          <button className="settings" onClick={handleEdit}>
             <ImCog />
           </button>
         )}
@@ -34,7 +37,7 @@ export default function GroupHeader({ groupData, userId }) {
       <div className="description">
         <h4>Descrição do grupo</h4>
         <p>
-          {!!groupData.description
+          {groupData.description
             ? groupData.description
             : "[Grupo sem descrição]"}
         </p>

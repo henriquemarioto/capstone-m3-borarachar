@@ -8,6 +8,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 20px;
+  max-width: 768px;
 `;
 
 export const ContentContainer = styled.div`

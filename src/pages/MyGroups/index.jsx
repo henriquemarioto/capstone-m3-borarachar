@@ -42,7 +42,7 @@ export default function MyGroups() {
     };
 
     getData();
-
+    
     return () => {
       // clean up
       componentDidMount = false;

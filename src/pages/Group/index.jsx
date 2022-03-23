@@ -65,7 +65,7 @@ export default function Group() {
             />
 
             <GroupHeader groupData={groupData} userId={id} />
-            {!!groupData.members.some(({ userId }) => userId === id) ? (
+            {groupData.members.some(({ userId }) => userId === id) ? (
               <GroupMember
                 update={update}
                 handlePopup={handlePopup}
