@@ -15,6 +15,7 @@ function CardStreamings({ type, listStream }) {
   const [showPlans, setShowPlans] = useState(false);
   const { name, image, plans, profiles } = listStream;
   const { streamSelection } = useContext(UserContext);
+  
   const planSelection = (ev) => {
     [listStream].map((list) => streamSelection([list, { ID: ev.target.id }]));
   };

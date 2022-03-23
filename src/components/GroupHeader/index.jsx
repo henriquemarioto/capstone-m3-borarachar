@@ -1,8 +1,10 @@
 import { Container } from "./styles";
 
 import { ImCog } from "react-icons/im";
+import { useHistory } from "react-router-dom";
 
 export default function GroupHeader({ groupData, userId }) {
+  const history = useHistory();
   return (
     <Container>
       <div className="header">
@@ -16,7 +18,10 @@ export default function GroupHeader({ groupData, userId }) {
           </div>
         </div>
         {userId === groupData.owner && (
-          <button className="settings">
+          <button
+            className="settings"
+            onClick={() => history.push(`/group/${groupData._id}/edit`)}
+          >
             <ImCog />
           </button>
         )}

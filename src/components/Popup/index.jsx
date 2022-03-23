@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import CardStreamings from "../Card/CardStreaming";
 import api from "../../services/api";
 import { UserContext } from "../../providers/User";
-export const Popup = ({ popUpType, setSelectedStreaming, setShowPopUp }) => {
+export const Popup = ({ popUpType, setShowInfo, setShowPopUp }) => {
   const [streamings, setStreamings] = useState([]);
 
   useEffect(() => {
@@ -100,7 +100,10 @@ export const Popup = ({ popUpType, setSelectedStreaming, setShowPopUp }) => {
                 size="full"
                 colour="blue"
                 type="submit"
-                onClick={() => setShowPopUp(false)}
+                onClick={() => {
+                  setShowPopUp(false);
+                  setShowInfo(true);
+                }}
               >
                 Sim
               </Button>

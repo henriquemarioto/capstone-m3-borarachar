@@ -95,11 +95,12 @@ export const UserProvider = ({ children }) => {
     });
     setSelectredStreaming([{ plan: filterPlan[0] }, item[0]]);
   };
-
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
   }, [location.pathname]);
 
+
+  
   return (
     <UserContext.Provider
       value={{

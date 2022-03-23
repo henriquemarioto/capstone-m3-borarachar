@@ -21,7 +21,7 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
-  console.log(groupData);
+  // console.log(groupData);
 
   const handleExit = async () => {
     try {
@@ -34,8 +34,12 @@ export default function GroupMember({
           },
         }
       );
-      toast.warn("Você saiu do grupo!");
-      history.push("/dashboard");
+      toast.warn(
+        groupData.members.length === 1
+          ? "Grupo excluído com sucesso"
+          : "Você saiu do grupo"
+      );
+      history.push("/mygroups");
     } catch (error) {
       toast.error(error.response.data.error || "Algo deu errado");
     }

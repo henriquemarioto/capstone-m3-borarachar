@@ -71,7 +71,7 @@ export const Plans = styled.div`
   transform: translateY(-5px);
   padding: 15px 10px 10px 10px;
   height: 100%;
-  max-height: 100px;
+  max-height: 250px;
   overflow: hidden;
   transition: 300ms max-height, 300ms padding;
   gap: 10px;
@@ -126,7 +126,7 @@ export const Plans = styled.div`
     if (!plansOpen) {
       return css`
         padding: 0 10px;
-        max-height: 0;
+        max-height: 0 ;
       `;
     }
   }}

@@ -9,7 +9,8 @@ import api from "../../services/api";
 import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
-import GroupCreationAndEditing from "../../components/GroupCreation-Editing";
+import GroupCreationAndEditing from "../GroupCreation";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function MyGroups() {
   const history = useHistory();
@@ -49,8 +50,7 @@ export default function MyGroups() {
   }, []);
 
   return (
-    <>
-      {!isCreatingGroup ? (
+     
         <Container>
           <ContentContainer>
             {!loading ? (
@@ -70,7 +70,7 @@ export default function MyGroups() {
 
                 <CardGroup
                   type="newGroup"
-                  onClick={() => setIsCreatingGroup(true)}
+                  onClick={() => history.push("/newgroup")}
                 />
               </>
             ) : (
@@ -78,9 +78,5 @@ export default function MyGroups() {
             )}
           </ContentContainer>
         </Container>
-      ) : (
-        <GroupCreationAndEditing setIsCreatingGroup={setIsCreatingGroup} />
-      )}
-    </>
   );
 }

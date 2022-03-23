@@ -16,6 +16,9 @@ import Layout from "../components/Layout";
 
 import Route from "./route";
 import AnotherProfile from "../pages/AnotherProfile";
+import GroupCreationAndEditing from "../pages/GroupCreation";
+import NewGroup from "../pages/GroupCreation";
+import EditGroup from "../pages/EditGroup";
 
 export const Routes = () => {
   return (
@@ -42,6 +45,10 @@ export const Routes = () => {
             <Dashboard />
           </Route>
 
+          <Route path="/newgroup" isPrivate>
+            <NewGroup />
+          </Route>
+
           <Route path="/profile" isPrivate>
             <Profile myProfile />
           </Route>
@@ -50,8 +57,12 @@ export const Routes = () => {
             <AnotherProfile />
           </Route>
 
-          <Route path="/group/:groupID" isPrivate>
+          <Route exact path="/group/:groupID" isPrivate>
             <Group />
+          </Route>
+
+          <Route path="/group/:groupID/edit" isPrivate>
+            <EditGroup />
           </Route>
 
           <Route path="/groups" isPrivate>

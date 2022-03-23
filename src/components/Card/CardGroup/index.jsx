@@ -16,6 +16,8 @@ function CardGroup({ groupData, type, userId, ...rest }) {
   const price = () => {
     return CurrencyFormatter.format(groupData.streaming.plan.price);
   };
+
+  
   const newPrice = () => {
     return CurrencyFormatter.format(
       groupData.streaming.plan.price / (groupData.members.length + 1)

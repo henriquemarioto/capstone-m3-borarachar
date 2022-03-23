@@ -45,7 +45,7 @@ export const Container = styled.section`
 
         span {
           font-weight: 500;
-          font-size: 9px;
+          font-size: 14px;
           line-height: 11px;
         }
       }
@@ -62,7 +62,7 @@ export const Container = styled.section`
 
   > p {
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14px;
 
     color: var(--dark-gray);
@@ -81,24 +81,25 @@ export const Container = styled.section`
 
     p {
       font-weight: 400;
-      font-size: 12px;
+      font-size: 13px;
       line-height: 14px;
     }
   }
 
   .owner {
     display: flex;
+    align-items: center;
     gap: 5px;
 
     p {
       font-weight: 500;
-      font-size: 12px;
+      font-size: 13px;
       line-height: 14px;
     }
 
     img {
-      width: 15px;
-      height: 15px;
+      width: 10px;
+      height: 10px;
       border-radius: 100%;
     }
   }
