@@ -9,7 +9,8 @@ import api from "../../services/api";
 import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
-import GroupCreationAndEditing from "../../components/GroupCreation-Editing";
+import GroupCreationAndEditing from "../GroupCreation";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function MyGroups() {
   const history = useHistory();
@@ -49,32 +50,27 @@ export default function MyGroups() {
   }, []);
 
   return (
-    <>
-      {!isCreatingGroup ? (
+     
         <Container>
           <ContentContainer>
             {!loading ? (
               <>
                 {groups.map((group) => {
                   const { _id, owner } = group;
-
                   return (
-                    <>
-                      <CardGroup
-                        key={_id}
-                        type="groupMember"
-                        groupData={group}
-                        userId={id}
-                        onClick={() => history.push(`/group/${group._id}`)}
-                      />
-                    </>
+                    <CardGroup
+                      key={_id}
+                      type="groupMember"
+                      groupData={group}
+                      userId={id}
+                      onClick={() => history.push(`/group/${group._id}`)}
+                    />
                   );
                 })}
 
                 <CardGroup
-                  key={"newGroup"}
-                  type={"newGroup"}
-                  onClick={() => setIsCreatingGroup(true)}
+                  type="newGroup"
+                  onClick={() => history.push("/newgroup")}
                 />
               </>
             ) : (
@@ -82,9 +78,5 @@ export default function MyGroups() {
             )}
           </ContentContainer>
         </Container>
-      ) : (
-        <GroupCreationAndEditing setIsCreatingGroup={setIsCreatingGroup} />
-      )}
-    </>
   );
 }

@@ -7,7 +7,12 @@ import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useHistory, useParams } from "react-router-dom";
 
-export default function GroupMember({ groupData, handlePopup }) {
+export default function GroupMember({
+  groupData,
+  handlePopup,
+  setUpdate,
+  update,
+}) {
   const history = useHistory();
 
   const { groupID } = useParams();
@@ -15,6 +20,8 @@ export default function GroupMember({ groupData, handlePopup }) {
   const {
     user: { token, id },
   } = useUser();
+
+  // console.log(groupData);
 
   const handleExit = async () => {
     try {
@@ -27,8 +34,12 @@ export default function GroupMember({ groupData, handlePopup }) {
           },
         }
       );
-      toast.warn("Você saiu do grupo!");
-      history.push("/dashboard");
+      toast.warn(
+        groupData.members.length === 1
+          ? "Grupo excluído com sucesso"
+          : "Você saiu do grupo"
+      );
+      history.push("/mygroups");
     } catch (error) {
       toast.error(error.response.data.error || "Algo deu errado");
     }
@@ -53,6 +64,8 @@ export default function GroupMember({ groupData, handlePopup }) {
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
+                update={update}
+                setUpdate={setUpdate}
               />
             ) : (
               <CardUser
@@ -90,7 +103,7 @@ export default function GroupMember({ groupData, handlePopup }) {
           size="full"
           onClick={groupData.members.length === 1 ? handleExit : () => {}}
         >
-          Sair do grupo
+          {groupData.members.length === 1 ? "Excluir grupo" : "Sair do grupo"}
         </Button>
       ) : (
         <Button colour="red" hover size="full" onClick={handleExit}>

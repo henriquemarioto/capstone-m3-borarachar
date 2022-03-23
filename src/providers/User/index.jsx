@@ -99,6 +99,8 @@ export const UserProvider = ({ children }) => {
     setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
   }, [location.pathname]);
 
+
+  
   return (
     <UserContext.Provider
       value={{

@@ -35,7 +35,7 @@ export default function GroupNonMember({ groupData }) {
         }
       );
       toast.success("Você entrou nesse grupo!");
-      history.push(`/mygroups`);
+      history.push(`/group/${groupID}`);
       setMemberStatus(true);
     } catch (error) {
       toast.error("Algo de errado aconteceu");
@@ -63,7 +63,7 @@ export default function GroupNonMember({ groupData }) {
         <h4>Você ainda não faz parte desse grupo, clique no botão abaixo!</h4>
         <div>
           <Button colour="blue" hover onClick={handleJoin}>
-            Solicitar entrada
+            Entrar no grupo
           </Button>
         </div>
       </JoinContainer>

@@ -10,6 +10,8 @@ export const Container = styled.div`
   height: 100%;
   background: var(--black-25);
   position: fixed;
+  z-index: 100;
+  padding: 10px;
 `;
 
 // export const InputPopup = styled(Input)`
@@ -24,18 +26,34 @@ export const Content = styled.div`
   padding: 8px;
   background-color: var(--white);
   text-align: center;
-  width: 300px;
+  max-width: 425px;
+  width: 100%;
+
   border: none;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 500px;
+  height: 100%;
+  max-height: 500px;
+
   .streamings {
     display: flex;
     flex-direction: column;
     overflow: auto;
     height: 100%;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--gray);
+      border-radius: 20px;
+    }
   }
   span {
     font-size: 18px;

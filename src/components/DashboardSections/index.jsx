@@ -87,13 +87,15 @@ export default function DashboardSections({
         return data;
       }
     } else {
+      /*
       if (
         userData.already_member?.some(({ streaming }) =>
           data.searching_for.some(({ _id }) => _id === streaming._id)
         )
       ) {
         return data;
-      }
+      }*/
+      return data;
     }
   });
 

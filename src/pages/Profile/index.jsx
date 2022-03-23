@@ -37,10 +37,12 @@ export const Profile = ({ myProfile }) => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
   const { getUserInfo, patchUser } = useUser();
+  const [filteredStreamings, setFilteredStreamings] = useState([]);
 
   const updateUser = async (data) => {
-    data.searching_for = !data.searching_for ? user.searching_for : data.searching_for;
-    console.log(data)
+    data.searching_for = !data.searching_for
+      ? user.searching_for
+      : data.searching_for;
     await patchUser(data);
     setUpdate(update + 1);
     await getUser();
@@ -55,7 +57,7 @@ export const Profile = ({ myProfile }) => {
     async function getData() {
       await getUser();
     }
-    getData()
+    getData();
   }, [update]);
 
   return (

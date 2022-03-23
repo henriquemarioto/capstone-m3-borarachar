@@ -39,15 +39,21 @@ export const GroupNameContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  img {
+    width: 60px;
+    border-radius: 5px;
+  }
   span {
-    font-size: 10px;
+    font-size: 14px;
   }
   button {
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 60px;
+    max-width: 60px;
     min-height: 60px;
+    max-height: 60px;
     border-radius: 5px;
     background-color: var(--gray);
     font-size: 40px;
