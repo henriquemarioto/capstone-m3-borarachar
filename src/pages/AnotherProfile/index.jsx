@@ -1,14 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../providers/User";
-import api from "../../services/api";
+import useUser from "../../providers/User";
+
 import {
   Bio,
   Contact,
   Container,
   InfoDiv,
-  NewStreaming,
   PerfilDiv,
   SearchingFor,
   Section,
@@ -22,58 +20,38 @@ import {
 import Loading from "../../components/Loading";
 
 function AnotherProfile() {
-  const userRequest = useContext(UserContext);
-  const [user, setUser] = useState([]);
+  const { anotherUser, showAnotherUser } = useUser();
   const params = useParams();
-  const [isEditing, setIsEditing] = useState(false);
-  const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
-    let componentDidMount = true;
-    api
-      .get(`/users/${params.userID}`, {
-        headers: {
-          Authorization: `Bearer ${userRequest.user.token}`,
-        },
-      })
-      .then((response) => {
-        if (componentDidMount) {
-          setUser(response.data);
-        }
-      });
-
-    return () => {
-      // clean up
-      componentDidMount = false;
-    };
+  useEffect(async () => {
+    await showAnotherUser(params);
   }, []);
 
   return (
     <Container>
-      {user.searching_for ? (
+      {anotherUser.searching_for ? (
         <>
           <InfoDiv>
             <PerfilDiv>
-              <UserImg src={user.avatar_url} />
+              <UserImg src={anotherUser.avatar_url} />
               <div className="editing">
                 <Section>
                   <UserName
-                    bordered={isEditing}
-                    {...register("name")}
-                    disabled={!isEditing}
+                    disabled
                     type="text"
-                    placeholder={user.name}
+                    placeholder={anotherUser.name}
                   />
                 </Section>
                 <Bio
-                  bordered={isEditing}
-                  {...register("bio")}
                   type="text"
-                  disabled={!isEditing}
-                  placeholder={user.bio === "" ? "Sem bio" : user.bio}
+                  placeholder={
+                    anotherUser.bio === "" ? "Sem bio" : anotherUser.bio
+                  }
                 />
                 <Contact>
-                  {user.phone && <SpanContact>{user.phone}</SpanContact>}
+                  {anotherUser.phone && (
+                    <SpanContact>{anotherUser.phone}</SpanContact>
+                  )}
                 </Contact>
               </div>
             </PerfilDiv>
@@ -81,24 +59,23 @@ function AnotherProfile() {
               <SearchingFor>
                 <span>Procurando por:</span>
                 <StreamingList>
-                  {user.searching_for.length > 0 ? (
+                  {anotherUser.searching_for.length > 0 ? (
                     <>
-                      {user.searching_for.map((item) => (
+                      {anotherUser.searching_for.map((item) => (
                         <StreamingImg key={item._id} src={item.image} />
                       ))}
                     </>
                   ) : (
                     <p>Não foi definido nenhuma streaming.</p>
                   )}
-                  {isEditing ? <NewStreaming>+</NewStreaming> : <></>}
                 </StreamingList>
               </SearchingFor>
               <SearchingFor>
                 <span>Já usa:</span>
                 <StreamingList>
-                  {user.already_member.length > 0 ? (
+                  {anotherUser.already_member.length > 0 ? (
                     <>
-                      {user.already_member.map((item) => (
+                      {anotherUser.already_member.map((item) => (
                         <StreamingImg
                           key={item._id}
                           src={item.streaming.image}

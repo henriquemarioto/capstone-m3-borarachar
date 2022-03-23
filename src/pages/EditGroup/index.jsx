@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BsArrowRepeat} from "react-icons/bs";
+import { BsArrowRepeat } from "react-icons/bs";
 import { FiAlertTriangle } from "react-icons/fi";
 import Button from "../../components/Button";
 // import { Popup } from "../../components/Popup";
@@ -25,12 +25,6 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 function EditGroup() {
   // const [showPopUp, setShowPopUp] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const [planInfo, setPlanInfo] = useState({});
-  const { selectedStreaming, setSelectedStreaming } = useUser();
-  const {
-    user: { token },
-  } = useUser();
   const history = useHistory();
 
   const streamingSchema = yup.object().shape({
@@ -52,31 +46,6 @@ function EditGroup() {
   } = useForm({
     resolver: yupResolver(streamingSchema),
   });
-
-  const submitNewGroup = async (data) => {
-    try {
-      data.pay_day = Number(data.pay_day.slice(-2));
-      data.members_limit = planInfo.screens === 1 ? 2 : planInfo.screens;
-      data.streaming = {
-        streamingId: selectedStreaming[1]._id,
-        plan: planInfo.name,
-      };
-
-      const response = await api
-        .post("/groups", data, {
-          headers: {
-            authorization: `bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          toast.success("Grupo criado com sucesso");
-          history.push(`/group/${res.data.id}`);
-        });
-    } catch (error) {
-      console.log(error);
-      toast.error("Algo deu errado");
-    }
-  };
 
   useEffect(() => {
     if (selectedStreaming.length > 0)

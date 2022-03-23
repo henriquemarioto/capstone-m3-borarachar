@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 
@@ -7,8 +7,11 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [selectedStreaming, setSelectredStreaming] = useState([]);
+  const [anotherUser, setAnotherUser] = useState([]);
   const history = useHistory();
   const location = useLocation();
+
+  const params = useParams();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@BoraRachar:user")) || {}
@@ -17,6 +20,25 @@ export const UserProvider = ({ children }) => {
   const saveData = (data) => {
     localStorage.setItem("@BoraRachar:user", JSON.stringify(data));
     setUser(data);
+  };
+
+  const showAnotherUser = (paramsUser) => {
+    let componentDidMount = true;
+    api
+      .get(`/users/${paramsUser.userID}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((response) => {
+        if (componentDidMount) {
+          setAnotherUser(response.data);
+        }
+      });
+
+    return () => {
+      componentDidMount = false;
+    };
   };
 
   const submitLogin = async (data) => {
@@ -95,12 +117,11 @@ export const UserProvider = ({ children }) => {
     });
     setSelectredStreaming([{ plan: filterPlan[0] }, item[0]]);
   };
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
   }, [location.pathname]);
 
-
-  
   return (
     <UserContext.Provider
       value={{
@@ -113,6 +134,8 @@ export const UserProvider = ({ children }) => {
         changePassword,
         selectedStreaming,
         streamSelection,
+        showAnotherUser,
+        anotherUser,
       }}
     >
       {children}

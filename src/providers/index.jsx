@@ -1,5 +1,10 @@
+import { GroupProvider } from "./Group";
 import { UserProvider } from "./User";
 
 export default ({ children }) => {
-  return <UserProvider>{children}</UserProvider>;
+  return (
+    <UserProvider>
+      <GroupProvider>{children}</GroupProvider>
+    </UserProvider>
+  );
 };

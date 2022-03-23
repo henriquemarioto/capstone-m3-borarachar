@@ -1,42 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 import { Container, ContentContainer } from "./styles";
 
-import api from "../../services/api";
 import useUser from "../../providers/User";
 import GroupHeader from "../../components/GroupHeader";
 import GroupMember from "../../components/GroupMember";
 import GroupNonMember from "../../components/GroupNonMember";
 import Loading from "../../components/Loading";
 import SubscriptionPopup from "../../components/SubscriptionPopup";
+import { useGroup } from "../../providers/Group";
 
 export default function Group() {
   const {
-    user: { token, id },
+    user: { id },
   } = useUser();
 
   const [update, setUpdate] = useState(false);
 
   let { groupID } = useParams();
-  const [groupData, setGroupData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const { groupData, loading, getData } = useGroup();
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-
-      const response = await api.get(`/groups/${groupID}`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-
-      setGroupData(response.data);
-      setLoading(false);
-    };
-    getData();
+    getData(groupID);
   }, [update]);
 
   const handlePopup = (event) => {
