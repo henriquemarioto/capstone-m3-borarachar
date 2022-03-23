@@ -17,6 +17,8 @@ export default function Group() {
     user: { token, id },
   } = useUser();
 
+  const [update, setUpdate] = useState(false);
+
   let { groupID } = useParams();
   const [groupData, setGroupData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ export default function Group() {
       setLoading(false);
     };
     getData();
-  }, []);
+  }, [update]);
 
   const handlePopup = (event) => {
     if (
@@ -64,7 +66,12 @@ export default function Group() {
 
             <GroupHeader groupData={groupData} userId={id} />
             {!!groupData.members.some(({ userId }) => userId === id) ? (
-              <GroupMember handlePopup={handlePopup} groupData={groupData} />
+              <GroupMember
+                update={update}
+                handlePopup={handlePopup}
+                groupData={groupData}
+                setUpdate={setUpdate}
+              />
             ) : (
               <GroupNonMember groupData={groupData} />
             )}

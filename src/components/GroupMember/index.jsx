@@ -7,7 +7,12 @@ import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useHistory, useParams } from "react-router-dom";
 
-export default function GroupMember({ groupData, handlePopup }) {
+export default function GroupMember({
+  groupData,
+  handlePopup,
+  setUpdate,
+  update,
+}) {
   const history = useHistory();
 
   const { groupID } = useParams();
@@ -53,6 +58,8 @@ export default function GroupMember({ groupData, handlePopup }) {
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
+                update={update}
+                setUpdate={setUpdate}
               />
             ) : (
               <CardUser

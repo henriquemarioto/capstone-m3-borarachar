@@ -1,7 +1,6 @@
 import { Container } from "../styles";
 import {
   ContentInfo,
-  ContentRequest,
   DivSelect,
   InfoFind,
   PerfilDiv,
@@ -19,10 +18,24 @@ import { MdPersonRemove } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
 import PillButton from "../../PillButton";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import api from "../../../services/api";
+import useUser from "../../../providers/User";
+import { toast } from "react-toastify";
 
-function CardUser({ type, memberData, groupData, onClick = () => {} }) {
+function CardUser({
+  type,
+  memberData,
+  groupData,
+  setUpdate,
+  update,
+  onClick = () => {},
+}) {
   const { name, avatar_url, status, searching_for } = memberData;
+
+  const {
+    user: { token },
+  } = useUser();
 
   const price = () =>
     CurrencyFormatter.format(
@@ -33,6 +46,47 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleRemove = () => {
+    const getData = async () => {
+      try {
+        await api.patch(
+          `/groups/${groupData._id}/remove`,
+          { userId: memberData.userId },
+          {
+            headers: {
+              authorization: `Bearer ${token}
+          `,
+            },
+          }
+        );
+
+        toast.info("O usuário foi removido do grupo");
+        setUpdate(!update);
+      } catch (error) {
+        toast.error("Aconteceu um erro");
+      }
+    };
+    getData();
+  };
+
+  const handleUpdateStatus = async (event) => {
+    try {
+      await api.patch(
+        `/groups/${groupData._id}/updatestatus`,
+        { userId: memberData.userId, status: event.currentTarget.value },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Você atualizou o status do pagamento");
+      setUpdate(!update);
+    } catch (error) {
+      toast.error("Erro ao atualizar o status do pagamento");
+    }
   };
 
   return (
@@ -79,16 +133,32 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
             <MenuContainer showMenu={showMenu}>
               <div className="menu">
                 <div className="pills">
-                  <PillButton label="Pagou" icon={RiCheckLine} color="green" />
+                  <PillButton
+                    label="Pagou"
+                    icon={RiCheckLine}
+                    color="green"
+                    value="paid"
+                    onClick={handleUpdateStatus}
+                  />
+                  <PillButton
+                    label="Pendente"
+                    icon={RiTimeLine}
+                    color="blue"
+                    value="pending"
+                    onClick={handleUpdateStatus}
+                  />
                   <PillButton
                     label="Não pagou"
                     icon={RiCloseLine}
                     color="red"
+                    value="unpaid"
+                    onClick={handleUpdateStatus}
                   />
                   <PillButton
-                    label="Remover usuário"
+                    label="Remover"
                     icon={MdPersonRemove}
                     color="gray"
+                    onClick={handleRemove}
                   />
                 </div>
 
