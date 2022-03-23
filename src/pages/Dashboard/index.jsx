@@ -135,18 +135,20 @@ export const Dashboard = () => {
           )}
         </section>
 
-        <section>
-          {!nomMemberGroupsResponseLoading ? (
-            <DashboardSections
-              title="Procurando por grupos"
-              emptyMessage="Ninguém procurando por grupos no momento"
-              renderData={searchingFoGroups}
-              sectionType="members"
-            />
-          ) : (
-            <Loading />
-          )}
-        </section>
+        {
+          <section>
+            {!nomMemberGroupsResponseLoading ? (
+              <DashboardSections
+                title="Outros usuários"
+                emptyMessage="Ninguém procurando por grupos no momento"
+                renderData={searchingFoGroups}
+                sectionType="members"
+              />
+            ) : (
+              <Loading />
+            )}
+          </section>
+        }
       </ContentContainer>
     </Container>
   );

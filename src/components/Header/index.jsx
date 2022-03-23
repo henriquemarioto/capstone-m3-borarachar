@@ -60,7 +60,7 @@ function Header() {
     evt.preventDefault();
 
     if (!input) {
-      return
+      return;
     }
 
     history.push(`/search?search=${input}`);
@@ -119,7 +119,8 @@ function Header() {
 
             <span>Perfil</span>
           </MenuButton>
-          <MenuButton
+
+          {/*<MenuButton
             onClick={() => handleClick(endpoints.notifications)}
             className={
               location.pathname === endpoints.notifications && "active"
@@ -129,7 +130,7 @@ function Header() {
               <MdNotifications />
             </div>
             <span>Notificações</span>
-          </MenuButton>
+          </MenuButton>*/}
         </BottomMenu>
       </ContentContainer>
     </Container>

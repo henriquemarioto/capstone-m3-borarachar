@@ -141,9 +141,9 @@ function CardUser({ type, memberData, groupData, onClick = () => {} }) {
             </InfoFind>
           </ContentInfo>
 
-          <ContentRequest>
+          {/*<ContentRequest>
             <button>Convidar</button>
-          </ContentRequest>
+                </ContentRequest>*/}
         </>
       )}
     </Container>

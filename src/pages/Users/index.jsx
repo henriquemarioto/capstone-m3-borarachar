@@ -61,13 +61,15 @@ export default function Users() {
   }, []);
 
   const filteredUsers = users.filter((data) => {
-    if (
-      userData.already_member?.some(({ streaming }) =>
-        data.searching_for.some(({ _id }) => _id === streaming._id)
-      )
-    ) {
-      return data;
-    }
+    /*
+      if (
+        userData.already_member?.some(({ streaming }) =>
+          data.searching_for.some(({ _id }) => _id === streaming._id)
+        )
+      ) {
+        return data;
+      }*/
+    return data;
   });
 
   return (

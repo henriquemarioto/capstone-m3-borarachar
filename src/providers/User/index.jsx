@@ -87,7 +87,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-
   const streamSelection = (item) => {
     const planName = item[1].ID;
 
@@ -98,9 +97,8 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("@DivideComigo:user")) || {});
+    setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
   }, [location.pathname]);
-
 
   return (
     <UserContext.Provider
