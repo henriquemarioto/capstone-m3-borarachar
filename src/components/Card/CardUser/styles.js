@@ -162,7 +162,11 @@ export const PerfilDiv = styled.div`
 
   img {
     border-radius: 100%;
+    min-width: 30px;
+    width: 30px;
+    min-height: 30px;
     height: 30px;
+    object-fit: cover;
   }
 
   h3 {
