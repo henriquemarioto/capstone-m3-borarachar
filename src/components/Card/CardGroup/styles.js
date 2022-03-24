@@ -54,10 +54,10 @@ export const InfoMembers = styled.div`
     gap: 3px;
 
     img {
-      max-width: 15px;
-      max-height: 15px;
-      width: auto;
-      height: auto;
+      width: 15px;
+      height: 15px;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
 `;

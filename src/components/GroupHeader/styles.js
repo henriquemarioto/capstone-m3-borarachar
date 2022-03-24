@@ -102,6 +102,7 @@ export const Container = styled.section`
       width: 30px;
       height: 30px;
       border-radius: 50%;
+      object-fit: cover;
     }
   }
 `;

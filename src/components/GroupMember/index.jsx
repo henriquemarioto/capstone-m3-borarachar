@@ -21,7 +21,6 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
-  // console.log(groupData);
 
   const handleExit = async () => {
     try {

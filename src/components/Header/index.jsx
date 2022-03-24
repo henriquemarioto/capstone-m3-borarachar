@@ -4,7 +4,6 @@ import {
   MdHome,
   MdGroups,
   MdPerson,
-  MdNotifications,
   MdSearch,
 } from "react-icons/md";
 
@@ -131,6 +130,7 @@ function Header() {
             </div>
             <span>Notificações</span>
           </MenuButton>*/}
+          
         </BottomMenu>
       </ContentContainer>
     </Container>

@@ -10,7 +10,6 @@ import api from "../../services/api";
 import useUser from "../../providers/User";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function GroupNonMember({ groupData, setUpdate, update }) {

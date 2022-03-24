@@ -40,7 +40,7 @@ function CardGroup({ groupData, type, userId, ...rest }) {
               )}
             </InfoTitle>
             <InfoMembers>
-              <span>membros:</span>
+              <span>Membros:</span>
               <div>
                 {groupData.members.map(({ _id, avatar_url }) => (
                   <img
