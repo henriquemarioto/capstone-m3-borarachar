@@ -19,16 +19,14 @@ import Button from "../../components/Button";
 import Svg1 from "../../images/Home/undraw_movie_night_re_9umk_1.svg";
 import StreamingServices from "../../images/Home/streamings_services.svg";
 import Calendar from "../../images/Home/calendar.svg";
-import { RiArrowDownSLine, RiAlertLine, RiCloseFill } from "react-icons/ri";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { Logo } from "../../components/Logo";
-import { useState } from "react";
 
 export const Home = () => {
   document.title = "BoraRachar - Streamings a um preço acessível";
 
   const history = useHistory();
-  const [warningVisible, setwarningVisible] = useState(true);
   const arrDevs = [
     {
       name: "Lucas Anacleto",
@@ -59,21 +57,6 @@ export const Home = () => {
 
   return (
     <Container>
-      <Aviso warningVisible={warningVisible}>
-        <div>
-          <button onClick={() => setwarningVisible(false)}>
-            <RiCloseFill size="30" />
-          </button>
-          <div>
-            <h2>Atenção</h2>
-            {/* <RiAlertLine size="35" /> */}
-          </div>
-          <p>
-            Este site foi desenvolvido apenas para fins de estudo,{" "}
-            <strong>não utilize informações verdadeiras!</strong>
-          </p>
-        </div>
-      </Aviso>
       <Logo header={false} />
       <ContainerDividir>
         <Dividir>

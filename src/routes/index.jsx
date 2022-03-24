@@ -16,80 +16,83 @@ import Layout from "../components/Layout";
 
 import Route from "./route";
 import AnotherProfile from "../pages/AnotherProfile";
-import GroupCreationAndEditing from "../pages/GroupCreation";
 import NewGroup from "../pages/GroupCreation";
+import AlertBar from "../components/AlertBar";
 import EditGroup from "../pages/EditGroup";
 
 export const Routes = () => {
   return (
-    <Switch>
-      <Route exact path="/" home>
-        <Home />
-      </Route>
+    <>
+      <AlertBar />
+      <Switch>
+        <Route exact path="/" home>
+          <Home />
+        </Route>
 
-      <Route path="/login">
-        <Login />
-      </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-      <Route path="/register">
-        <Register />
-      </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
 
-      <Route path="/recovery">
-        <PasswordRecovery />
-      </Route>
+        <Route path="/recovery">
+          <PasswordRecovery />
+        </Route>
 
-      <Layout>
-        <Switch>
-          <Route path="/dashboard" isPrivate>
-            <Dashboard />
-          </Route>
+        <Layout>
+          <Switch>
+            <Route path="/dashboard" isPrivate>
+              <Dashboard />
+            </Route>
 
-          <Route path="/newgroup" isPrivate>
-            <NewGroup />
-          </Route>
+            <Route path="/newgroup" isPrivate>
+              <NewGroup />
+            </Route>
 
-          <Route path="/profile" isPrivate>
-            <Profile myProfile />
-          </Route>
+            <Route path="/profile" isPrivate>
+              <Profile myProfile />
+            </Route>
 
-          <Route path="/user/:userID" isPrivate>
-            <AnotherProfile />
-          </Route>
+            <Route path="/user/:userID" isPrivate>
+              <AnotherProfile />
+            </Route>
 
-          <Route exact path="/group/:groupID" isPrivate>
-            <Group />
-          </Route>
+            <Route exact path="/group/:groupID" isPrivate>
+              <Group />
+            </Route>
 
-          <Route path="/group/:groupID/edit" isPrivate>
-            <EditGroup />
-          </Route>
+            <Route path="/group/:groupID/edit" isPrivate>
+              <EditGroup />
+            </Route>
 
-          <Route path="/groups" isPrivate>
-            <Groups />
-          </Route>
+            <Route path="/groups" isPrivate>
+              <Groups />
+            </Route>
 
-          <Route path="/users" isPrivate>
-            <Users />
-          </Route>
+            <Route path="/users" isPrivate>
+              <Users />
+            </Route>
 
-          <Route path="/notifications" isPrivate>
-            <Notification />
-          </Route>
+            <Route path="/notifications" isPrivate>
+              <Notification />
+            </Route>
 
-          <Route path="/mygroups" isPrivate>
-            <MyGroups />
-          </Route>
+            <Route path="/mygroups" isPrivate>
+              <MyGroups />
+            </Route>
 
-          <Route path="/search" isPrivate>
-            <Search />
-          </Route>
+            <Route path="/search" isPrivate>
+              <Search />
+            </Route>
 
-          <Route>
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </Layout>
-    </Switch>
+            <Route>
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </Layout>
+      </Switch>
+    </>
   );
 };
