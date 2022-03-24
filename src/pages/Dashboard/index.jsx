@@ -5,8 +5,6 @@ import { Container, ContentContainer } from "./styles";
 import api from "../../services/api";
 import useUser from "../../providers/User";
 import DashboardSections from "../../components/DashboardSections";
-import Loading from "../../components/Loading";
-import { Popup } from "../../components/Popup";
 
 export const Dashboard = () => {
   const {
@@ -107,42 +105,33 @@ export const Dashboard = () => {
     <Container>
       <ContentContainer>
         <section>
-          {!myGroupsLoading ? (
-            <DashboardSections
-              title="Grupos ativos"
-              emptyMessage="Você não faz parte de nenhum grupo"
-              renderData={myGroups}
-              sectionType="myGroups"
-            />
-          ) : (
-            <Loading />
-          )}
+          <DashboardSections
+            title="Grupos ativos"
+            emptyMessage="Você não faz parte de nenhum grupo"
+            renderData={myGroups}
+            sectionType="myGroups"
+            isLoading={myGroupsLoading}
+          />
         </section>
         <section>
-          {!searchingFoGroupsLoading ? (
-            <DashboardSections
-              title="Procurando por membros"
-              emptyMessage="Ninguém procurando por membros no momento"
-              renderData={nomMemberGroups}
-              sectionType="groups"
-            />
-          ) : (
-            <Loading />
-          )}
+          <DashboardSections
+            title="Procurando por membros"
+            emptyMessage="Ninguém procurando por membros no momento"
+            renderData={nomMemberGroups}
+            sectionType="groups"
+            isLoading={nomMemberGroupsResponseLoading}
+          />
         </section>
 
         {
           <section>
-            {!nomMemberGroupsResponseLoading ? (
-              <DashboardSections
-                title="Outros usuários"
-                emptyMessage="Ninguém procurando por grupos no momento"
-                renderData={searchingFoGroups}
-                sectionType="members"
-              />
-            ) : (
-              <Loading />
-            )}
+            <DashboardSections
+              title="Outros usuários"
+              emptyMessage="Ninguém procurando por grupos no momento"
+              renderData={searchingFoGroups}
+              sectionType="members"
+              isLoading={searchingFoGroupsLoading}
+            />
           </section>
         }
       </ContentContainer>
