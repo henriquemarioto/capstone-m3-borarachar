@@ -115,7 +115,7 @@ export const UserInfo = styled.div`
   justify-content: space-between;
 `;
 
-export const StatusContainer = styled.div`
+export const StatusContainer = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
