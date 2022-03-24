@@ -10,12 +10,14 @@ import useUser from "../../providers/User";
 
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import CardLoading from "../Card/CardLoading";
 
 export default function DashboardSections({
   title,
   emptyMessage,
   renderData,
   sectionType,
+  isLoading,
 }) {
   const {
     user: { token, id },
@@ -106,6 +108,13 @@ export default function DashboardSections({
       </HeaderContainer>
 
       <DataContainer>
+        {isLoading && (
+          <>
+            <CardLoading type={sectionType} />
+            <CardLoading type={sectionType} />
+          </>
+        )}
+
         {filteredData.length !== 0 ? (
           <>
             {filteredData
@@ -138,7 +147,7 @@ export default function DashboardSections({
               )}
           </>
         ) : (
-          <span>{emptyMessage}</span>
+          !isLoading && <span>{emptyMessage}</span>
         )}
       </DataContainer>
 
