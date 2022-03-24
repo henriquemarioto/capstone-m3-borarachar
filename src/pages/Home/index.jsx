@@ -1,6 +1,6 @@
 import {
   Container,
-  ContainerDividir,
+  TopContainer,
   Dividir,
   ContainerRegister,
   ContainerScrollDown,
@@ -13,69 +13,64 @@ import {
   VariosServicos,
   Plataforma,
   Conteudo,
-  Aviso,
 } from "./styles";
+
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+
 import Button from "../../components/Button";
 import Svg1 from "../../images/Home/undraw_movie_night_re_9umk_1.svg";
 import StreamingServices from "../../images/Home/streamings_services.svg";
 import Calendar from "../../images/Home/calendar.svg";
-import { RiArrowDownSLine, RiAlertLine, RiCloseFill } from "react-icons/ri";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { Logo } from "../../components/Logo";
-import { useState } from "react";
 
 export const Home = () => {
   document.title = "BoraRachar - Streamings a um preço acessível";
 
   const history = useHistory();
-  const [warningVisible, setwarningVisible] = useState(true);
   const arrDevs = [
     {
       name: "Lucas Anacleto",
       job: "PO",
       img: "https://ca.slack-edge.com/TQZR39SET-U025V7YHLDA-61ab0aa73aa8-512",
+      git: "https://github.com/lucasanacleto1",
+      linkedin: "https://www.linkedin.com/in/lucas-anacleto-da-silva/",
     },
     {
       name: "Paulo Marioto",
       job: "Scrum Master",
       img: "https://ca.slack-edge.com/TQZR39SET-U02ED7GNX6X-87fca365e0a5-512",
+      git: "https://github.com/henriquemarioto",
+      linkedin: "https://www.linkedin.com/in/paulo-marioto/",
     },
     {
       name: "Guilherme Milék",
       job: "Teach Leader",
       img: "https://ca.slack-edge.com/TQZR39SET-U02E99UMW22-6ce586c894ed-512",
+      git: "https://github.com/guilherme-milek",
+      linkedin: "https://www.linkedin.com/in/guilhermeprevedamilek/",
     },
     {
       name: "Brayon França",
       job: "QA",
       img: "https://ca.slack-edge.com/TQZR39SET-U02G04MHXSM-7916a184b971-512",
+      git: "https://github.com/jormundur-33",
+      linkedin: "",
     },
     {
       name: "Pedro Lima",
       job: "QA",
       img: "https://ca.slack-edge.com/TQZR39SET-U02FGSVLJRX-f8f07152f6ff-512",
+      git: "https://github.com/Pedrolima7337",
+      linkedin: "",
     },
   ];
 
   return (
     <Container>
-      <Aviso warningVisible={warningVisible}>
-        <div>
-          <button onClick={() => setwarningVisible(false)}>
-            <RiCloseFill size="30" />
-          </button>
-          <div>
-            <h2>Atenção</h2>
-            {/* <RiAlertLine size="35" /> */}
-          </div>
-          <p>
-            Este site foi desenvolvido apenas para fins de estudo,{" "}
-            <strong>não utilize informações verdadeiras!</strong>
-          </p>
-        </div>
-      </Aviso>
       <Logo header={false} />
-      <ContainerDividir>
+      <TopContainer>
         <Dividir>
           <Conteudo>
             <h2>Dividir</h2>
@@ -95,7 +90,7 @@ export const Home = () => {
                 Cadastre-se
               </Button>
               <p>
-                ou faça &nbsp;
+                ou faça&nbsp;
                 <a onClick={() => history.push("/login")}> login</a>
               </p>
             </ContainerRegister>
@@ -107,7 +102,7 @@ export const Home = () => {
           <a href="#servicos">Role para baixo e saiba mais</a>
           <RiArrowDownSLine />
         </ContainerScrollDown>
-      </ContainerDividir>
+      </TopContainer>
 
       <ContainerVariosServicos id="servicos">
         <VariosServicos>
@@ -153,15 +148,25 @@ export const Home = () => {
 
               <p>{item.name}</p>
               <span>{item.job}</span>
+              <div>
+                {!!item.git && (
+                  <a href={item.git} target="_blank">
+                    <FaGithub />
+                  </a>
+                )}
+
+                {!!item.linkedin && (
+                  <a href={item.linkedin} target="_blank">
+                    <FaLinkedin />
+                  </a>
+                )}
+              </div>
             </CardPessoa>
           ))}
         </ContainerPessoas>
       </ContainerTime>
 
       <Footer>
-        <p>
-          Conheça a nossa <a href="#">equipe maravilhosa!</a>
-        </p>
         <p>Todos os direitos não reservados! © 2022</p>
       </Footer>
     </Container>

@@ -83,6 +83,7 @@ export const Register = () => {
               }
               register={register}
               name="name"
+              maxLength="20"
             />
 
             <InputRadio
@@ -111,6 +112,7 @@ export const Register = () => {
               register={register}
               name="email"
               type="email"
+              maxLength="50"
             />
             <Input
               isErrored={errors.cpf === undefined ? false : true}
@@ -118,6 +120,9 @@ export const Register = () => {
               register={register}
               name="cpf"
               type="number"
+              maxLength="11"
+              min="1"
+              max="99999999999"
             />
             <Input
               isErrored={errors.phone === undefined ? false : true}
@@ -127,6 +132,7 @@ export const Register = () => {
               register={register}
               name="phone"
               type="number"
+              maxLength="11"
             />
             <Input
               isErrored={errors.password === undefined ? false : true}
@@ -138,6 +144,7 @@ export const Register = () => {
               register={register}
               name="password"
               type="password"
+              maxLength="30"
             />
             <Input
               isErrored={errors.password_confirm === undefined ? false : true}
