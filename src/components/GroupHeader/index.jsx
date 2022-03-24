@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container, OwnerName } from "./styles";
 
 import { ImCog } from "react-icons/im";
 import { useHistory } from "react-router-dom";
@@ -53,6 +53,9 @@ export default function GroupHeader({ groupData, userId }) {
             groupData.members.find(({ owner }) => owner === true)?.name || ""
           }
         />
+        <OwnerName>
+          {groupData.members.find(({ owner }) => owner === true)?.name || ""}
+        </OwnerName>
       </div>
     </Container>
   );

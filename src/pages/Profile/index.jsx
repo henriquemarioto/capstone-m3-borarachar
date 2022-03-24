@@ -79,13 +79,17 @@ export const Profile = ({ myProfile }) => {
                     placeholder={user.name}
                   />
                 </Section>
-                <Bio
-                  bordered={isEditing}
-                  {...register("bio")}
-                  type="text"
-                  disabled={!isEditing}
-                  placeholder={user.bio === "" ? "Sem bio" : user.bio}
-                />
+                {isEditing ? (
+                  <Bio
+                    bordered={isEditing}
+                    {...register("bio")}
+                    type="text"
+                    disabled={!isEditing}
+                    placeholder={user.bio === "" ? "Sem bio" : user.bio}
+                  />
+                ) : (
+                  <p>{user.bio}</p>
+                )}
                 <Contact>
                   {user.phone ? (
                     <SpanContact>{user.phone}</SpanContact>

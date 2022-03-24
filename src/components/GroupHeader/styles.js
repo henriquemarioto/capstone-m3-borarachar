@@ -94,14 +94,18 @@ export const Container = styled.section`
 
     p {
       font-weight: 500;
-      font-size: 13px;
+      font-size: 15px;
       line-height: 14px;
     }
 
     img {
-      width: 10px;
-      height: 10px;
-      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
   }
+`;
+
+export const OwnerName = styled.span`
+  font-size: 16px;
 `;
