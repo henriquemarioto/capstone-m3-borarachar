@@ -8,7 +8,7 @@ export const Container = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding-top: 15px;
+  padding: 15px;
   width: 100%;
   .editing {
     display: flex;
