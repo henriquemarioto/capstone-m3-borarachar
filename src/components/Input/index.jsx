@@ -7,27 +7,40 @@ function Input({
   register,
   name,
   type = "text",
+  maxLength,
+  min,
+  max,
   ...rest
 }) {
-
   const [focus, setFocus] = useState(false);
 
   return (
-
     <Container {...rest} isErrored={isErrored}>
       <TextContainer isErrored={isErrored} focus={focus}>
         {inputName}
       </TextContainer>
-      <input
-        {...register(name)}
-        onBlur={() => setFocus(false)}
-        onFocus={() => setFocus(true)}
-        type={type}
-      />
-    </Container>
+      {type === "number" ? (
+        <input
+          {...register(name)}
+          onBlur={() => setFocus(false)}
+          onFocus={() => setFocus(true)}
+          type={type}
+          min={min}
+          max={max}
+        />
+      ) : (
+        <input
+          {...register(name)}
+          onBlur={() => setFocus(false)}
+          onFocus={() => setFocus(true)}
+          type={type}
+          maxLength={maxLength}
+        />
+      )}
 
+      {}
+    </Container>
   );
-  
 }
 
 export default Input;
