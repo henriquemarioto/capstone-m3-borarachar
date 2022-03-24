@@ -35,14 +35,14 @@ export const Home = () => {
       job: "PO",
       img: "https://ca.slack-edge.com/TQZR39SET-U025V7YHLDA-61ab0aa73aa8-512",
       git: "https://github.com/lucasanacleto1",
-      linkedin: "",
+      linkedin: "https://www.linkedin.com/in/lucas-anacleto-da-silva/",
     },
     {
       name: "Paulo Marioto",
       job: "Scrum Master",
       img: "https://ca.slack-edge.com/TQZR39SET-U02ED7GNX6X-87fca365e0a5-512",
       git: "https://github.com/henriquemarioto",
-      linkedin: "",
+      linkedin: "https://www.linkedin.com/in/paulo-marioto/",
     },
     {
       name: "Guilherme Milék",
