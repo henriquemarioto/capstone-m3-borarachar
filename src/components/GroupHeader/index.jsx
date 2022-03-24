@@ -22,12 +22,12 @@ export default function GroupHeader({ groupData, userId }) {
               Usuários: {groupData.members.length}/{groupData.members_limit}
             </span>
           </div>
+          {userId === groupData.owner && (
+            <button className="settings" onClick={handleEdit}>
+              <ImCog />
+            </button>
+          )}
         </div>
-        {userId === groupData.owner && (
-          <button className="settings" onClick={handleEdit}>
-            <ImCog />
-          </button>
-        )}
       </div>
       <p>
         {groupData.searching_for_members

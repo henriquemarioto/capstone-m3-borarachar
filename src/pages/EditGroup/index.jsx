@@ -68,7 +68,7 @@ function EditGroup() {
           },
         })
         .then((res) => {
-          toast.success("Grupo criado com sucesso");
+          toast.success("Grupo atualizado");
           history.push(`/group/${groupData._id}`);
         });
     } catch (error) {

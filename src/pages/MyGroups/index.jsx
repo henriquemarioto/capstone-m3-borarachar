@@ -52,6 +52,8 @@ export default function MyGroups() {
   return (
     <Container>
       <ContentContainer>
+        <CardGroup type="newGroup" onClick={() => history.push("/newgroup")} />
+
         {loading && (
           <>
             <CardLoading type="myGroups" />
@@ -65,7 +67,7 @@ export default function MyGroups() {
         {!loading && (
           <>
             {groups.map((group) => {
-              const { _id } = group;
+              const { _id, owner } = group;
               return (
                 <CardGroup
                   key={_id}
@@ -78,8 +80,6 @@ export default function MyGroups() {
             })}
           </>
         )}
-
-        <CardGroup type="newGroup" onClick={() => history.push("/newgroup")} />
       </ContentContainer>
     </Container>
   );
