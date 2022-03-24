@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Container as Card } from "../styles";
 
 export const Container = styled.li`
   width: 100px;
