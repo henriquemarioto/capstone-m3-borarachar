@@ -45,6 +45,8 @@ export const Search = () => {
     getAndSetData();
   }, [query.get("search")]);
 
+  document.title = `Pesquisando por "${query.get("search")}" - BoraRachar`;
+
   return (
     <Container>
       <>

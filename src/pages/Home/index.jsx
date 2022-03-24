@@ -23,6 +23,8 @@ import { useHistory } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 
 export const Home = () => {
+  document.title = "BoraRachar - Streamings a um preço acessível";
+
   const history = useHistory();
   const arrDevs = [
     {

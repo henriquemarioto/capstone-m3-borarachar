@@ -12,6 +12,8 @@ import CardGroup from "../../components/Card/CardGroup";
 import CardLoading from "../../components/Card/CardLoading";
 
 export default function MyGroups() {
+  document.title = `Meus grupos - BoraRachar`;
+
   const history = useHistory();
 
   const {
