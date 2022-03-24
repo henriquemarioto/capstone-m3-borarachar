@@ -20,6 +20,7 @@ import {
   SpanContact,
   InfoDiv,
   PerfilDiv,
+  UserNameSpan,
 } from "./styles";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -35,9 +36,9 @@ export const Profile = ({ myProfile }) => {
   const [update, setUpdate] = useState(0);
   const history = useHistory();
   const { register, handleSubmit } = useForm();
-  const { getUserInfo, patchUser } = useUser();
+  const { getUserInfo, patchUser, newUser } = useUser();
   const [filteredStreamings, setFilteredStreamings] = useState([]);
-
+  console.log(user);
   const updateUser = async (data) => {
     data.searching_for = !data.searching_for
       ? user.searching_for
@@ -68,13 +69,17 @@ export const Profile = ({ myProfile }) => {
               <UserImg src={user.avatar_url} />
               <div className="editing">
                 <Section>
-                  <UserName
-                    bordered={isEditing}
-                    {...register("name")}
-                    disabled={!isEditing}
-                    type="text"
-                    placeholder={user.name}
-                  />
+                  {isEditing ? (
+                    <UserName
+                      bordered={isEditing}
+                      {...register("name")}
+                      disabled={!isEditing}
+                      type="text"
+                      defaultValue={user.name}
+                    />
+                  ) : (
+                    <UserNameSpan>{user.name}</UserNameSpan>
+                  )}
                 </Section>
                 {isEditing ? (
                   <Bio
@@ -151,7 +156,9 @@ export const Profile = ({ myProfile }) => {
               <Button type="submit" colour="blue">
                 Salvar Alterações
               </Button>
-              {/* <Button colour="red">Excluir Conta</Button> */}
+              <Button colour="red" onClick={() => setIsEditing(!isEditing)}>
+                Cancelar alterações
+              </Button>
             </Buttons>
           ) : (
             <></>

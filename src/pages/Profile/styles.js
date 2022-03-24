@@ -47,6 +47,21 @@ export const UserName = styled.input`
   margin-top: 10px;
 `;
 
+export const UserNameSpan = styled.span`
+  border: ${(props) => (props.bordered ? "1px solid black" : "none")};
+  border-radius: 5px;
+  width: 90%;
+  background: none;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+  margin-top: 10px;
+`;
+
 export const UserImg = styled.img`
   width: 150px;
   height: 150px;
@@ -132,6 +147,7 @@ export const StreamingList = styled.div`
 `;
 
 export const Buttons = styled.div`
+  padding: 0 10px;
   display: flex;
   flex-direction: row;
   gap: 10px;
