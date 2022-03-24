@@ -6,9 +6,9 @@ import { Container, ContentContainer } from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
-import Loading from "../../components/Loading";
 
 import CardUser from "../../components/Card/CardUser";
+import CardLoading from "../../components/Card/CardLoading";
 
 export default function Users() {
   const history = useHistory();
@@ -75,10 +75,20 @@ export default function Users() {
   return (
     <Container>
       <ContentContainer>
-        {!loading ? (
+        {loading && (
+          <>
+            <CardLoading type="members" />
+            <CardLoading type="members" />
+            <CardLoading type="members" />
+            <CardLoading type="members" />
+            <CardLoading type="members" />
+          </>
+        )}
+
+        {!loading && (
           <>
             {filteredUsers.map((user) => {
-              const { _id, owner } = user;
+              const { _id } = user;
 
               return (
                 <CardUser
@@ -90,8 +100,6 @@ export default function Users() {
               );
             })}
           </>
-        ) : (
-          <Loading />
         )}
       </ContentContainer>
     </Container>

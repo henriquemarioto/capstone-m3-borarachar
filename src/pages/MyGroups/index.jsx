@@ -6,11 +6,10 @@ import { Container, ContentContainer } from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
-import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
-import GroupCreationAndEditing from "../GroupCreation";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+
+import CardLoading from "../../components/Card/CardLoading";
 
 export default function MyGroups() {
   const history = useHistory();
@@ -21,7 +20,6 @@ export default function MyGroups() {
 
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   useEffect(() => {
     let componentDidMount = true;
@@ -42,7 +40,7 @@ export default function MyGroups() {
     };
 
     getData();
-    
+
     return () => {
       // clean up
       componentDidMount = false;
@@ -50,33 +48,37 @@ export default function MyGroups() {
   }, []);
 
   return (
-     
-        <Container>
-          <ContentContainer>
-            {!loading ? (
-              <>
-                {groups.map((group) => {
-                  const { _id, owner } = group;
-                  return (
-                    <CardGroup
-                      key={_id}
-                      type="groupMember"
-                      groupData={group}
-                      userId={id}
-                      onClick={() => history.push(`/group/${group._id}`)}
-                    />
-                  );
-                })}
+    <Container>
+      <ContentContainer>
+        {loading && (
+          <>
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+          </>
+        )}
 
+        {!loading && (
+          <>
+            {groups.map((group) => {
+              const { _id } = group;
+              return (
                 <CardGroup
-                  type="newGroup"
-                  onClick={() => history.push("/newgroup")}
+                  key={_id}
+                  type="groupMember"
+                  groupData={group}
+                  userId={id}
+                  onClick={() => history.push(`/group/${group._id}`)}
                 />
-              </>
-            ) : (
-              <Loading />
-            )}
-          </ContentContainer>
-        </Container>
+              );
+            })}
+          </>
+        )}
+
+        <CardGroup type="newGroup" onClick={() => history.push("/newgroup")} />
+      </ContentContainer>
+    </Container>
   );
 }

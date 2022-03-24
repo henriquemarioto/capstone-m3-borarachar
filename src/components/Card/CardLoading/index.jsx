@@ -9,16 +9,29 @@ export default function CardLoading({ type = "myGroups" }) {
             <div className="img"></div>
             <div className="h3"></div>
           </InfoTitle>
-          <InfoMembers>
-            <div className="span"></div>
-            <div className="members">
-              <div className="img" />
-              <div className="img" />
-              <div className="img" />
-              <div className="img" />
-              <div className="img" />
-            </div>
-          </InfoMembers>
+          {type === "myGroups" ? (
+            <InfoMembers>
+              <div className="span"></div>
+              <div className="members">
+                <div className="img" />
+                <div className="img" />
+                <div className="img" />
+                <div className="img" />
+                <div className="img" />
+              </div>
+            </InfoMembers>
+          ) : (
+            <InfoMembers>
+              <div className="places">
+                <div className="span"></div>
+                <div className="strong"></div>
+              </div>
+              <div className="places">
+                <div className="span"></div>
+                <div className="strong"></div>
+              </div>
+            </InfoMembers>
+          )}
         </ContentInfo>
       ) : (
         <ContentInfo>

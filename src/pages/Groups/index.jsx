@@ -8,7 +8,7 @@ import useUser from "../../providers/User";
 import api from "../../services/api";
 
 import CardGroup from "../../components/Card/CardGroup";
-import Loading from "../../components/Loading";
+import CardLoading from "../../components/Card/CardLoading";
 
 export default function Groups() {
   const history = useHistory();
@@ -54,7 +54,17 @@ export default function Groups() {
   return (
     <Container>
       <ContentContainer>
-        {!loading ? (
+        {loading && (
+          <>
+            <CardLoading type="groups" />
+            <CardLoading type="groups" />
+            <CardLoading type="groups" />
+            <CardLoading type="groups" />
+            <CardLoading type="groups" />
+          </>
+        )}
+
+        {!loading && (
           <>
             {filteredGroups.map((group) => {
               const { _id, owner } = group;
@@ -70,8 +80,6 @@ export default function Groups() {
               );
             })}
           </>
-        ) : (
-          <Loading />
         )}
       </ContentContainer>
     </Container>
