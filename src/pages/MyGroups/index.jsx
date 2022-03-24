@@ -6,13 +6,14 @@ import { Container, ContentContainer } from "./styles";
 
 import useUser from "../../providers/User";
 import api from "../../services/api";
-import Loading from "../../components/Loading";
 
 import CardGroup from "../../components/Card/CardGroup";
-import GroupCreationAndEditing from "../GroupCreation";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+
+import CardLoading from "../../components/Card/CardLoading";
 
 export default function MyGroups() {
+  document.title = `Meus grupos - BoraRachar`;
+
   const history = useHistory();
 
   const {
@@ -21,7 +22,6 @@ export default function MyGroups() {
 
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   useEffect(() => {
     let componentDidMount = true;
@@ -42,7 +42,7 @@ export default function MyGroups() {
     };
 
     getData();
-    
+
     return () => {
       // clean up
       componentDidMount = false;
@@ -52,13 +52,20 @@ export default function MyGroups() {
   return (
     <Container>
       <ContentContainer>
-        {!loading ? (
+        <CardGroup type="newGroup" onClick={() => history.push("/newgroup")} />
+
+        {loading && (
           <>
-            <CardGroup
-              type="newGroup"
-              onClick={() => history.push("/newgroup")}
-            />
-            
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+            <CardLoading type="myGroups" />
+          </>
+        )}
+
+        {!loading && (
+          <>
             {groups.map((group) => {
               const { _id, owner } = group;
               return (
@@ -72,8 +79,6 @@ export default function MyGroups() {
               );
             })}
           </>
-        ) : (
-          <Loading />
         )}
       </ContentContainer>
     </Container>

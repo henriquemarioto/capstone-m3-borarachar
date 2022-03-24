@@ -48,6 +48,8 @@ function AnotherProfile() {
     };
   }, []);
 
+  document.title = `${user.name || "Usuário"} - BoraRachar`;
+
   return (
     <Container>
       {user.searching_for ? (

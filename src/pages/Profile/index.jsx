@@ -30,6 +30,8 @@ import Loading from "../../components/Loading";
 import UserStreamingAdd from "../../components/UserStreamingAdd";
 
 export const Profile = ({ myProfile }) => {
+  document.title = `Meu perfil - BoraRachar`;
+
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [modalAddStreaming, setmodalAddStreaming] = useState(false);

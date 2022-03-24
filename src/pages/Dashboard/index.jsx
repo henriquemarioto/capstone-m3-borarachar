@@ -7,6 +7,8 @@ import useUser from "../../providers/User";
 import DashboardSections from "../../components/DashboardSections";
 
 export const Dashboard = () => {
+  document.title = "Dashboard - BoraRachar";
+
   const {
     user: { id, token },
   } = useUser();
