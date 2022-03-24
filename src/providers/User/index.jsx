@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const [selectedStreaming, setSelectredStreaming] = useState([]);
   const history = useHistory();
   const location = useLocation();
+  const [newUser, setNewUser] = useState({});
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@BoraRachar:user")) || {}
@@ -54,6 +55,7 @@ export const UserProvider = ({ children }) => {
           },
         })
         .then((response) => {
+          setNewUser(response.data);
           return response.data;
         });
     } catch (error) {
@@ -99,8 +101,6 @@ export const UserProvider = ({ children }) => {
     setUser(JSON.parse(localStorage.getItem("@BoraRachar:user")) || {});
   }, [location.pathname]);
 
-
-  
   return (
     <UserContext.Provider
       value={{
@@ -113,6 +113,7 @@ export const UserProvider = ({ children }) => {
         changePassword,
         selectedStreaming,
         streamSelection,
+        newUser,
       }}
     >
       {children}

@@ -78,6 +78,7 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    let componentDidMount = true;
     const getNomMemberGroupsResponseData = async () => {
       const nomMemberGroupsResponse = await api.get("/groups", {
         headers: {

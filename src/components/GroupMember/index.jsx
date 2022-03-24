@@ -21,7 +21,6 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
-
   const handleExit = async () => {
     try {
       await api.patch(
@@ -43,13 +42,6 @@ export default function GroupMember({
       toast.error(error.response.data.error || "Algo deu errado");
     }
   };
-
-  const redirectUser = (member) => {
-    member.userId === id
-      ? history.push("/profile")
-      : history.push(`/user/${member.userId}`);
-  };
-
   return (
     <Container>
       <MembersContainer>
@@ -62,7 +54,6 @@ export default function GroupMember({
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
-                onClick={() => redirectUser(member)}
               />
             ) : groupData.owner === id ? (
               <CardUser
@@ -72,14 +63,12 @@ export default function GroupMember({
                 key={member.userId}
                 update={update}
                 setUpdate={setUpdate}
-                onClick={() => redirectUser(member)}
               />
             ) : (
               <CardUser
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
-                onClick={() => redirectUser(member)}
               />
             );
           })}
@@ -87,22 +76,24 @@ export default function GroupMember({
       </MembersContainer>
 
       <a onClick={handlePopup}>Informações da assinatura</a>
-
-      <button
-        className="report"
-        onClick={() =>
-          window.open(
-            `https://wa.me/${
-              groupData.members.find(({ userId }) => userId === groupData.owner)
-                .phone
-            }`,
-            "_blank"
-          )
-        }
-      >
-        <FiAlertTriangle />
-        Reportar problema
-      </button>
+      {groupData.owner !== id && (
+        <button
+          className="report"
+          onClick={() =>
+            window.open(
+              `https://wa.me/${
+                groupData.members.find(
+                  ({ userId }) => userId === groupData.owner
+                ).phone
+              }`,
+              "_blank"
+            )
+          }
+        >
+          <FiAlertTriangle />
+          Reportar problema
+        </button>
+      )}
 
       {groupData.owner === id ? (
         <Button

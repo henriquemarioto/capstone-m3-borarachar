@@ -17,6 +17,7 @@ import { RiCloseLine, RiCheckLine, RiTimeLine } from "react-icons/ri";
 import { MdPersonRemove } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
 import PillButton from "../../PillButton";
+import { useHistory } from "react-router-dom";
 
 import { useState, useRef } from "react";
 import api from "../../../services/api";
@@ -32,6 +33,10 @@ function CardUser({
   onClick = () => {},
 }) {
   const { name, avatar_url, status, searching_for } = memberData;
+  const {
+    user: { id },
+  } = useUser();
+  const history = useHistory();
 
   const {
     user: { token },
@@ -89,13 +94,19 @@ function CardUser({
     }
   };
 
+  const redirectUser = () => {
+    memberData.userId === id
+      ? history.push("/profile")
+      : history.push(`/user/${memberData.userId}`);
+  };
+
   return (
     <Container onClick={onClick}>
       {!type && (
         <>
           <PerfilDiv>
             <img src={avatar_url} alt={name} />
-            <h3>{name}</h3>
+            <h3 onClick={redirectUser}>{name}</h3>
           </PerfilDiv>
           <StatusContainer status={status}>
             <span>{price()}</span>
@@ -117,7 +128,7 @@ function CardUser({
             <UserInfo>
               <PerfilDiv>
                 <img src={avatar_url} alt={name} />
-                <h3>{name}</h3>
+                <h3 onClick={redirectUser}>{name}</h3>
               </PerfilDiv>
               <StatusContainer status={status} onClick={handleMenu}>
                 <span>{price()}</span>
@@ -175,7 +186,7 @@ function CardUser({
         <>
           <PerfilDiv>
             <img src={avatar_url} alt={name} />
-            <h3>{name}</h3>
+            <h3 onClick={redirectUser}>{name}</h3>
           </PerfilDiv>
         </>
       )}
@@ -184,7 +195,7 @@ function CardUser({
         <>
           <PerfilDiv>
             <img src={avatar_url} alt={name} />
-            <h3>{name}</h3>
+            <h3 onClick={redirectUser}>{name}</h3>
           </PerfilDiv>
           <DivSelect>
             <input className="radioInput" type="radio" />
@@ -197,7 +208,7 @@ function CardUser({
           <ContentInfo>
             <PerfilDiv>
               <img src={avatar_url} alt={name} />
-              <h3>{name}</h3>
+              <h3 onClick={redirectUser}>{name}</h3>
             </PerfilDiv>
 
             <InfoFind>

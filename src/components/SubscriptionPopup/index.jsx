@@ -7,6 +7,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { CurrencyFormatter } from "../../services/formatters";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import useUser from "../../providers/User";
 
 export default function SubscriptionPopup({
   groupData,
@@ -20,6 +21,10 @@ export default function SubscriptionPopup({
   );
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const {
+    user: { id },
+  } = useUser();
+  const havePermissionToView = groupData.owner === id || groupData.members.find((member) => member.userId === id)?.status === "paid";
 
   const handleCopy = (event) => {
     const copyText = event.currentTarget.parentNode.querySelector("input");
@@ -36,7 +41,9 @@ export default function SubscriptionPopup({
   };
 
   const handlePassword = () => {
-    setPasswordVisible(!passwordVisible);
+    if (havePermissionToView) {
+      setPasswordVisible(!passwordVisible);
+    }
   };
 
   return (
@@ -98,12 +105,12 @@ export default function SubscriptionPopup({
                   type="text"
                   className="highlight"
                   value={
-                    groupData.account_email || "[Essa conta não possui email]"
+                    havePermissionToView ? groupData.account_email : "********"
                   }
                   readOnly
                 />
 
-                {!!groupData.account_email && (
+                {havePermissionToView && (
                   <button className="copy-button" onClick={handleCopy}>
                     <MdContentCopy />
                   </button>
@@ -119,8 +126,9 @@ export default function SubscriptionPopup({
                     <input
                       className="highlight"
                       value={
-                        groupData.account_password ||
-                        "[Essa conta não possui senha]"
+                        havePermissionToView
+                          ? groupData.account_password
+                          : "********"
                       }
                       type={
                         passwordVisible || !groupData.account_password
@@ -130,7 +138,7 @@ export default function SubscriptionPopup({
                       readOnly
                     />
 
-                    {!!groupData.account_password && (
+                    {havePermissionToView && (
                       <button
                         className="password-visibility"
                         onClick={handlePassword}
@@ -143,7 +151,7 @@ export default function SubscriptionPopup({
                       </button>
                     )}
                   </div>
-                  {!!groupData.account_password && (
+                  {havePermissionToView && (
                     <button className="copy-button" onClick={handleCopy}>
                       <MdContentCopy />
                     </button>

@@ -8,7 +8,7 @@ export const Container = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding-top: 15px;
+  padding: 15px;
   width: 100%;
   .editing {
     display: flex;
@@ -33,6 +33,21 @@ export const Bio = styled.input`
 `;
 
 export const UserName = styled.input`
+  border: ${(props) => (props.bordered ? "1px solid black" : "none")};
+  border-radius: 5px;
+  width: 90%;
+  background: none;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+  margin-top: 10px;
+`;
+
+export const UserNameSpan = styled.span`
   border: ${(props) => (props.bordered ? "1px solid black" : "none")};
   border-radius: 5px;
   width: 90%;
@@ -132,6 +147,7 @@ export const StreamingList = styled.div`
 `;
 
 export const Buttons = styled.div`
+  padding: 0 10px;
   display: flex;
   flex-direction: row;
   gap: 10px;

@@ -93,7 +93,7 @@ export const ContentInfo = styled.div`
       rgba(255, 255, 255, 0.5),
       transparent
     );
-    animation: shimmer 2s infinite;
+    animation: shimmer 1s infinite;
     content: "";
   }
 
