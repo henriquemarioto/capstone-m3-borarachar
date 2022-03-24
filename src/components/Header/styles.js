@@ -119,7 +119,7 @@ export const SearchContainer = styled.div`
       ${({ openInput }) =>
         openInput &&
         css`
-          width: 100%;
+          width: 375px;
           padding: 0 10px;
 
           @media (min-width: 768px) {
