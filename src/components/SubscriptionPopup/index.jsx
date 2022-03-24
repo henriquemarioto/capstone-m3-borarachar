@@ -24,7 +24,7 @@ export default function SubscriptionPopup({
   const {
     user: { id },
   } = useUser();
-  const havePermissionToView = groupData.owner === id || groupData.members.find((member) => member.userId === id).status === "paid";
+  const havePermissionToView = groupData.owner === id || groupData.members.find((member) => member.userId === id)?.status === "paid";
 
   const handleCopy = (event) => {
     const copyText = event.currentTarget.parentNode.querySelector("input");
