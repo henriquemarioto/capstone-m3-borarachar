@@ -26,6 +26,7 @@ export const Container = styled.form`
 export const Bio = styled.input`
   font-size: 15px;
   font-weight: 400;
+  padding: 5px;
   border-radius: 5px;
   text-align: center;
   border: ${(props) => (props.bordered ? "1px solid black" : "none")};
@@ -43,11 +44,13 @@ export const UserName = styled.input`
   text-align: center;
   font-size: 25px;
   font-weight: 900;
+  margin-top: 10px;
 `;
 
 export const UserImg = styled.img`
-  padding-top: 10px;
   width: 150px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 50%;
 `;
 

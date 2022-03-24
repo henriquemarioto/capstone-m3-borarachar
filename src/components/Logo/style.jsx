@@ -4,6 +4,7 @@ export const ContainerImgH1 = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   img {
     width: 210px;
   }
