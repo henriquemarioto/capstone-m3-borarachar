@@ -247,3 +247,5 @@ export const Footer = styled.footer`
         padding-top: 5px;
     }
 `
+export const Aviso = styled.div`
+`

@@ -13,6 +13,7 @@ import {
   VariosServicos,
   Plataforma,
   Conteudo,
+  Aviso,
 } from "./styles";
 import Button from "../../components/Button";
 import Svg1 from "../../images/Home/undraw_movie_night_re_9umk_1.svg";
@@ -56,6 +57,10 @@ export const Home = () => {
 
   return (
     <Container>
+      <Aviso>
+        <h2>Alerta</h2>
+        <p>Este site foi desenvolvido apenas para fins de estudo, não utilize informações verdadeiras!</p>
+      </Aviso>
       <Logo header={false} />
       <ContainerDividir>
         <Dividir>
