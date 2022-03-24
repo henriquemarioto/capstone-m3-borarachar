@@ -65,7 +65,7 @@ export const Conteudo = styled.div`
   gap: 15px;
 `;
 
-export const ContainerDividir = styled(ContainerBase)`
+export const TopContainer = styled(ContainerBase)`
   img {
     display: block;
     width: 100%;
@@ -92,6 +92,33 @@ export const ContainerRegister = styled.div`
 
   Button {
     font-weight: normal;
+    animation: buttonLoop 2000ms infinite forwards ease;
+  }
+
+  @keyframes buttonLoop {
+    0% {
+      transform: rotate(0deg);
+    }
+    5% {
+      transform: rotate(3deg);
+    }
+    10% {
+      transform: rotate(-3deg);
+    }
+    15% {
+      transform: rotate(3deg);
+    }
+    20% {
+      transform: rotate(-3deg);
+    }
+
+    25% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
   }
 
   p {
@@ -118,6 +145,18 @@ export const ContainerScrollDown = styled.div`
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  animation: loop 1000ms infinite alternate ease-in-out;
+
+  @keyframes loop {
+    from {
+      transform: translateY(-5px);
+    }
+
+    to {
+      transform: translateY(0px);
+    }
   }
 `;
 
@@ -157,11 +196,11 @@ export const Plataforma = styled(ContainerBaseInterior)`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     img {
-      max-width: 360px;
+      max-height: 250px;
       width: 100%;
-      max-width: 360px;
     }
   }
 `;
@@ -201,6 +240,23 @@ export const CardPessoa = styled.li`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
+
+  :hover {
+    img {
+      animation: twist 500ms forwards ease-in-out;
+
+      @keyframes twist {
+        from {
+          transform: rotateY(0deg);
+        }
+
+        to {
+          transform: rotateY(1turn);
+        }
+      }
+    }
+  }
 
   img {
     width: 100px;
@@ -217,6 +273,20 @@ export const CardPessoa = styled.li`
 
   span {
     font-size: 12px;
+  }
+
+  div {
+    display: flex;
+    gap: 5px;
+
+    a {
+      color: var(--white);
+      transition: 300ms transform;
+
+      &:hover {
+        transform: scale(115%);
+      }
+    }
   }
 `;
 
@@ -248,7 +318,7 @@ export const Aviso = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  display: ${(props) => (!props.warningVisible && "none")};
+  display: ${(props) => !props.warningVisible && "none"};
 
   > div {
     position: relative;
