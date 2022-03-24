@@ -76,6 +76,7 @@ export const Profile = ({ myProfile }) => {
                       disabled={!isEditing}
                       type="text"
                       defaultValue={user.name}
+                      maxLength="15"
                     />
                   ) : (
                     <UserNameSpan>{user.name}</UserNameSpan>
@@ -88,9 +89,10 @@ export const Profile = ({ myProfile }) => {
                     type="text"
                     disabled={!isEditing}
                     placeholder={user.bio === "" ? "Sem bio" : user.bio}
+                    maxLength="30"
                   />
                 ) : (
-                  <p>{user.bio}</p>
+                  <p>{user.bio ? user.bio : "Sem bio"}</p>
                 )}
                 <Contact>
                   {user.phone ? (
