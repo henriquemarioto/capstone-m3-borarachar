@@ -38,7 +38,6 @@ export const Profile = ({ myProfile }) => {
   const { register, handleSubmit } = useForm();
   const { getUserInfo, patchUser, newUser } = useUser();
   const [filteredStreamings, setFilteredStreamings] = useState([]);
-  console.log(user);
   const updateUser = async (data) => {
     data.searching_for = !data.searching_for
       ? user.searching_for

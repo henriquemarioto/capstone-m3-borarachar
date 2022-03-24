@@ -21,7 +21,6 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
-
   const handleExit = async () => {
     try {
       await api.patch(
@@ -77,22 +76,24 @@ export default function GroupMember({
       </MembersContainer>
 
       <a onClick={handlePopup}>Informações da assinatura</a>
-
-      <button
-        className="report"
-        onClick={() =>
-          window.open(
-            `https://wa.me/${
-              groupData.members.find(({ userId }) => userId === groupData.owner)
-                .phone
-            }`,
-            "_blank"
-          )
-        }
-      >
-        <FiAlertTriangle />
-        Reportar problema
-      </button>
+      {groupData.owner !== id && (
+        <button
+          className="report"
+          onClick={() =>
+            window.open(
+              `https://wa.me/${
+                groupData.members.find(
+                  ({ userId }) => userId === groupData.owner
+                ).phone
+              }`,
+              "_blank"
+            )
+          }
+        >
+          <FiAlertTriangle />
+          Reportar problema
+        </button>
+      )}
 
       {groupData.owner === id ? (
         <Button
