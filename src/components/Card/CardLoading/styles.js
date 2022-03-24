@@ -32,6 +32,21 @@ export const InfoMembers = styled.div`
     }
   }
 
+  .places {
+    display: flex;
+    gap: 5px;
+    .span {
+      background: var(--light-gray);
+      height: 10px;
+      width: 72px;
+    }
+    .strong {
+      background: var(--light-gray);
+      height: 10px;
+      width: 20px;
+    }
+  }
+
   .members {
     padding-top: 3px;
     width: 100%;

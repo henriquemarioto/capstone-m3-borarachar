@@ -52,6 +52,8 @@ export default function Group() {
     }
   };
 
+  document.title = `${groupData.name || "Grupo"} - BoraRachar`;
+
   return (
     <Container>
       <ContentContainer>

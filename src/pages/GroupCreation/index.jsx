@@ -1,5 +1,5 @@
-import {  useEffect, useState } from "react";
-import { BsArrowRepeat} from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { BsArrowRepeat } from "react-icons/bs";
 import { FiAlertTriangle } from "react-icons/fi";
 import Button from "../../components/Button";
 import { Popup } from "../../components/Popup";
@@ -25,7 +25,6 @@ import * as yup from "yup";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-
 
 function NewGroup() {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -58,6 +57,7 @@ function NewGroup() {
   });
 
   const submitEditGroup = async (data) => {
+    document.title = `Criar grupo - BoraRachar`;
 
     try {
       data.pay_day = Number(data.pay_day.slice(-2));

@@ -14,13 +14,13 @@ import loginImg from "/src/images/undraw_login_re_4vu2 1.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
-import { toast } from "react-toastify";
 
 import useUser from "../../providers/User";
 
 export const Login = () => {
-  const { saveData, submitLogin } = useUser();
+  document.title = "Entrar - BoraRachar";
+
+  const { submitLogin } = useUser();
 
   const loginSchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),

@@ -55,6 +55,8 @@ function EditGroup() {
     resolver: yupResolver(streamingSchema),
   });
 
+  document.title = `Editando ${groupData.name || "grupo"} - BoraRachar`;
+
   const submitNewGroup = async (data) => {
     try {
       data.pay_day = Number(data.pay_day.slice(-2));

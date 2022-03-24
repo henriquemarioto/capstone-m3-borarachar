@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import useUser from "../../providers/User";
 
 export const PasswordRecovery = () => {
+  document.title = "Recuperar senha - BoraRachar";
+
   const { changePassword } = useUser();
   const passwordRecoverySchema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),

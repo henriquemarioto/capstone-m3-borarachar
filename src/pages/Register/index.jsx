@@ -21,6 +21,8 @@ import { useForm } from "react-hook-form";
 import useUser from "../../providers/User";
 
 export const Register = () => {
+  document.title = "Cadastrar - BoraRachar";
+
   const { submitRegister, saveData } = useUser();
   const registerSchema = yup.object().shape({
     name: yup.string().required("Nome completo obrigatório"),
