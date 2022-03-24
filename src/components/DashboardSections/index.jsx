@@ -9,7 +9,6 @@ import Button from "../Button";
 import useUser from "../../providers/User";
 
 import api from "../../services/api";
-import { toast } from "react-toastify";
 import CardLoading from "../Card/CardLoading";
 
 export default function DashboardSections({

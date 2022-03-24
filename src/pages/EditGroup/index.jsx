@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { BsArrowRepeat } from "react-icons/bs";
+import {  useState } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import Button from "../../components/Button";
 // import { Popup } from "../../components/Popup";
@@ -27,7 +26,7 @@ import { toast } from "react-toastify";
 function EditGroup() {
   // const [showPopUp, setShowPopUp] = useState(false);
   const history = useHistory();
-  const [showInfo, setShowInfo] = useState(false);
+  // const [showInfo, setShowInfo] = useState(false);
   const [planInfo, setPlanInfo] = useState({});
   const { selectedStreaming, setSelectedStreaming } = useUser();
   const {
@@ -72,7 +71,6 @@ function EditGroup() {
           history.push(`/group/${groupData._id}`);
         });
     } catch (error) {
-      console.log(error);
       toast.error("Algo deu errado");
     }
   };
