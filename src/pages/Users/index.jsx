@@ -39,11 +39,7 @@ export default function Users() {
         });
 
         if (componentDidMount) {
-          setUsers(
-            usersResponse.data.filter(
-              ({ searching_for }) => searching_for.length !== 0
-            )
-          );
+          setUsers(usersResponse.data);
 
           setUserData(userResponse.data);
 
@@ -60,17 +56,16 @@ export default function Users() {
     };
   }, []);
 
-  const filteredUsers = users.filter((data) => {
-    /*
-      if (
-        userData.already_member?.some(({ streaming }) =>
-          data.searching_for.some(({ _id }) => _id === streaming._id)
-        )
-      ) {
-        return data;
-      }*/
-    return data;
-  });
+  // const filteredUsers = users.filter((data) => {
+  //   if (
+  //     userData.already_member?.some(({ streaming }) =>
+  //       data.searching_for.some(({ _id }) => _id === streaming._id)
+  //     )
+  //   ) {
+  //     return data;
+  //   }
+  //   return data;
+  // });
 
   return (
     <Container>
@@ -87,7 +82,7 @@ export default function Users() {
 
         {!loading && (
           <>
-            {filteredUsers.map((user) => {
+            {users.map((user) => {
               const { _id } = user;
 
               return (
