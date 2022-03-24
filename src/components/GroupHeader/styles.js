@@ -57,6 +57,7 @@ export const Container = styled.section`
       align-items: center;
       height: fit-content;
       background: transparent;
+      margin-bottom: auto;
     }
   }
 

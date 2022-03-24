@@ -54,7 +54,10 @@ export default function GroupNonMember({ groupData, setUpdate, update }) {
         </div>
       </MembersContainer>
       <JoinContainer>
-        <h4>Você ainda não faz parte desse grupo, clique no botão abaixo!</h4>
+        <h4>
+          Você ainda não faz parte desse grupo,{" "}
+          <strong>clique no botão abaixo!</strong>
+        </h4>
         <div>
           <Button colour="blue" hover onClick={handleJoin}>
             Entrar no grupo

@@ -50,33 +50,32 @@ export default function MyGroups() {
   }, []);
 
   return (
-     
-        <Container>
-          <ContentContainer>
-            {!loading ? (
-              <>
-                {groups.map((group) => {
-                  const { _id, owner } = group;
-                  return (
-                    <CardGroup
-                      key={_id}
-                      type="groupMember"
-                      groupData={group}
-                      userId={id}
-                      onClick={() => history.push(`/group/${group._id}`)}
-                    />
-                  );
-                })}
-
+    <Container>
+      <ContentContainer>
+        {!loading ? (
+          <>
+            <CardGroup
+              type="newGroup"
+              onClick={() => history.push("/newgroup")}
+            />
+            
+            {groups.map((group) => {
+              const { _id, owner } = group;
+              return (
                 <CardGroup
-                  type="newGroup"
-                  onClick={() => history.push("/newgroup")}
+                  key={_id}
+                  type="groupMember"
+                  groupData={group}
+                  userId={id}
+                  onClick={() => history.push(`/group/${group._id}`)}
                 />
-              </>
-            ) : (
-              <Loading />
-            )}
-          </ContentContainer>
-        </Container>
+              );
+            })}
+          </>
+        ) : (
+          <Loading />
+        )}
+      </ContentContainer>
+    </Container>
   );
 }

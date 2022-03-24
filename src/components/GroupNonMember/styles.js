@@ -63,7 +63,13 @@ export const JoinContainer = styled.div`
 
   h4 {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 12px;
+    text-align: center;
+    line-height: 1;
+
+    strong{
+      font-weight: bold;
+    }
   }
 `;
