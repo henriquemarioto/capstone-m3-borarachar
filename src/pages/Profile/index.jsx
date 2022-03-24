@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "../../components/Button";
-import { Loader } from "../../components/Loading/styles";
 import useUser from "../../providers/User";
-import api from "../../services/api";
 import { useForm } from "react-hook-form";
 import {
   Container,
@@ -24,7 +22,6 @@ import {
   PerfilDiv,
 } from "./styles";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading";
 import UserStreamingAdd from "../../components/UserStreamingAdd";
@@ -79,13 +76,17 @@ export const Profile = ({ myProfile }) => {
                     placeholder={user.name}
                   />
                 </Section>
-                <Bio
-                  bordered={isEditing}
-                  {...register("bio")}
-                  type="text"
-                  disabled={!isEditing}
-                  placeholder={user.bio === "" ? "Sem bio" : user.bio}
-                />
+                {isEditing ? (
+                  <Bio
+                    bordered={isEditing}
+                    {...register("bio")}
+                    type="text"
+                    disabled={!isEditing}
+                    placeholder={user.bio === "" ? "Sem bio" : user.bio}
+                  />
+                ) : (
+                  <p>{user.bio}</p>
+                )}
                 <Contact>
                   {user.phone ? (
                     <SpanContact>{user.phone}</SpanContact>
@@ -150,7 +151,7 @@ export const Profile = ({ myProfile }) => {
               <Button type="submit" colour="blue">
                 Salvar Alterações
               </Button>
-              <Button colour="red">Excluir Conta</Button>
+              {/* <Button colour="red">Excluir Conta</Button> */}
             </Buttons>
           ) : (
             <></>

@@ -78,7 +78,6 @@ function NewGroup() {
           history.push(`/group/${res.data.id}`);
         });
     } catch (error) {
-      console.log(error);
       toast.error("Algo deu errado");
     }
   };

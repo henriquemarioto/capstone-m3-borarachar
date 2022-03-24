@@ -21,7 +21,6 @@ export default function GroupMember({
     user: { token, id },
   } = useUser();
 
-  // console.log(groupData);
 
   const handleExit = async () => {
     try {
@@ -45,6 +44,12 @@ export default function GroupMember({
     }
   };
 
+  const redirectUser = (member) => {
+    member.userId === id
+      ? history.push("/profile")
+      : history.push(`/user/${member.userId}`);
+  };
+
   return (
     <Container>
       <MembersContainer>
@@ -57,6 +62,7 @@ export default function GroupMember({
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
+                onClick={() => redirectUser(member)}
               />
             ) : groupData.owner === id ? (
               <CardUser
@@ -66,12 +72,14 @@ export default function GroupMember({
                 key={member.userId}
                 update={update}
                 setUpdate={setUpdate}
+                onClick={() => redirectUser(member)}
               />
             ) : (
               <CardUser
                 memberData={member}
                 groupData={groupData}
                 key={member.userId}
+                onClick={() => redirectUser(member)}
               />
             );
           })}

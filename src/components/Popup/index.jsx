@@ -105,7 +105,7 @@ export const Popup = ({ popUpType, setShowInfo, setShowPopUp }) => {
                   setShowInfo(true);
                 }}
               >
-                Sim
+               Confirmar
               </Button>
 
               <Button
@@ -114,7 +114,7 @@ export const Popup = ({ popUpType, setShowInfo, setShowPopUp }) => {
                 colour="gray"
                 onClick={() => setShowPopUp(false)}
               >
-                Não
+                Cancelar
               </Button>
             </Buttons>
           </Content>
