@@ -19,11 +19,12 @@ export const MembersContainer = styled.div`
     line-height: 18px;
   }
 
-  div {
+  > div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
   }
 `;
 
@@ -36,16 +37,17 @@ export const MemberInfo = styled.div`
   max-width: 80px;
 
   img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
   }
 
   span {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 12px;
     width: 100%;
+    max-width: 50px;
     text-align: center;
 
     overflow: hidden;
