@@ -212,7 +212,7 @@ function CardUser({
             </PerfilDiv>
 
             <InfoFind>
-              <span>Procurando por:</span>
+              {!!searching_for.length && <span>Procurando por:</span>}
 
               <div>
                 {searching_for.map(({ _id, image }) => (

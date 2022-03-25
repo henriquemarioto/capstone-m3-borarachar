@@ -116,6 +116,7 @@ export const UserInfo = styled.div`
 `;
 
 export const StatusContainer = styled.button`
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
