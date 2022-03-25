@@ -263,7 +263,8 @@ export const CardPessoa = styled.li`
     height: 100px;
     background-color: var(--gray);
     border-radius: 50%;
-    border: 1px solid var(--gray);
+    border: 4px solid var(--light-gray);
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
   }
 
   p {
